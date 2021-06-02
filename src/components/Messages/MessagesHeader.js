@@ -1,6 +1,7 @@
 import React from 'react'
 import { Header, Segment, Input, Icon } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export default function MessagesHeader({
   channelName,
@@ -37,6 +38,11 @@ export default function MessagesHeader({
           onChange={handleSearchMessages}
           loading={searching}
         />
+      </Header>
+      <Header floated="left">
+        <Link to="/video">
+          <Icon name="video" color="blue" />
+        </Link>
       </Header>
     </Segment>
   )

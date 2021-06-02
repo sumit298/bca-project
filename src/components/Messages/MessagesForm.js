@@ -33,25 +33,25 @@ export default function MessagesForm({
     if (uploadTask !== null) {
       uploadTask.on(
         'state_changed',
-        snap => {
+        (snap) => {
           const percentage = Math.round(
             (snap.bytesTransferred / snap.totalBytes) * 100
           )
           setPercentUpload(percentage)
         },
-        err => {
+        (err) => {
           setUploadState('ERROR')
-          setErrors(errors => [...errors, err.message])
+          setErrors((errors) => [...errors, err.message])
         },
         () => {
           uploadTask.snapshot.ref
             .getDownloadURL()
-            .then(downloadedUrl => {
+            .then((downloadedUrl) => {
               sendFileMessage(downloadedUrl, pathToUpload)
             })
-            .catch(err => {
+            .catch((err) => {
               setUploadState('ERROR')
-              setErrors(errors => [...errors, err.message])
+              setErrors((errors) => [...errors, err.message])
             })
         }
       )
@@ -73,8 +73,8 @@ export default function MessagesForm({
       .then(() => {
         setUploadState('DONE')
       })
-      .catch(err => {
-        setErrors(errors => [...errors, err])
+      .catch((err) => {
+        setErrors((errors) => [...errors, err])
       })
   }
 
@@ -97,34 +97,28 @@ export default function MessagesForm({
 
   const resetState = () => {
     setMessage('')
-    setErrors(errors => [])
+    setErrors((errors) => [])
   }
 
   const sendMessage = async () => {
     if (message) {
       setStatus('PENDING')
       try {
-        await messagesRef()
-          .child(currentChannel.id)
-          .push()
-          .set(createMessage())
-        await typingRef
-          .child(currentChannel.id)
-          .child(currentUser.uid)
-          .remove()
+        await messagesRef().child(currentChannel.id).push().set(createMessage())
+        await typingRef.child(currentChannel.id).child(currentUser.uid).remove()
         resetState()
         setStatus('RESOLVED')
       } catch (err) {
         console.log('Error while sending message: ', err)
         setStatus('REJECTED')
-        setErrors(errors => [...errors, { message: err.message }])
+        setErrors((errors) => [...errors, { message: err.message }])
       }
     } else {
-      setErrors(errors => [...errors, { message: 'Add a message..' }])
+      setErrors((errors) => [...errors, { message: 'Add a message..' }])
     }
   }
 
-  const getFilePath = channelId => {
+  const getFilePath = (channelId) => {
     return isChannelPrivate ? `chat/private/${channelId}` : `chat/public`
   }
 
@@ -136,8 +130,8 @@ export default function MessagesForm({
     setUploadTask(fileReference)
   }
 
-  const handleKeyDown = event => {
-    if (event.ctrlKey && event.keyCode === 13) {
+  const handleKeyPress = (event) => {
+    if (event.charCode === 13) {
       sendMessage()
     }
     if (message) {
@@ -146,10 +140,7 @@ export default function MessagesForm({
         .child(currentUser.uid)
         .set(currentUser.displayName)
     } else {
-      typingRef
-        .child(currentChannel.id)
-        .child(currentUser.uid)
-        .remove()
+      typingRef.child(currentChannel.id).child(currentUser.uid).remove()
     }
   }
 
@@ -157,7 +148,7 @@ export default function MessagesForm({
     setEmojiPicker(!emojiPicker)
   }
 
-  const handleAddEmoji = emoji => {
+  const handleAddEmoji = (emoji) => {
     const oldMessage = message
     const newMessage = colonToUnicode(` ${oldMessage} ${emoji.colons} `)
     setMessage(newMessage)
@@ -168,8 +159,8 @@ export default function MessagesForm({
     }, 0)
   }
 
-  const colonToUnicode = message => {
-    return message.replace(/:[A-Za-z0-9_+-]+:/g, x => {
+  const colonToUnicode = (message) => {
+    return message.replace(/:[A-Za-z0-9_+-]+:/g, (x) => {
       x = x.replace(/:/g, '')
       let emoji = emojiIndex.emojis[x]
       if (typeof emoji !== 'undefined') {
@@ -198,44 +189,33 @@ export default function MessagesForm({
           onSelect={handleAddEmoji}
         />
       )}
+      <Button
+        color="red"
+        style={{ marginLeft: '8px' }}
+        // labelPosition="right"
+        icon="cloud upload"
+        onClick={openModal}
+      />
+      <Button color="blue" icon="rocket" onClick={openModal} />
       <Input
-        fluid
-        style={{ marginBottom: '0.7em' }}
+        style={{ width: '90%' }}
         label={
           <Button
-            icon={emojiPicker ? 'close' : 'add'}
-            content={emojiPicker ? 'Close' : null}
+            icon={emojiPicker ? 'X' : 'smile outline'}
+            content={emojiPicker ? 'X' : null}
             onClick={handleEmojiPicker}
           />
         }
         labelPosition="left"
         placeholder="Write your message..."
         value={message}
-        onChange={event => setMessage(event.target.value)}
-        onKeyDown={handleKeyDown}
+        onChange={(event) => setMessage(event.target.value)}
         ref={messageInputRef}
+        onKeyPress={handleKeyPress}
         className={
-          errors.some(err => err.message.includes('message')) ? 'error' : ''
+          errors.some((err) => err.message.includes('message')) ? 'error' : ''
         }
       />
-
-      <Button.Group icon widths="2">
-        <Button
-          color="purple"
-          content="Reply"
-          labelPosition="left"
-          icon="edit"
-          onClick={sendMessage}
-          disabled={status === 'PENDING'}
-        />
-        <Button
-          color="green"
-          content="Upload Media"
-          labelPosition="right"
-          icon="cloud upload"
-          onClick={openModal}
-        />
-      </Button.Group>
       <UploadFileModal
         open={modal}
         closeModal={closeModal}

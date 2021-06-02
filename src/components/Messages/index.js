@@ -11,6 +11,7 @@ import Typing from './Typing'
 
 import firebase from '../../firebase'
 import Skeleton from './Skeleton'
+import VideoChat from '../VideoChat'
 
 export default function Messages({ currentUser, currentChannel }) {
   const isMount = useIsMount()
@@ -23,6 +24,7 @@ export default function Messages({ currentUser, currentChannel }) {
   const [searchResults, setSearchResults] = useState([])
   const [typingUsers, setTypingUsers] = useState([])
   const [isStarred, setIsStarred] = useState(true)
+  const [video, setVideo] = useState(true);
 
   const [messagesRef] = useState(firebase.database().ref('messages'))
   const [privateMessagesRef] = useState(
@@ -33,7 +35,7 @@ export default function Messages({ currentUser, currentChannel }) {
   const [connectedRef] = useState(firebase.database().ref('.info/connected'))
   const [listeners, setListeners] = useState([])
   const dispatch = useDispatch()
-  const isChannelPrivate = useSelector(state => state.channel.private)
+  const isChannelPrivate = useSelector((state) => state.channel.private)
 
   const messagesEndRef = useRef(null)
 
@@ -47,19 +49,19 @@ export default function Messages({ currentUser, currentChannel }) {
     }
   }, [])
 
-  const addListeners = channel => {
+  const addListeners = (channel) => {
     getAllMessagesListener(channel.id)
     typingListener(channel.id)
   }
 
   const addToListeners = (id, ref, event) => {
     const index = listeners.findIndex(
-      listener =>
+      (listener) =>
         listener.id === id && listener.ref === ref && listener.event === event
     )
     if (index === -1) {
       const newListener = { id, ref, event }
-      setListeners(prevListeners => [...prevListeners, newListener])
+      setListeners((prevListeners) => [...prevListeners, newListener])
     }
   }
   /**
@@ -67,13 +69,13 @@ export default function Messages({ currentUser, currentChannel }) {
    * @param {string} channelId
    * Change listener to the channel, triggers whenever the message is added, get all the messages of channel
    */
-  const getAllMessagesListener = channelId => {
+  const getAllMessagesListener = (channelId) => {
     getMessagesRef()
       .child(channelId)
-      .on('child_added', snap => {
+      .on('child_added', (snap) => {
         const message = snap.val()
         setMessagesLoading(false)
-        setMessages(messages => [...messages, message])
+        setMessages((messages) => [...messages, message])
       })
     addToListeners(channelId, getMessagesRef(), 'child_added')
   }
@@ -87,7 +89,7 @@ export default function Messages({ currentUser, currentChannel }) {
       .child(userId)
       .child(`starred`)
       .once('value')
-      .then(data => {
+      .then((data) => {
         if (data.val() !== null) {
           const channelIds = Object.keys(data.val())
           const prevStarred = channelIds.includes(channelId)
@@ -116,7 +118,7 @@ export default function Messages({ currentUser, currentChannel }) {
         })
       } else {
         // if unstarred, then remove this channel from favorites
-        userRef.child(`${user.uid}/starred/${channel.id}`).remove(err => {
+        userRef.child(`${user.uid}/starred/${channel.id}`).remove((err) => {
           if (err !== null) {
             console.error('ERROR: ', err)
           }
@@ -125,9 +127,9 @@ export default function Messages({ currentUser, currentChannel }) {
     }
   }, [isStarred])
 
-  const typingListener = channelId => {
+  const typingListener = (channelId) => {
     let allTypingUsers = []
-    typingRef.child(channelId).on('child_added', snap => {
+    typingRef.child(channelId).on('child_added', (snap) => {
       if (snap.key !== currentUser.id) {
         allTypingUsers.concat({
           id: snap.key,
@@ -138,22 +140,22 @@ export default function Messages({ currentUser, currentChannel }) {
     })
     addToListeners(channelId, typingRef, 'child_added')
 
-    typingRef.child(channelId).on('child_removed', snap => {
-      const index = allTypingUsers.findIndex(tu => tu.id === snap.key)
+    typingRef.child(channelId).on('child_removed', (snap) => {
+      const index = allTypingUsers.findIndex((tu) => tu.id === snap.key)
       if (index !== -1) {
-        allTypingUsers = allTypingUsers.filter(tu => tu.id !== snap.key)
+        allTypingUsers = allTypingUsers.filter((tu) => tu.id !== snap.key)
         setTypingUsers(allTypingUsers)
       }
     })
     addToListeners(channelId, typingRef, 'child_removed')
 
-    connectedRef.on('value', snap => {
+    connectedRef.on('value', (snap) => {
       if (snap.val === true) {
         typingRef
           .child(currentChannel.id)
           .child(currentUser.uid)
           .onDisconnect()
-          .remove(err => {
+          .remove((err) => {
             if (err !== null) {
               console.log(err)
             }
@@ -163,7 +165,7 @@ export default function Messages({ currentUser, currentChannel }) {
   }
 
   const removeAllListeners = () => {
-    listeners.forEach(listener => {
+    listeners.forEach((listener) => {
       listener.ref.child(listener.id).off(listener.event)
     })
   }
@@ -176,7 +178,7 @@ export default function Messages({ currentUser, currentChannel }) {
    * @param {object} channel
    * returns the channel name
    */
-  const getChannelName = channel =>
+  const getChannelName = (channel) =>
     channel && `${!isChannelPrivate ? '#' : '@'} ${channel.name}`
 
   /**
@@ -185,7 +187,7 @@ export default function Messages({ currentUser, currentChannel }) {
    * @description Get the total count and generate a readable string
    * @return {string} - {userCount} user{plural ? s : _ }
    */
-  const getUniqueUsers = messages => {
+  const getUniqueUsers = (messages) => {
     const uniqueUsers = messages.reduce((acc, message) => {
       if (!acc.includes(message.user.name)) {
         acc.push(message.user.name)
@@ -203,7 +205,7 @@ export default function Messages({ currentUser, currentChannel }) {
    * @param {Event} event
    * handles the event change for search field in message header
    */
-  const handleSearchMessages = event => {
+  const handleSearchMessages = (event) => {
     setSearchTerm(event.target.value)
     setSearchingMessages(true)
   }
@@ -233,16 +235,16 @@ export default function Messages({ currentUser, currentChannel }) {
    * @param {Array} messages
    * renders the messages
    */
-  const renderMessages = messages => {
+  const renderMessages = (messages) => {
     return (
       messages.length > 0 &&
-      messages.map(message => (
+      messages.map((message) => (
         <Message key={message.timestamp} message={message} user={user} />
       ))
     )
   }
 
-  const renderSkeleton = loading => {
+  const renderSkeleton = (loading) => {
     return loading ? [...Array(10)].map((_, i) => <Skeleton key={i} />) : null
   }
 
@@ -274,10 +276,10 @@ export default function Messages({ currentUser, currentChannel }) {
     }
   }, [messages])
 
-  const displayTypingUsers = users => {
+  const displayTypingUsers = (users) => {
     return (
       users.length > 0 &&
-      users.map(tu => {
+      users.map((tu) => {
         return (
           <div
             key={tu.id}
@@ -296,35 +298,59 @@ export default function Messages({ currentUser, currentChannel }) {
   }
 
   return (
-    <>
-      <MessagesHeader
-        channelName={getChannelName(channel)}
-        users={getUniqueUsers(messages)}
-        searchTerm={searchTerm}
-        handleSearchMessages={handleSearchMessages}
-        searching={searchingMessages}
-        isChannelPrivate={isChannelPrivate}
-        handleStarChannel={handleStarChannel}
-        isStarred={isStarred}
-      />
+    <div>
+      {video ? (
+        <div>
+          <MessagesHeader
+            channelName={getChannelName(channel)}
+            users={getUniqueUsers(messages)}
+            searchTerm={searchTerm}
+            handleSearchMessages={handleSearchMessages}
+            searching={searchingMessages}
+            isChannelPrivate={isChannelPrivate}
+            handleStarChannel={handleStarChannel}
+            isStarred={isStarred}
+          />
 
-      <Segment className="messages">
-        <Comment.Group>
-          {renderSkeleton(messagesLoading)}
-          {searchTerm
-            ? renderMessages(searchResults)
-            : renderMessages(messages)}
-          <div ref={messagesEndRef}></div>
-        </Comment.Group>
-        {displayTypingUsers(typingUsers)}
-      </Segment>
+          <Segment className="messages">
+            <Comment.Group>
+              {renderSkeleton(messagesLoading)}
+              {searchTerm
+                ? renderMessages(searchResults)
+                : renderMessages(messages)}
+              <div ref={messagesEndRef}></div>
+            </Comment.Group>
+            {displayTypingUsers(typingUsers)}
+          </Segment>
 
-      <MessagesForm
-        currentChannel={currentChannel}
-        currentUser={currentUser}
-        messagesRef={getMessagesRef}
-        isChannelPrivate={isChannelPrivate}
-      />
-    </>
+          <MessagesForm
+            currentChannel={currentChannel}
+            currentUser={currentUser}
+            messagesRef={getMessagesRef}
+            isChannelPrivate={isChannelPrivate}
+          />
+        </div>
+      ) : (
+        <div>
+          <MessagesHeader
+            channelName={getChannelName(channel)}
+            users={getUniqueUsers(messages)}
+            searchTerm={searchTerm}
+            handleSearchMessages={handleSearchMessages}
+            searching={searchingMessages}
+            isChannelPrivate={isChannelPrivate}
+            handleStarChannel={handleStarChannel}
+            isStarred={isStarred}
+          />
+        <VideoChat/> 
+        <MessagesForm
+            currentChannel={currentChannel}
+            currentUser={currentUser}
+            messagesRef={getMessagesRef}
+            isChannelPrivate={isChannelPrivate}
+          />
+        </div>
+      )}
+    </div>
   )
 }
