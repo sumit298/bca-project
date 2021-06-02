@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react'
 import { v4 as uuid } from 'uuid'
 import { Segment, Input, Button } from 'semantic-ui-react'
 import { Picker, emojiIndex } from 'emoji-mart'
+import ReactGiphySearch from 'react-giphy-searchbox'
 
 import firebase from '../../firebase'
 import UploadFileModal from './UploadFileModal'
 import ProgressBar from './ProgressBar'
-
+import './Message.css'
 import 'emoji-mart/css/emoji-mart.css'
 
 export default function MessagesForm({
@@ -26,6 +27,7 @@ export default function MessagesForm({
   const [uploadState, setUploadState] = useState('')
   const [pathToUpload, setPathToUpload] = useState('')
   const [emojiPicker, setEmojiPicker] = useState(false)
+  const [showGifs, setShowGifs] = useState(false)
   const messageInputRef = useRef(null)
 
   useEffect(() => {
@@ -64,6 +66,8 @@ export default function MessagesForm({
       }
     }
   }, [uploadTask])
+
+  // Gif handler
 
   const sendFileMessage = (downloadedFileUrl, filePath) => {
     messagesRef()
@@ -123,6 +127,7 @@ export default function MessagesForm({
   }
 
   const uploadFile = (file, metaData) => {
+    console.log(file);
     setPathToUpload(currentChannel.id)
     const filePath = `${getFilePath(currentChannel.id)}/${uuid()}.jpg`
     setUploadState('UPLOADING')
@@ -149,9 +154,11 @@ export default function MessagesForm({
   }
 
   const handleAddEmoji = (emoji) => {
+    console.log(emoji);
     const oldMessage = message
     const newMessage = colonToUnicode(` ${oldMessage} ${emoji.colons} `)
     setMessage(newMessage)
+    setShowGifs(false)
     setEmojiPicker(false)
 
     setTimeout(() => {
@@ -174,12 +181,41 @@ export default function MessagesForm({
     })
   }
 
+  const gifSelectHandler = (gif) => {
+    console.log(gif)
+    const oldMessage = message
+    const newMessage = gif?.user.avatar_url;
+    const uploader = uploadFile(newMessage)
+    setMessage(uploader);
+    setShowGifs(false)
+
+    setTimeout(() => {
+      messageInputRef.current.focus()
+    }, 0)
+    // notificationAudio.play();
+    // db.collection('textChannels').doc(channelId)
+    // .collection("messages").add({
+    //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    //     user: user,
+    //     gif: item.images.downsized_medium.url
+    // });
+  }
+
   const openModal = () => setModal(true)
 
   const closeModal = () => setModal(false)
+  const handleSubmit = e=>{
+    e.preventDefault();
+  }
 
   return (
-    <Segment className="message__form">
+    <div className="chat__message">
+      {showGifs && (
+        <ReactGiphySearch
+          apiKey="m8zn7XPBBGgyFC0QlJdTZCrG9y9ofAj1"
+          onSelect={gifSelectHandler}
+        />
+      )}
       {emojiPicker && (
         <Picker
           set="apple"
@@ -196,13 +232,22 @@ export default function MessagesForm({
         icon="cloud upload"
         onClick={openModal}
       />
-      <Button color="blue" icon="rocket" onClick={openModal} />
+      <Button
+        color="blue"
+        icon="rocket"
+        onClick={() => {
+          setEmojiPicker(false)
+          setShowGifs(!showGifs)
+        }}
+      />
+      <form onSubmit={handleSubmit}>
       <Input
-        style={{ width: '90%' }}
+        style={{ width: '90%', overflow: 'hidden' }}
+        inverted
         label={
           <Button
-            icon={emojiPicker ? 'X' : 'smile outline'}
-            content={emojiPicker ? 'X' : null}
+            icon={emojiPicker ? 'close' : 'smile outline'}
+            content={emojiPicker ? 'close' : null}
             onClick={handleEmojiPicker}
           />
         }
@@ -216,12 +261,13 @@ export default function MessagesForm({
           errors.some((err) => err.message.includes('message')) ? 'error' : ''
         }
       />
+      </form>
       <UploadFileModal
         open={modal}
         closeModal={closeModal}
         uploadFile={uploadFile}
       />
       <ProgressBar uploadPercent={percentUpload} uploadState={uploadState} />
-    </Segment>
+    </div>
   )
 }

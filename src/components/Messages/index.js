@@ -8,6 +8,7 @@ import MessagesHeader from './MessagesHeader'
 import MessagesForm from './MessagesForm'
 import Message from './Message'
 import Typing from './Typing'
+import './Message.css';
 
 import firebase from '../../firebase'
 import Skeleton from './Skeleton'
@@ -271,7 +272,7 @@ export default function Messages({ currentUser, currentChannel }) {
 
   useEffect(() => {
     countUserPosts()
-    if (messagesEndRef) {
+    if (!!messagesEndRef) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }, [messages])
@@ -298,7 +299,7 @@ export default function Messages({ currentUser, currentChannel }) {
   }
 
   return (
-    <div>
+    <div className="chat">
       {video ? (
         <div>
           <MessagesHeader
@@ -312,7 +313,7 @@ export default function Messages({ currentUser, currentChannel }) {
             isStarred={isStarred}
           />
 
-          <Segment className="messages">
+          <div className="messages">
             <Comment.Group>
               {renderSkeleton(messagesLoading)}
               {searchTerm
@@ -321,7 +322,7 @@ export default function Messages({ currentUser, currentChannel }) {
               <div ref={messagesEndRef}></div>
             </Comment.Group>
             {displayTypingUsers(typingUsers)}
-          </Segment>
+          </div>
 
           <MessagesForm
             currentChannel={currentChannel}
@@ -343,12 +344,12 @@ export default function Messages({ currentUser, currentChannel }) {
             isStarred={isStarred}
           />
         <VideoChat/> 
-        <MessagesForm
+        {/* <MessagesForm
             currentChannel={currentChannel}
             currentUser={currentUser}
             messagesRef={getMessagesRef}
             isChannelPrivate={isChannelPrivate}
-          />
+          /> */}
         </div>
       )}
     </div>

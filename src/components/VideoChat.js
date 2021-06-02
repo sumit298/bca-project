@@ -1,7 +1,7 @@
 import React, { createRef, useState } from 'react'
 import './App.css'
 import firebase from '../firebase'
-import {Modal} from 'semantic-ui-react';
+import {Modal, Icon, Button} from 'semantic-ui-react';
 
 const firestore = firebase.firestore()
 
@@ -246,13 +246,15 @@ function VideoChat() {
         </span>
         <span>
           <h2>End the call</h2>
-          <button
+          <Button
             id="hangupButton"
             disabled={hangUpButtonDisabled}
             onClick={hangUp}
+            icon={"phone"}
+            
           >
             Hangup
-          </button>
+          </Button>
         </span>
       </div>
     </div>

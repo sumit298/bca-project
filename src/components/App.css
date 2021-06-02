@@ -2,13 +2,22 @@ html,
 body,
 .app {
   height: 100vh;
-  padding: 1em;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* padding: 1em; */
+  /* background-color: #0c0d0f; */
+  /* color: #e6e6e6 !important; */
 }
 
 /* messages */
 .messages {
-  height: 450px;
+  height: 86vh;
   overflow-y: scroll;
+  color: #8d8c91 !important;
+  font-size: 1.1rem;
+  color: #e6e6e6;
+  /* background-color: #0C0D0F !important; */
 }
 
 /* messages form */
@@ -21,6 +30,8 @@ body,
   /* width: 80%; */
   right: 1em;
   z-index: 200;
+  background-color: #161B22 !important;
+  display: flex;
 }
 
 /* message component */
@@ -37,7 +48,7 @@ body,
 }
 
 /* color panels */
-
+/* 
 .color__container {
   position: relative;
   overflow: hidden;
@@ -54,7 +65,7 @@ body,
   width: 85px;
   height: 35px;
   transform: rotate(225deg);
-}
+} */
 
 /* typing ...*/
 
@@ -304,4 +315,33 @@ body,
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(8, 8, 15);
+}
+
+
+.message {
+  display: flex;
+  align-items: center;
+  padding: 17px 20px;
+  color: white;
+}
+
+.message__info {
+  margin-left: 20px;
+}
+
+.message__info > h4 {
+  display: flex;
+  align-items: center;
+}
+
+.message__timestamp {
+  color: rgba(128, 128, 128, 0.452);
+  margin-left: 20px;
+  font-size: x-small;
+}
+
+.message__info  > img {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 70%;
 }

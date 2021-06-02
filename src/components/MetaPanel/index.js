@@ -7,6 +7,7 @@ import {
   Image,
   List,
   ListItem,
+  Sidebar
 } from 'semantic-ui-react'
 
 export default function MetaPanel({
@@ -46,6 +47,7 @@ export default function MetaPanel({
   }
 
   return (
+    <Sidebar >
     <Segment loading={!currentChannel}>
       <Header as="h3" attached="top">
         About # {currentChannel && currentChannel.name}
@@ -96,5 +98,6 @@ export default function MetaPanel({
         </Accordion.Content>
       </Accordion>
     </Segment>
+    </Sidebar>
   )
 }
