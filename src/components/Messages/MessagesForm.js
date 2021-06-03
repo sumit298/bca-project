@@ -3,12 +3,31 @@ import { v4 as uuid } from 'uuid'
 import { Segment, Input, Button } from 'semantic-ui-react'
 import { Picker, emojiIndex } from 'emoji-mart'
 import ReactGiphySearch from 'react-giphy-searchbox'
-
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import { makeStyles } from '@material-ui/core'
+import GifIcon from '@material-ui/icons/Gif'
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import firebase from '../../firebase'
 import UploadFileModal from './UploadFileModal'
 import ProgressBar from './ProgressBar'
 import './MessageForm.scss'
 import 'emoji-mart/css/emoji-mart.css'
+import { IconButton } from '@material-ui/core'
+
+const useStyles = makeStyles(() => {
+  return {
+    button: {
+      color: '#b8bbc0',
+      padding: '0 .75rem',
+      '&:hover': {
+        color: '#fff',
+      },
+    },
+    addbutton: {
+      color: '#b8bbc0',
+    },
+  }
+})
 
 export default function MessagesForm({
   currentChannel,
@@ -29,7 +48,7 @@ export default function MessagesForm({
   const [emojiPicker, setEmojiPicker] = useState(false)
   const [showGifs, setShowGifs] = useState(false)
   const messageInputRef = useRef(null)
-
+  console.log(currentChannel)
   useEffect(() => {
     // listener for upload task, when it's done; this will be called.
     if (uploadTask !== null) {
@@ -68,7 +87,7 @@ export default function MessagesForm({
   }, [uploadTask])
 
   // Gif handler
-
+  const classes = useStyles()
   const sendFileMessage = (downloadedFileUrl, filePath) => {
     messagesRef()
       .child(filePath)
@@ -207,7 +226,7 @@ export default function MessagesForm({
   const handleSubmit = (e) => {
     e.preventDefault()
   }
-
+  const channelName = currentChannel.name.toLowerCase()
   return (
     <div className="message__form">
       {showGifs && (
@@ -225,45 +244,55 @@ export default function MessagesForm({
           onSelect={handleAddEmoji}
         />
       )}
+      <div className="chatsearchbar">
+        <div className="chatsearchbar__addicon">
+          <IconButton
+            onClick={openModal}
+            className={classes.button}
+            aria-label="settings"
+          >
+            <AddCircleIcon style={{ fontSize: 25 }} />
+          </IconButton>
+        </div>
+        <div className="chatsearchbar__input">
+          <input
+            autoFocus
+            placeholder={`Message #${channelName}`}
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            ref={messageInputRef}
+            onKeyPress={handleKeyPress}
+            className={
+              errors.some((err) => err.message.includes('message'))
+                ? 'error'
+                : ''
+            }
+          />
+        </div>
+        <div className="chatsearchbar__gifcon">
+          <IconButton
+            onClick={() => {
+              // setEmojiPicker(false)
+              setShowGifs(!showGifs)
+            }}
+            className={classes.button}
+            aria-label="settings"
+          >
+            <GifIcon style={{ fontSize: 30 }} />
+          </IconButton>
+        </div>
+        <div className="chatsearchbar__emojiicon">
+          <IconButton
+            className={classes.addbutton}
+            icon={emojiPicker ? 'close' : 'smile outline'}
+            content={emojiPicker ? 'close' : null}
+            onClick={handleEmojiPicker}
+          >
+            <InsertEmoticonIcon style={{ fontSize: 30 }} />
+          </IconButton>
+        </div>
+      </div>
 
-      {/* <form onSubmit={handleSubmit}> */}
-        <Input
-          style={{ width: '90%' }}
-          // className=""
-          // inverted
-          label={
-            <Button
-              icon={emojiPicker ? 'close' : 'smile outline'}
-              content={emojiPicker ? 'close' : null}
-              onClick={handleEmojiPicker}
-            />
-          }
-          labelPosition="left"
-          placeholder="Write your message..."
-          value={message}
-          onChange={(event) => setMessage(event.target.value)}
-          ref={messageInputRef}
-          onKeyPress={handleKeyPress}
-          className={
-            errors.some((err) => err.message.includes('message')) ? 'error' : ''
-          }
-        />
-        <Button
-          color="red"
-          style={{ marginLeft: '8px' }}
-          // labelPosition="right"
-          icon="cloud upload"
-          onClick={openModal}
-        />
-        <Button
-          color="blue"
-          icon="rocket"
-          onClick={() => {
-            // setEmojiPicker(false)
-            setShowGifs(!showGifs)
-          }}
-        />
-      {/* </form> */}
       <UploadFileModal
         open={modal}
         closeModal={closeModal}

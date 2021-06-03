@@ -12,7 +12,7 @@ body,
 
 /* messages */
 .messages {
-  height: 85vh;
+  height: 82vh;
   overflow-y: scroll;
   font-size: 1.1rem;
   color: #e6e6e6;
@@ -23,12 +23,12 @@ body,
 /* messages form */
 
 .message__form {
-  position: fixed !important;
+  position:fixed;
   bottom: 1em;
-  margin-left: 320px !important;
+  margin-left: 300px;
   left: 0;
   /* width: 80%; */
-  right: 1em;
+  /* right: 1em; */
   z-index: 200;
   /* height: 8vh; */
   background-color: #35383d;
