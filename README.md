@@ -25,19 +25,18 @@
 - Online User's List Icons
 
 ## Issues
-- ([ ]) Add className for Emojis
-- ([ ])
-- ([ ]) VideoCall feature integration
-- ([ ]) Gifs not working
-- ([ ]) Sidebar issues
-- ([ ]) VoiceCall integration
-- ([ ]) Conversion from firebase realtime to firebase firestore
-- ([ ]) animations
-- ([ ]) time format i.e add exact time
-- ([ ]) Dark Mode
-- ([ ]) Search User Integration
-- ([ ]) Push Notifications
-- ([ ]) Responsive - Much bigger issue
+- [ ] Add className for Emojis
+- [ ] VideoCall feature integration
+- [x] Gifs not working
+- [ ] Sidebar issues
+- [ ] VoiceCall integration
+- [ ] Conversion from firebase realtime to firebase firestore
+- [ ] animations
+- [ ] time format i.e add exact time
+- [x] Dark Mode
+- [ ] Search User Integration
+- [ ] Push Notifications
+- [ ] Responsive - Much bigger issue
 
 ## How to setup ?
 
