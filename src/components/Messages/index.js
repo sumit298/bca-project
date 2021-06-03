@@ -8,7 +8,7 @@ import MessagesHeader from './MessagesHeader'
 import MessagesForm from './MessagesForm'
 import Message from './Message'
 import Typing from './Typing'
-import './Message.css';
+import './Message.scss'
 
 import firebase from '../../firebase'
 import Skeleton from './Skeleton'
@@ -25,7 +25,7 @@ export default function Messages({ currentUser, currentChannel }) {
   const [searchResults, setSearchResults] = useState([])
   const [typingUsers, setTypingUsers] = useState([])
   const [isStarred, setIsStarred] = useState(true)
-  const [video, setVideo] = useState(true);
+  const [video, setVideo] = useState(true)
 
   const [messagesRef] = useState(firebase.database().ref('messages'))
   const [privateMessagesRef] = useState(
@@ -300,58 +300,37 @@ export default function Messages({ currentUser, currentChannel }) {
 
   return (
     <div className="chat">
-      {video ? (
-        <div>
-          <MessagesHeader
-            channelName={getChannelName(channel)}
-            users={getUniqueUsers(messages)}
-            searchTerm={searchTerm}
-            handleSearchMessages={handleSearchMessages}
-            searching={searchingMessages}
-            isChannelPrivate={isChannelPrivate}
-            handleStarChannel={handleStarChannel}
-            isStarred={isStarred}
-          />
+      <div>
+        <MessagesHeader
+          channelName={getChannelName(channel)}
+          users={getUniqueUsers(messages)}
+          searchTerm={searchTerm}
+          handleSearchMessages={handleSearchMessages}
+          searching={searchingMessages}
+          isChannelPrivate={isChannelPrivate}
+          handleStarChannel={handleStarChannel}
+          isStarred={isStarred}
+        />
 
-          <div className="messages">
-            <Comment.Group>
-              {renderSkeleton(messagesLoading)}
-              {searchTerm
-                ? renderMessages(searchResults)
-                : renderMessages(messages)}
-              <div ref={messagesEndRef}></div>
-            </Comment.Group>
-            {displayTypingUsers(typingUsers)}
-          </div>
+        <div className="messages">
+          <Comment.Group>
+            {renderSkeleton(messagesLoading)}
+            {searchTerm
+              ? renderMessages(searchResults)
+              : renderMessages(messages)}
+            <div ref={messagesEndRef}></div>
+          </Comment.Group>
+          {displayTypingUsers(typingUsers)}
+        </div>
 
-          <MessagesForm
-            currentChannel={currentChannel}
-            currentUser={currentUser}
-            messagesRef={getMessagesRef}
-            isChannelPrivate={isChannelPrivate}
-          />
-        </div>
-      ) : (
-        <div>
-          <MessagesHeader
-            channelName={getChannelName(channel)}
-            users={getUniqueUsers(messages)}
-            searchTerm={searchTerm}
-            handleSearchMessages={handleSearchMessages}
-            searching={searchingMessages}
-            isChannelPrivate={isChannelPrivate}
-            handleStarChannel={handleStarChannel}
-            isStarred={isStarred}
-          />
-        <VideoChat/> 
-        {/* <MessagesForm
-            currentChannel={currentChannel}
-            currentUser={currentUser}
-            messagesRef={getMessagesRef}
-            isChannelPrivate={isChannelPrivate}
-          /> */}
-        </div>
-      )}
+        <MessagesForm
+          currentChannel={currentChannel}
+          currentUser={currentUser}
+          messagesRef={getMessagesRef}
+          isChannelPrivate={isChannelPrivate}
+        />
+      </div>
+      )
     </div>
   )
 }

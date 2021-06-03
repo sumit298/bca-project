@@ -1,7 +1,7 @@
 import React from 'react'
-import { Comment, Image } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 import moment from 'moment'
-import './Message.css'
+import './Message.scss'
 import { Avatar } from '@material-ui/core'
 
 const isOwnUser = (message, user) =>
@@ -15,19 +15,22 @@ export default function Message({ message, user }) {
 
   return (
     <div className="message">
-      {/* <Comment style={{color: "red !important"}}> */}
       <Avatar src={message.user.avatar} />
       <div className={isOwnUser(message, user)}>
         <div className="message__info">
-          <h4>{message.user.name}</h4>
-          <span>{timeFromNow(message.timestamp)}</span>
+          <h4>
+            {message.user.name}
+            <span className="message__timestamp">
+              {timeFromNow(message.timestamp)}
+            </span>
+          </h4>
 
           {isImage(message) ? (
-            <Image src={message.image} style={{ padding: '1em' }} />
+            <Image src={message.image} style={{ padding: ' 0.7em 0' }} />
           ) : (
-            <Comment.Text>{message.content}</Comment.Text>
+            <p className="content">{message.content}</p>
           )}
-          {/* {message ? <p>{message}</p> : <img src={gifUrl} alt="gif" />} */}
+          {/* {message ? <p>{message}</p> : <img src={"gifUrl"} alt="gif" />} */}
         </div>
       </div>
     </div>

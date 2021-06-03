@@ -7,8 +7,9 @@ import {
   Image,
   List,
   ListItem,
-  Sidebar
+  Sidebar,
 } from 'semantic-ui-react'
+import './metaPanel.scss'
 
 export default function MetaPanel({
   isPrivateChannel,
@@ -28,18 +29,29 @@ export default function MetaPanel({
       .sort((a, b) => b[1] - a[1])
       .map(([key, value], i) => {
         return (
-          <ListItem key={key}>
-            <Image avatar src={value.avatar} />
-            <List.Content>
-              <List.Header as="a">{key}</List.Header>
-              <List.Description>{getPostText(value.count)}</List.Description>
+          <ListItem className="metalist" key={key}>
+            <Image
+              style={{ height: '2.5rem', width: '2.5rem' }}
+              avatar
+              src={value.avatar}
+            />
+            <List.Content className="metalist__content">
+              <List.Header as="a" style={{ fontSize: '1.2rem' }}>
+                {key}
+              </List.Header>
+              <List.Description
+                style={{ fontSize: '1rem', color: '#fff' }}
+                as="p"
+              >
+                {getPostText(value.count)}
+              </List.Description>
             </List.Content>
           </ListItem>
         )
       })
   }
 
-  const getPostText = count =>
+  const getPostText = (count) =>
     count > 1 || count === 0 ? `${count} posts` : `${count} post`
 
   if (isPrivateChannel) {
@@ -47,57 +59,29 @@ export default function MetaPanel({
   }
 
   return (
-    <Sidebar >
-    <Segment loading={!currentChannel}>
-      <Header as="h3" attached="top">
-        About # {currentChannel && currentChannel.name}
-      </Header>
+    <div className="metapanel" loading={!currentChannel}>
+      <h3>About # {currentChannel && currentChannel.name}</h3>
 
-      <Accordion styled attached="true">
-        <Accordion.Title
-          active={activeIndex === 0}
-          index={0}
-          onClick={handleAccordionChange}
-        >
-          <Icon name="dropdown" />
-          <Icon name="info" />
-          Channel Details
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 0}>
-          {currentChannel && currentChannel.description}
-        </Accordion.Content>
-        <Accordion.Title
-          active={activeIndex === 1}
-          index={1}
-          onClick={handleAccordionChange}
-        >
-          <Icon name="dropdown" />
+      <div>
+        <p>{currentChannel && currentChannel.description}</p>
+        <h4>
           <Icon name="user circle" />
           Top posters
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 1}>
+        </h4>
+        <p>
           <List>{userPosts && renderUserPosts(userPosts)}</List>
-        </Accordion.Content>
-        <Accordion.Title
-          active={activeIndex === 2}
-          index={2}
-          onClick={handleAccordionChange}
-        >
-          <Icon name="dropdown" />
-          <Icon name="pencil alternate" />
-          Created By
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 2}>
-          <Header as="h3">
-            <Image
-              circular
-              src={currentChannel && currentChannel.createdBy.avatar}
-            />
-            {currentChannel && currentChannel.createdBy.name}
-          </Header>
-        </Accordion.Content>
-      </Accordion>
-    </Segment>
-    </Sidebar>
+        </p>
+        <div className="meta__createdBy">
+          <h4>
+            <Icon name="pencil alternate" />
+            Created By
+          </h4>
+          <p>
+            <img src={currentChannel && currentChannel.createdBy.avatar} />
+            <h3>{currentChannel && currentChannel.createdBy.name}</h3>
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }

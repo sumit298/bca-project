@@ -2,7 +2,6 @@ import React from 'react'
 import { Grid } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
 
-
 import SidePanel from './SidePanel'
 import Messages from './Messages'
 import MetaPanel from './MetaPanel'
@@ -33,13 +32,15 @@ export default function App() {
           />
         )}
       </Grid.Column>
-      {/* <Grid.Column width="4">
-        <MetaPanel
-          isPrivateChannel={isPrivateChannel}
-          currentChannel={currentChannel}
-          userPosts={userPosts}
-        />
-      </Grid.Column> */}
+      {!isPrivateChannel ? (
+        <Grid.Column width={2}>
+          <MetaPanel
+            isPrivateChannel={isPrivateChannel}
+            currentChannel={currentChannel}
+            userPosts={userPosts}
+          />
+        </Grid.Column>
+      ) : null}
     </Grid>
   )
 }

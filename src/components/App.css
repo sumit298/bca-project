@@ -6,17 +6,17 @@ body,
   margin: 0;
   padding: 0;
   /* padding: 1em; */
-  /* background-color: #0c0d0f; */
+  background-color: #35383d
   /* color: #e6e6e6 !important; */
 }
 
 /* messages */
 .messages {
-  height: 86vh;
+  height: 85vh;
   overflow-y: scroll;
-  color: #8d8c91 !important;
   font-size: 1.1rem;
   color: #e6e6e6;
+  background-color: #35383d;
   /* background-color: #0C0D0F !important; */
 }
 
@@ -30,15 +30,17 @@ body,
   /* width: 80%; */
   right: 1em;
   z-index: 200;
-  background-color: #161B22 !important;
-  display: flex;
+  /* height: 8vh; */
+  background-color: #35383d;
+  
 }
 
 /* message component */
 
 .message__self {
+  margin-left: 10px;
   border-left: 1px solid orange;
-  padding-left: 8px;
+  padding-left: 5px;
 }
 
 /* progress bar styles */
@@ -196,7 +198,7 @@ body,
 
 .chat {
   flex: 0.75;
-  background: #0d1117;
+  /* background-color: #35383d; */
   display: flex;
   position: relative;
   flex-direction: column;
@@ -210,8 +212,8 @@ body,
   padding: 15px;
   border-radius: 7px;
   margin: 20px;
-  border-top: 2px solid #0c0d0f;
-  background-color: #0c0d0f;
+  /* border-top: 2px solid #0c0d0f; */
+  /* background-color: #0c0d0f; */
 }
 
 .chat__input  .MuiSvgIcon-root {
@@ -289,7 +291,7 @@ body,
 }
 
 .chat__messages {
-  height: 73.8vh;
+  /* height: 73.8vh; */
   overflow-y: auto;
   scroll-snap-type: y mandatory;
 }
@@ -336,12 +338,12 @@ body,
 
 .message__timestamp {
   color: rgba(128, 128, 128, 0.452);
-  margin-left: 20px;
-  font-size: x-small;
+  margin-left: 15px;
+  font-size: small;
 }
 
 .message__info  > img {
   margin-top: 10px;
   border-radius: 10px;
-  width: 70%;
+  width: 100%;
 }

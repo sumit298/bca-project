@@ -111,7 +111,7 @@ export default function UserPanel({ currentUser }) {
     <Grid>
       <Grid.Column>
         <Grid.Row style={{ padding: '1.2em', margin: 0 }}>
-          <Input type="text" name="search"/>
+          <Input type="text" name="search" placeholder="Search for User"/>
           <Header inverted as="h4" style={{ padding: '1.2em' }}>
             <Image avatar src={user.photoURL} />
             {/* User menu */}

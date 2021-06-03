@@ -17,7 +17,7 @@ export default function SidePanel({ currentUser }) {
       // color="black"
       fixed="left"
       vertical
-      style={{ fontSize: '1.2rem' ,overflowY: "scroll", backgroundColor: "#0d0d0d", width: '40vh' }}
+      style={{ fontSize: '1.2rem' ,overflowY: "scroll", backgroundColor: "#23272a", width: '40vh' }}
     >
       <UserPanel currentUser={currentUser} />
       <Starred currentUser={currentUser} />

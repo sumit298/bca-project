@@ -7,7 +7,7 @@ import ReactGiphySearch from 'react-giphy-searchbox'
 import firebase from '../../firebase'
 import UploadFileModal from './UploadFileModal'
 import ProgressBar from './ProgressBar'
-import './Message.css'
+import './MessageForm.scss'
 import 'emoji-mart/css/emoji-mart.css'
 
 export default function MessagesForm({
@@ -127,7 +127,7 @@ export default function MessagesForm({
   }
 
   const uploadFile = (file, metaData) => {
-    console.log(file);
+    console.log(file)
     setPathToUpload(currentChannel.id)
     const filePath = `${getFilePath(currentChannel.id)}/${uuid()}.jpg`
     setUploadState('UPLOADING')
@@ -154,7 +154,7 @@ export default function MessagesForm({
   }
 
   const handleAddEmoji = (emoji) => {
-    console.log(emoji);
+    console.log(emoji)
     const oldMessage = message
     const newMessage = colonToUnicode(` ${oldMessage} ${emoji.colons} `)
     setMessage(newMessage)
@@ -184,9 +184,9 @@ export default function MessagesForm({
   const gifSelectHandler = (gif) => {
     console.log(gif)
     const oldMessage = message
-    const newMessage = gif?.user.avatar_url;
-    const uploader = uploadFile(newMessage)
-    setMessage(uploader);
+    const newMessage = gif.images.downsized_medium.url
+    // const uploader = uploadFile(newMessage)
+    setMessage(newMessage)
     setShowGifs(false)
 
     setTimeout(() => {
@@ -204,12 +204,12 @@ export default function MessagesForm({
   const openModal = () => setModal(true)
 
   const closeModal = () => setModal(false)
-  const handleSubmit = e=>{
-    e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault()
   }
 
   return (
-    <div className="chat__message">
+    <div className="message__form">
       {showGifs && (
         <ReactGiphySearch
           apiKey="m8zn7XPBBGgyFC0QlJdTZCrG9y9ofAj1"
@@ -225,43 +225,45 @@ export default function MessagesForm({
           onSelect={handleAddEmoji}
         />
       )}
-      <Button
-        color="red"
-        style={{ marginLeft: '8px' }}
-        // labelPosition="right"
-        icon="cloud upload"
-        onClick={openModal}
-      />
-      <Button
-        color="blue"
-        icon="rocket"
-        onClick={() => {
-          setEmojiPicker(false)
-          setShowGifs(!showGifs)
-        }}
-      />
-      <form onSubmit={handleSubmit}>
-      <Input
-        style={{ width: '90%', overflow: 'hidden' }}
-        inverted
-        label={
-          <Button
-            icon={emojiPicker ? 'close' : 'smile outline'}
-            content={emojiPicker ? 'close' : null}
-            onClick={handleEmojiPicker}
-          />
-        }
-        labelPosition="left"
-        placeholder="Write your message..."
-        value={message}
-        onChange={(event) => setMessage(event.target.value)}
-        ref={messageInputRef}
-        onKeyPress={handleKeyPress}
-        className={
-          errors.some((err) => err.message.includes('message')) ? 'error' : ''
-        }
-      />
-      </form>
+
+      {/* <form onSubmit={handleSubmit}> */}
+        <Input
+          style={{ width: '90%' }}
+          // className=""
+          // inverted
+          label={
+            <Button
+              icon={emojiPicker ? 'close' : 'smile outline'}
+              content={emojiPicker ? 'close' : null}
+              onClick={handleEmojiPicker}
+            />
+          }
+          labelPosition="left"
+          placeholder="Write your message..."
+          value={message}
+          onChange={(event) => setMessage(event.target.value)}
+          ref={messageInputRef}
+          onKeyPress={handleKeyPress}
+          className={
+            errors.some((err) => err.message.includes('message')) ? 'error' : ''
+          }
+        />
+        <Button
+          color="red"
+          style={{ marginLeft: '8px' }}
+          // labelPosition="right"
+          icon="cloud upload"
+          onClick={openModal}
+        />
+        <Button
+          color="blue"
+          icon="rocket"
+          onClick={() => {
+            // setEmojiPicker(false)
+            setShowGifs(!showGifs)
+          }}
+        />
+      {/* </form> */}
       <UploadFileModal
         open={modal}
         closeModal={closeModal}
