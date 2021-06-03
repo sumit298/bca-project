@@ -1,4 +1,4 @@
-# Slack Application Clone
+# Slack/Discord Application Project
 
 ## A clone for slack application with following features ✔️
 
@@ -21,19 +21,27 @@
 ---
 
 ## Upcomming features ✔️
-- Mobile responsive layout 
+- Mobile responsive layout
+- Online User's List Icons
 
-
+## Issues
+- Add className for Emojis
+- VideoCall feature integration
+- Gifs not working
+- Sidebar issues
+- VoiceCall integration
+- Conversion from firebase realtime to firebase firestore
+- animations
+- time format i.e add exact time
+- Dark Mode
+- Search User Integration
+- Push Notifications
+- Responsive - Much bigger issue
 
 ## How to setup ?
 
+
 ### Step 01
-
-```
-git clone https://github.com/rehan-sattar/slack-clone-react
-```
-
-### Step 02
 
 ```
 npm install
@@ -43,7 +51,7 @@ or
 yarn install
 ```
 
-### Step 03
+### Step 02
 
 Create an `env.local` file, add your firebase credentials like this
 
@@ -61,7 +69,7 @@ REACT_APP_measurementId=[MEASUREMENT_ID]
 
 > 📣 NOTE : You have to create your own firebase project in firebase console and you will get the credentials from there.
 
-### Step 04
+### Step 03
 
 ```
 npm start
