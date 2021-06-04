@@ -17,10 +17,7 @@ export default function App() {
   const [isMounted, setIsMounted] = React.useState(false)
   const darkMode = useDarkMode(true)
   const theme = darkMode.value ? darkTheme : lightTheme
-  //   const themeToggler = () => {
-  //     theme === 'light' ? setTheme('dark') : setTheme('light')
-  //     console.log('hello')
-  // }
+  
   const { currentUser, currentChannel, isPrivateChannel, userPosts } =
     useSelector(({ user, channel }) => ({
       currentUser: user.currentUser,

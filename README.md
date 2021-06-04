@@ -36,7 +36,11 @@
 - Optional - voice command feature 
 - Verification of User
 - Forget Password
-- User Report 
+- User Report -CSV
+- User block - see old code
+- channel delete
+- message delete
+- total users count in metapanel
 
 ## Issues
 - [ ] Add className for Emojis
