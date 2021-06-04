@@ -1,5 +1,5 @@
 import React, { createRef, useState } from 'react'
-import './App.css'
+import './App.scss'
 import firebase from '../firebase'
 import {Modal, Icon, Button} from 'semantic-ui-react';
 

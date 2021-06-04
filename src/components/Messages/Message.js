@@ -1,7 +1,6 @@
 import React from 'react'
 import { Image } from 'semantic-ui-react'
 import moment from 'moment'
-import './Message.scss'
 import { Avatar } from '@material-ui/core'
 
 const isOwnUser = (message, user) =>
@@ -11,7 +10,7 @@ const timeFromNow = (timestamp) => moment(timestamp).fromNow()
 
 export default function Message({ message, user }) {
   const isImage = (message) =>
-    message.hasOwnProperty('image') && !message.hasOwnProperty('content')
+    message.hasOwnProperty('image','gifs') && !message.hasOwnProperty('content')
 
   return (
     <div className="message">

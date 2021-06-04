@@ -33,7 +33,10 @@
 - Add Formik and Yup for Validation in Login and Register.
 - Threads of chats displayed in Sidebar
 - Linkify html - like clickable urls
-- Optional - voice command feature  
+- Optional - voice command feature 
+- Verification of User
+- Forget Password
+- User Report 
 
 ## Issues
 - [ ] Add className for Emojis

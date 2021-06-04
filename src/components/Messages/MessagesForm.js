@@ -10,7 +10,6 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import firebase from '../../firebase'
 import UploadFileModal from './UploadFileModal'
 import ProgressBar from './ProgressBar'
-import './MessageForm.scss'
 import 'emoji-mart/css/emoji-mart.css'
 import { IconButton } from '@material-ui/core'
 
@@ -47,8 +46,9 @@ export default function MessagesForm({
   const [pathToUpload, setPathToUpload] = useState('')
   const [emojiPicker, setEmojiPicker] = useState(false)
   const [showGifs, setShowGifs] = useState(false)
+  const [gifs, setGifs] = useState("")
   const messageInputRef = useRef(null)
-  console.log(currentChannel)
+  // console.log(currentChannel)
   useEffect(() => {
     // listener for upload task, when it's done; this will be called.
     if (uploadTask !== null) {
@@ -111,7 +111,7 @@ export default function MessagesForm({
       },
     }
     if (file !== null) {
-      messageBody['image'] = file
+      messageBody['image', 'gif'] = file
     } else {
       messageBody['content'] = message
     }
@@ -149,6 +149,7 @@ export default function MessagesForm({
     console.log(file)
     setPathToUpload(currentChannel.id)
     const filePath = `${getFilePath(currentChannel.id)}/${uuid()}.jpg`
+    console.log(filePath);
     setUploadState('UPLOADING')
     const fileReference = storageRef.child(filePath).put(file, metaData)
     setUploadTask(fileReference)
@@ -179,7 +180,8 @@ export default function MessagesForm({
     setMessage(newMessage)
     setShowGifs(false)
     setEmojiPicker(false)
-
+    // const fileReference = storageRef.child(filePath).put(newMessage)
+    setUploadTask(newMessage);
     setTimeout(() => {
       messageInputRef.current.focus()
     }, 0)
@@ -200,17 +202,19 @@ export default function MessagesForm({
     })
   }
 
-  const gifSelectHandler = (gif) => {
+  const gifSelectHandler = async(gif) => {
     console.log(gif)
     const oldMessage = message
-    const newMessage = gif.images.downsized_medium.url
+    const newMessage = gif.images.downsized_medium.url;
     // const uploader = uploadFile(newMessage)
+    setGifs(newMessage);
     setMessage(newMessage)
     setShowGifs(false)
 
     setTimeout(() => {
       messageInputRef.current.focus()
     }, 0)
+    setPathToUpload(newMessage);
     // notificationAudio.play();
     // db.collection('textChannels').doc(channelId)
     // .collection("messages").add({
@@ -231,7 +235,7 @@ export default function MessagesForm({
     <div className="message__form">
       {showGifs && (
         <ReactGiphySearch
-          apiKey="m8zn7XPBBGgyFC0QlJdTZCrG9y9ofAj1"
+          apiKey={`${process.env.REACT_APP_GIF_API_KEY}`}
           onSelect={gifSelectHandler}
         />
       )}
@@ -292,7 +296,6 @@ export default function MessagesForm({
           </IconButton>
         </div>
       </div>
-
       <UploadFileModal
         open={modal}
         closeModal={closeModal}
