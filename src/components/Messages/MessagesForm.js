@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { v4 as uuid } from 'uuid'
-import { Segment, Input, Button } from 'semantic-ui-react'
+// import { Segment, Input, Button } from 'semantic-ui-react'
 import { Picker, emojiIndex } from 'emoji-mart'
 import ReactGiphySearch from 'react-giphy-searchbox'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
@@ -13,21 +13,12 @@ import ProgressBar from './ProgressBar'
 import './MessageForm.scss'
 import 'emoji-mart/css/emoji-mart.css'
 import { IconButton } from '@material-ui/core'
+import { darkTheme, lightTheme } from '../../Themes/GlobalStyles'
+import useDarkMode from 'use-dark-mode'
 
-const useStyles = makeStyles(() => {
-  return {
-    button: {
-      color: '#b8bbc0',
-      padding: '0 .75rem',
-      '&:hover': {
-        color: '#fff',
-      },
-    },
-    addbutton: {
-      color: '#b8bbc0',
-    },
-  }
-})
+
+
+
 
 export default function MessagesForm({
   currentChannel,
@@ -48,7 +39,9 @@ export default function MessagesForm({
   const [emojiPicker, setEmojiPicker] = useState(false)
   const [showGifs, setShowGifs] = useState(false)
   const messageInputRef = useRef(null)
-  console.log(currentChannel)
+  // console.log(currentChannel)
+  const theme = useDarkMode(true)
+ 
   useEffect(() => {
     // listener for upload task, when it's done; this will be called.
     if (uploadTask !== null) {
@@ -87,7 +80,6 @@ export default function MessagesForm({
   }, [uploadTask])
 
   // Gif handler
-  const classes = useStyles()
   const sendFileMessage = (downloadedFileUrl, filePath) => {
     messagesRef()
       .child(filePath)
@@ -223,9 +215,9 @@ export default function MessagesForm({
   const openModal = () => setModal(true)
 
   const closeModal = () => setModal(false)
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  // }
   const channelName = currentChannel.name.toLowerCase()
   return (
     <div className="message__form">
@@ -248,10 +240,10 @@ export default function MessagesForm({
         <div className="chatsearchbar__addicon">
           <IconButton
             onClick={openModal}
-            className={classes.button}
+            className="icon__button"
             aria-label="settings"
           >
-            <AddCircleIcon style={{ fontSize: 25 }} />
+            <AddCircleIcon className="icon__button" style={{ fontSize: 25 }} />
           </IconButton>
         </div>
         <div className="chatsearchbar__input">
@@ -275,20 +267,20 @@ export default function MessagesForm({
               // setEmojiPicker(false)
               setShowGifs(!showGifs)
             }}
-            className={classes.button}
+            className="icon__button"
             aria-label="settings"
           >
-            <GifIcon style={{ fontSize: 30 }} />
+            <GifIcon className="icon__button" style={{ fontSize: 30 }} />
           </IconButton>
         </div>
         <div className="chatsearchbar__emojiicon">
           <IconButton
-            className={classes.addbutton}
+            // className="icon__button"
             icon={emojiPicker ? 'close' : 'smile outline'}
             content={emojiPicker ? 'close' : null}
             onClick={handleEmojiPicker}
           >
-            <InsertEmoticonIcon style={{ fontSize: 30 }} />
+            <InsertEmoticonIcon className="icon__button" style={{ fontSize: 30 }} />
           </IconButton>
         </div>
       </div>

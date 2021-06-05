@@ -1,13 +1,13 @@
 import React from 'react'
 import {
-  Segment,
-  Accordion,
-  Header,
+  // Segment,
+  // Accordion,
+  // Header,
   Icon,
   Image,
   List,
   ListItem,
-  Sidebar,
+  // Sidebar,
 } from 'semantic-ui-react'
 import './metaPanel.scss'
 
@@ -39,12 +39,11 @@ export default function MetaPanel({
               <List.Header as="a" style={{ fontSize: '1.2rem' }}>
                 {key}
               </List.Header>
-              <List.Description
-                style={{ fontSize: '1rem', color: '#fff' }}
-                as="p"
+              <p
+                style={{ fontSize: '1rem' }}
               >
                 {getPostText(value.count)}
-              </List.Description>
+              </p>
             </List.Content>
           </ListItem>
         )
@@ -60,6 +59,7 @@ export default function MetaPanel({
 
   return (
     <div className="metapanel" loading={!currentChannel}>
+      <div className="metapanel__content">
       <h3>About # {currentChannel && currentChannel.name}</h3>
 
       <div>
@@ -76,11 +76,12 @@ export default function MetaPanel({
             <Icon name="pencil alternate" />
             Created By
           </h4>
-          <p>
-            <img src={currentChannel && currentChannel.createdBy.avatar} />
-            <h3>{currentChannel && currentChannel.createdBy.name}</h3>
-          </p>
+          <h4>
+            <img className="img" src={currentChannel && currentChannel.createdBy.avatar} />
+            <p>{currentChannel && currentChannel.createdBy.name}</p>
+          </h4>
         </div>
+      </div>
       </div>
     </div>
   )

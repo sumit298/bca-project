@@ -1,0 +1,61 @@
+:global(.ui.inverted.menu .active.item) {
+  background: rgba(255, 255, 255, 0.15);
+  color: #480202 !important;
+}
+
+#menu {
+  // color: blue;
+  font-size: 1.2rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  // marginTop: '52px',
+  //   background-color: rgb(163, 94, 94);
+  width: 20vw !important;
+  // color: blue !important;
+}
+
+.menu-item {
+  // color: blue;
+  // margin: 25px 0;
+  margin-left: 30px;
+  opacity: 0.8;
+  font-style: italic;
+  margin-bottom: 20px;
+  // border-bottom: 1px solid black;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    // background-color: rgb(163, 94, 94);
+    padding: 10px 0;
+    // width: 60%;
+    cursor: pointer;
+    // transition: all 0.3s linear;
+    // margin-left: 40px    ;
+  }
+}
+
+.menu-label {
+  // color: red;
+  margin-left: 20px;
+}
+
+.menu-item-label {
+  margin-left: 30px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  font-style: italic;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    // background-color: rgb(163, 94, 94);
+    padding: 10px 0;
+    // width: 60%;
+    cursor: pointer;
+    // transition: all 0.3s linear;
+    // margin-left: 40px    ;
+  }
+}
+
+.active__icon {
+  position: sticky;
+  left: 180px;
+}
+

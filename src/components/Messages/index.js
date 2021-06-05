@@ -299,7 +299,7 @@ export default function Messages({ currentUser, currentChannel }) {
   }
 
   return (
-    <div className="chat">
+    <div className={isChannelPrivate ? 'chatPrivate' : 'chat'}>
       <div>
         <MessagesHeader
           channelName={getChannelName(channel)}
@@ -330,7 +330,7 @@ export default function Messages({ currentUser, currentChannel }) {
           isChannelPrivate={isChannelPrivate}
         />
       </div>
-      )
+      
     </div>
   )
 }

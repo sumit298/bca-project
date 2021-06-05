@@ -1,18 +1,17 @@
 .chatsearchbar {
-  background-color: #2c2f33;
+  // background-color: #2c2f33;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 58vw;
   border-radius: 5px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   input {
-    width: 100vh;
-
-    color: white;
+    width: 45vw;
+    // color: white;
     border: none;
-    background-color: #2c2f33;
+    // background-color: #2c2f33;
     padding: 10px 0;
     margin-left: 15px;
     outline: none;
@@ -22,6 +21,6 @@
   }
   :-ms-input-placeholder {
     margin-right: -10px;
-    color: brown;
+    // color: brown;
   }
 }

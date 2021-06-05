@@ -67,14 +67,14 @@ export default function Starred({ currentUser }) {
     dispatch(setChannelAction(channel))
   }
   return (
-    <Menu.Menu style={{ paddingBottom: '2rem' }}>
-      <Menu.Item>
+    <div style={{ paddingBottom: '2rem' }}>
+      <p className="menu-label">
         <span>
           <Icon name="star" /> Channels
         </span>{' '}
         ({starredChannels.length})
-      </Menu.Item>
+      </p>
       {renderStarredChannels(starredChannels)}
-    </Menu.Menu>
+    </div>
   )
 }

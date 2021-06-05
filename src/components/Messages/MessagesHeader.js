@@ -4,9 +4,11 @@ import { fade, makeStyles } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './MessageHeader.scss'
+import useDarkMode from 'use-dark-mode';
 
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import FlareIcon from '@material-ui/icons/Flare';
+
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -54,6 +56,7 @@ export default function MessagesHeader({
   handleStarChannel,
   isStarred,
 }) {
+  const darkMode = useDarkMode(true);
   return (
     <div className="chat__main">
       <div className="chatheader">
@@ -75,8 +78,8 @@ export default function MessagesHeader({
         </div>
         <div className="chatheader__items">
           <div className="chatheader__items-left">
-              <Brightness4Icon/>
-              <FlareIcon/>
+              <Brightness4Icon onClick={darkMode.toggle}/>
+              {/* <FlareIcon onClick={darkMode.disable}/> */}
           </div>
           <div className="chatheader__searchbar">
             <input

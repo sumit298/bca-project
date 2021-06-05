@@ -178,18 +178,19 @@ class Channels extends React.Component {
   displayChannels = channels =>
     channels.length > 0 &&
     channels.map(channel => (
-      <Menu.Item
+      <div
+        className="menu-item"
         key={channel.id}
         onClick={() => this.changeChannel(channel)}
         name={channel.name}
-        style={{ opacity: 0.7 }}
+        style={{ opacity: 0.8 }}
         active={channel.id === this.state.activeChannel}
       >
         {this.getNotificationCount(channel) && (
           <Label color="red">{this.getNotificationCount(channel)}</Label>
         )}
         # {channel.name}
-      </Menu.Item>
+      </div>
     ))
 
   isFormValid = ({ channelName, channelDetails }) =>
@@ -204,15 +205,15 @@ class Channels extends React.Component {
 
     return (
       <React.Fragment>
-        <Menu.Menu className="menu">
-          <Menu.Item>
-            <span>
-              <Icon name="exchange" /> CHANNELS
+        <div id="menu">
+          <p className="menu-label">
+            <span >
+              <Icon name="exchange" /> Channels
             </span>{' '}
-            ({channels.length}) <Icon name="add" onClick={this.openModal} />
-          </Menu.Item>
+            ({channels.length}) <Icon name="add" style={{marginLeft: 50}} onClick={this.openModal} />
+          </p>
           {this.displayChannels(channels)}
-        </Menu.Menu>
+        </div>
 
         {/* Add Channel Modal */}
         <Modal basic open={modal} onClose={this.closeModal}>

@@ -1,13 +1,12 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
-
+import './sidePanel.scss'
 import UserPanel from './UserPanel'
 import Starred from './Starred'
 import Channels from './Channels'
 import DirectMessages from './DirectMessages'
-import VideoChat from '../VideoChat';
-import VideoChannel from './VideoChannel'
-
+// import VideoChat from '../VideoChat'
+// import VideoChannel from './VideoChannel'
 
 export default function SidePanel({ currentUser }) {
   return (
@@ -17,14 +16,14 @@ export default function SidePanel({ currentUser }) {
       // color="black"
       fixed="left"
       vertical
-      style={{ fontSize: '1.2rem' ,overflowY: "scroll", backgroundColor: "#23272a", width: '40vh' }}
+      id="menu"
     >
       <UserPanel currentUser={currentUser} />
       <Starred currentUser={currentUser} />
       <Channels currentUser={currentUser} />
       {/* <VideoChat/> */}
       <DirectMessages currentUser={currentUser} />
-      <VideoChannel currentUser={currentUser} />
+      {/* <VideoChannel currentUser={currentUser} /> */}
     </Menu>
   )
 }

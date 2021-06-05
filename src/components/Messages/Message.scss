@@ -2,8 +2,15 @@
   display: flex;
   align-items: center;
   padding: 17px 20px;
-  color: white;
-  background-color: #35383d;
+  margin: 0 10px;
+  // color: white;
+  // background-color: #35383d;
+  width: 100%;
+  &:hover{
+    background-color: aqua;
+    position: sticky;
+    width: 62vw;
+  }
 }
 
 .message__info {
@@ -15,13 +22,14 @@
   display: flex;
   align-items: center;
   font-size: 1.3rem;
-  font-family: 'Segoe UI';
+  font-weight: 400;
+  // font-family: 'Segoe UI', serif;
 }
 
 .message__timestamp {
   // color: rgba(128, 128, 128, 0.452);
-  color: antiquewhite;
-  opacity: 0.452;
+  // color: antiquewhite;
+  opacity: 0.602;
   margin-left: 15px;
   font-size: small;
 }
@@ -37,4 +45,7 @@
   opacity: 0.8;
   font-family: 'Quicksand', serif;
   margin-top: -10px;
+  font-weight: 500;
+
+ 
 }
