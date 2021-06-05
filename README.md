@@ -23,6 +23,7 @@
 ## Upcomming features ✔️
 - Mobile responsive layout
 - Online User's List Icons
+<<<<<<< HEAD
 - Add reply message bubble
 - Add Support for uploading other file types
 - Friend and Contact List
@@ -38,6 +39,8 @@
 - channel delete
 - message delete
 - total users count in metapanel
+=======
+>>>>>>> parent of 2f958bb (Updated features issues and upcoming list)
 
 ## Issues
 - [ ] Add className for Emojis

@@ -23,8 +23,11 @@
     "redux-devtools-extension": "^2.13.8",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
+<<<<<<< HEAD
     "styled-components": "^5.3.0",
     "use-dark-mode": "^2.3.1",
+=======
+>>>>>>> parent of 2f958bb (Updated features issues and upcoming list)
     "uuid": "^7.0.2"
   },
   "scripts": {
