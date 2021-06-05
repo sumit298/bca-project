@@ -292,7 +292,7 @@ export default function MessagesForm({
             content={emojiPicker ? 'close' : null}
             onClick={handleEmojiPicker}
           >
-            <InsertEmoticonIcon style={{ fontSize: 30 }} />
+            <InsertEmoticonIcon style={{ fontSize: 25 }} />
           </IconButton>
         </div>
       </div>

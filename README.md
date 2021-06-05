@@ -1,6 +1,6 @@
 # Slack/Discord Application Project
 
-## A clone for slack/discord application with following features ✔️
+## A clone for slack application with following features ✔️
 
 - 💡 Authentication
 - 💡 Channel Creation
@@ -17,9 +17,6 @@
 - 💡 Favorite channels
 - 💡 Search in the chat
 - 💡 Indicators when the other peron is typing.
-- 💡 VideoCall Feature
-- 💡 Gifs Feature
-- 💡 Dark Mode / Light Mode
 
 ---
 
@@ -46,12 +43,10 @@
 - [ ] Add className for Emojis
 - [ ] VideoCall feature integration
 - [x] Gifs not working
-- [ ] Sidebar issues (need a button to hide and show sidebar)
-- [ ] Favourite Channel (Starring Channel) not working
-- [ ] User Profile Picture Updation Issues
+- [ ] Sidebar issues
 - [ ] VoiceCall integration
 - [ ] Conversion from firebase realtime to firebase firestore
-- [ ] Animations
+- [ ] animations
 - [ ] time format i.e add exact time
 - [x] Dark Mode
 - [ ] Search User Integration

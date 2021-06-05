@@ -51,6 +51,8 @@ export default function MetaPanel({
     return null
   }
 
+  // const newClassName = isPrivateChannel ? "": ""
+
   return (
     <div className="metapanel" loading={!currentChannel}>
       <h3>About # {currentChannel && currentChannel.name}</h3>

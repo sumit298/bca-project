@@ -12,12 +12,15 @@ export const GlobalStyles = createGlobalStyle`
   }
 
 .metapanel {
-  // width: 100%;
+  /* width: 100%; */
   background-color: ${({ theme }) => theme.metaPanelColor};
   // color: #fff;
-  // position: absolute;
-
-  margin-top: 100px;
+  /* position: absolute; */
+  width: 20vw;
+  margin-left: -73px;
+  
+  margin-top: 53px;
+  height: 89vh;
 }
 
 .metalist {
@@ -28,7 +31,7 @@ export const GlobalStyles = createGlobalStyle`
 
 .metalist__content {
   margin-top: auto;
-  color: #0d1016;
+  /* color: #0d1016; */
 }
 
 .meta__createdBy {
@@ -70,13 +73,14 @@ export const GlobalStyles = createGlobalStyle`
 
 /* Chat  */
 .chat__main {
-  width: 100%;
+  width: 60vw; 
+  /* 65vw; */
   height: 100%;
 }
 .chatheader {
-  height: 10vh;
-  width: 100%;
-
+  height: 8vh;
+  width: 82vw;
+  overflow: visible;
   display: flex;
   align-items: center;
   // color: #fff;
@@ -189,7 +193,7 @@ export const GlobalStyles = createGlobalStyle`
 
 .content {
   font-size: 1.1rem;
-  opacity: 0.8;
+  opacity: ${({theme})=> theme.opacity};
   font-family: 'Quicksand', serif;
   margin-top: -10px;
 }
@@ -200,6 +204,7 @@ export const GlobalStyles = createGlobalStyle`
   height: 82vh;
   overflow-y: scroll;
   font-size: 1.1rem;
+  width: 100%;
   // color: #e6e6e6;
   // background-color: #35383d;
   /* background-color: #0C0D0F !important; */
@@ -373,26 +378,28 @@ export const GlobalStyles = createGlobalStyle`
 
 /* Other useful stuff */
 .chatsearchbar {
-  background-color: #2c2f33;
+  background-color: ${({ theme }) => theme.metaPanelColor}; 
   display: flex;
   align-items: center;
   width: 100%;
+  justify-content: flex-start;
+  margin-left: -2px;
   border-radius: 5px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   input {
-    width: 100vh;
+    width: 95vh;
 
-    color: white;
+    color: ${({ theme }) => theme.text};
     border: none;
-    background-color: #2c2f33;
-    padding: 10px 0;
-    margin-left: 15px;
+    background-color: ${({ theme }) => theme.metaPanelColor};
+    padding: 5px 0;
+    /* margin-left: 12px; */
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: lighter;
-    text-align: left;
+    /* text-align: left; */
   }
 }
 
@@ -418,13 +425,15 @@ svg {
   align-items: center;
   flex-direction: column;
   overflow-y: scroll;
-  background-color: #2f3135 !important;
+  background-color: ${({ theme }) => theme.metaPanelColor} !important;
   width: 19vw !important;
+  color: ${({ theme }) => theme.text} !important
 }
 
 .chat {
-  flex: 0.75;
-  /* background-color: #35383d; */
+  /* flex: 0.75; */
+  width: 95%;
+  background-color: ${({ theme }) => theme.body} ;
   display: flex;
   position: relative;
   flex-direction: column;
