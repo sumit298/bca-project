@@ -8,7 +8,6 @@ import MessagesHeader from './MessagesHeader'
 import MessagesForm from './MessagesForm'
 import Message from './Message'
 import Typing from './Typing'
-import './Message.scss'
 
 import firebase from '../../firebase'
 import Skeleton from './Skeleton'
@@ -330,7 +329,7 @@ export default function Messages({ currentUser, currentChannel }) {
           isChannelPrivate={isChannelPrivate}
         />
       </div>
-      )
+      
     </div>
   )
 }

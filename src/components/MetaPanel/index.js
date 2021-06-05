@@ -9,20 +9,13 @@ import {
   ListItem,
   Sidebar,
 } from 'semantic-ui-react'
-import './metaPanel.scss'
-
+import styled from 'styled-components'
 export default function MetaPanel({
   isPrivateChannel,
   currentChannel,
   userPosts,
 }) {
   const [activeIndex, setActiveIndex] = React.useState(0)
-
-  const handleAccordionChange = (event, titleProps) => {
-    const { index } = titleProps
-    const newIndex = activeIndex === index ? -1 : index
-    setActiveIndex(newIndex)
-  }
 
   const renderUserPosts = () => {
     return Object.entries(userPosts)
@@ -58,6 +51,8 @@ export default function MetaPanel({
     return null
   }
 
+  // const newClassName = isPrivateChannel ? "": ""
+
   return (
     <div className="metapanel" loading={!currentChannel}>
       <h3>About # {currentChannel && currentChannel.name}</h3>
@@ -85,3 +80,10 @@ export default function MetaPanel({
     </div>
   )
 }
+
+// const MetaPanelWrapper = styled.div`
+//   width: 100%;
+//   /* background-color: ${props=>props.lightTheme.primary}; */
+
+//   margin-top: 100px;
+// `

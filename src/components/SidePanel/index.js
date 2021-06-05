@@ -6,7 +6,9 @@ import Starred from './Starred'
 import Channels from './Channels'
 import DirectMessages from './DirectMessages'
 import VideoChat from '../VideoChat';
+import '../App.scss';
 import VideoChannel from './VideoChannel'
+import { lightTheme, darkTheme } from '../Themes/theme'
 
 
 export default function SidePanel({ currentUser }) {
@@ -14,15 +16,14 @@ export default function SidePanel({ currentUser }) {
     <Menu
       inverted
       size="large"
-      // color="black"
       fixed="left"
       vertical
-      style={{ fontSize: '1.2rem' ,overflowY: "scroll", backgroundColor: "#23272a", width: '40vh' }}
+      className="sidebar__Sidepanel"
+      // style={{width: '19vw', backgroundColor: "#35383d"}}
     >
       <UserPanel currentUser={currentUser} />
       <Starred currentUser={currentUser} />
       <Channels currentUser={currentUser} />
-      {/* <VideoChat/> */}
       <DirectMessages currentUser={currentUser} />
       <VideoChannel currentUser={currentUser} />
     </Menu>
