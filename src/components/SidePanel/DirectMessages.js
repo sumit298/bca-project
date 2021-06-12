@@ -7,8 +7,8 @@ import {
 
 import { setChannel, setPrivateChannel } from '../../store/channels/actions'
 import firebase from '../../firebase'
-import VideoChat from '../../components/VideoChat'
-import { Link } from 'react-router-dom'
+// import VideoChat from '../../components/VideoChat'
+// import { Link } from 'react-router-dom'
 
 function DirectMessages({ currentUser }) {
   const [users, setUsers] = useState([])
@@ -108,7 +108,6 @@ function DirectMessages({ currentUser }) {
         </span>{' '}
         ({users.length})
       </p>
-      <Link to="/video" target="_blank">VideoChat </Link>
       {users.map((user, index) => {
         return (
           <div

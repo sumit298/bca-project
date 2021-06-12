@@ -21,14 +21,15 @@ import 'semantic-ui-css/semantic.min.css'
 import VideoChat from './components/VideoChat'
 import Auth from './components/Auth/Auth'
 import ForgetPassword from './components/Auth/ForgetPassword'
+import { VoiceChat } from '@material-ui/icons'
 
 const Root = () => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const isLoading = useSelector(state => state.user.isLoading)
+  const isLoading = useSelector((state) => state.user.isLoading)
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         dispatch(setUser(user))
         history.push('/')
@@ -46,8 +47,9 @@ const Root = () => {
       <Route exact path="/" component={App} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
-      <Route path='/forget-password' component={ForgetPassword}/>
-      <Route exact path="/video" component={VideoChat}/>
+      <Route path="/forget-password" component={ForgetPassword} />
+      <Route exact path="/video" component={VideoChat} />
+      {/* <Route exact path="/audio" component={VoiceChat}/> */}
     </Switch>
   )
 }

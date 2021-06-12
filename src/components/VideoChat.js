@@ -1,9 +1,12 @@
 import React, { createRef, useState } from 'react'
-import './App.css'
+// import './App.css'
+import './VideoChat.scss'
 import firebase from '../firebase'
 import {
-  // Modal, Icon, 
-  Button} from 'semantic-ui-react';
+  // Modal, Icon,
+  Button,
+  Input,
+} from 'semantic-ui-react'
 
 const firestore = firebase.firestore()
 
@@ -189,11 +192,32 @@ function VideoChat() {
   // 		console.error('Error removing document: ', error);
   // 	});
   // }
+  let mic_switch = true
+  let video_switch = true
+
+  function toggleVideo() {
+    if (localStream != null && localStream.getVideoTracks().length > 0) {
+      video_switch = !video_switch
+
+      localStream.getVideoTracks()[0].enabled = video_switch
+    }
+  }
+
+  function toggleMic() {
+    if (localStream != null && localStream.getTracks().length > 0) {
+      mic_switch = !mic_switch
+
+      localStream.getAudioTracks()[0].enabled = mic_switch
+    }
+    localStream.getTracks().forEach((t) => {
+      if (t.kind === 'audio') t.enabled = !t.enabled
+    })
+  }
 
   return (
-    <div className="App">
+    <div>
       <div className="videos">
-        <span>
+        <span id="local-stream">
           <h3>Local Stream</h3>
           <video
             id="webcamVideo"
@@ -202,7 +226,7 @@ function VideoChat() {
             playsInline
           ></video>
         </span>
-        <span>
+        <span className="remote-stream">
           <h3>Remote Stream</h3>
           <video
             id="remoteVideo"
@@ -212,52 +236,68 @@ function VideoChat() {
           ></video>
         </span>
       </div>
-      <button
-        id="webcamButton"
-        disabled={webcamButtonDisabled}
-        onClick={webcamSetup}
-      >
-        Start webcam
-      </button>
+
       <div className="buttons">
-        <span>
-          <h2>Create a new call</h2>
-          <button
-            id="callButton"
-            disabled={callButtonDisabled}
-            onClick={createCall}
+        <div>
+          <Button
+            id="webcamButton"
+            disabled={webcamButtonDisabled}
+            onClick={webcamSetup}
           >
-            Create Call
-          </button>
-        </span>
-        <span>
-          <h2>Join from another browser</h2>
-          <input
+            Start webcam
+          </Button>
+        </div>
+        <div>
+          <span>
+            <Button
+              id="callButton"
+              disabled={callButtonDisabled}
+              onClick={createCall}
+            >
+              Create Call
+            </Button>
+          </span>
+          <span>
+            <Button disabled={hangUpButtonDisabled} onClick={toggleMic}>
+              Mute Audio
+            </Button>
+          </span>
+          <span>
+            <Button disabled={hangUpButtonDisabled} onClick={toggleVideo}>
+              Mute Video
+            </Button>
+          </span>
+        </div>
+        <div>
+          <Input
             id="callInput"
             placeholder="Enter Unique ID"
             value={callID}
+            onClick={() => {
+              navigator.clipboard.writeText(callID.textToCopy)
+            }}
             onChange={(e) => setCallID(e.target.value)}
           />
-          <button
+          <Button
             id="answerButton"
             disabled={answerButtonDisabled}
             onClick={answerCall}
           >
             Answer
-          </button>
-        </span>
-        <span>
-          <h2>End the call</h2>
-          <Button
-            id="hangupButton"
-            disabled={hangUpButtonDisabled}
-            onClick={hangUp}
-            icon={"phone"}
-            
-          >
-            Hangup
           </Button>
-        </span>
+        </div>
+        <div>
+          <span>
+            <Button
+              id="hangupButton"
+              disabled={hangUpButtonDisabled}
+              onClick={hangUp}
+              icon={'phone'}
+            >
+              Hangup
+            </Button>
+          </span>
+        </div>
       </div>
     </div>
   )
