@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Segment, Comment } from 'semantic-ui-react'
+import { 
+  // Segment
+   Comment } from 'semantic-ui-react'
 import { useIsMount } from '../../hooks/isMount'
 import { setUserPosts } from '../../store/channels/actions'
 
@@ -12,7 +14,7 @@ import './Message.scss'
 
 import firebase from '../../firebase'
 import Skeleton from './Skeleton'
-import VideoChat from '../VideoChat'
+// import VideoChat from '../VideoChat'
 
 export default function Messages({ currentUser, currentChannel }) {
   const isMount = useIsMount()
@@ -25,7 +27,7 @@ export default function Messages({ currentUser, currentChannel }) {
   const [searchResults, setSearchResults] = useState([])
   const [typingUsers, setTypingUsers] = useState([])
   const [isStarred, setIsStarred] = useState(true)
-  const [video, setVideo] = useState(true)
+  // const [video, setVideo] = useState(true)
 
   const [messagesRef] = useState(firebase.database().ref('messages'))
   const [privateMessagesRef] = useState(

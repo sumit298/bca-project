@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 import { Picker, emojiIndex } from 'emoji-mart'
 import ReactGiphySearch from 'react-giphy-searchbox'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
-import { makeStyles } from '@material-ui/core'
+// import { makeStyles } from '@material-ui/core'
 import GifIcon from '@material-ui/icons/Gif'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import firebase from '../../firebase'
@@ -13,12 +13,8 @@ import ProgressBar from './ProgressBar'
 import './MessageForm.scss'
 import 'emoji-mart/css/emoji-mart.css'
 import { IconButton } from '@material-ui/core'
-import { darkTheme, lightTheme } from '../../Themes/GlobalStyles'
-import useDarkMode from 'use-dark-mode'
-
-
-
-
+// import { darkTheme, lightTheme } from '../../Themes/GlobalStyles'
+// import useDarkMode from 'use-dark-mode';
 
 export default function MessagesForm({
   currentChannel,
@@ -40,8 +36,8 @@ export default function MessagesForm({
   const [showGifs, setShowGifs] = useState(false)
   const messageInputRef = useRef(null)
   // console.log(currentChannel)
-  const theme = useDarkMode(true)
- 
+  // const theme = useDarkMode(true)
+
   useEffect(() => {
     // listener for upload task, when it's done; this will be called.
     if (uploadTask !== null) {
@@ -165,9 +161,13 @@ export default function MessagesForm({
   }
 
   const handleAddEmoji = (emoji) => {
+    const emojiClass = {
+      fontSize: '20px',
+    }
     console.log(emoji)
     const oldMessage = message
     const newMessage = colonToUnicode(` ${oldMessage} ${emoji.colons} `)
+    // newMessage
     setMessage(newMessage)
     setShowGifs(false)
     setEmojiPicker(false)
@@ -194,8 +194,9 @@ export default function MessagesForm({
 
   const gifSelectHandler = (gif) => {
     console.log(gif)
-    const oldMessage = message
+    // const oldMessage = message
     const newMessage = gif.images.downsized_medium.url
+    console.log(newMessage)
     // const uploader = uploadFile(newMessage)
     setMessage(newMessage)
     setShowGifs(false)
@@ -280,7 +281,10 @@ export default function MessagesForm({
             content={emojiPicker ? 'close' : null}
             onClick={handleEmojiPicker}
           >
-            <InsertEmoticonIcon className="icon__button" style={{ fontSize: 30 }} />
+            <InsertEmoticonIcon
+              className="icon__button"
+              style={{ fontSize: 30 }}
+            />
           </IconButton>
         </div>
       </div>

@@ -18,6 +18,7 @@ export default function SidePanel({ currentUser }) {
       vertical
       id="menu"
     >
+      
       <UserPanel currentUser={currentUser} />
       <Starred currentUser={currentUser} />
       <Channels currentUser={currentUser} />

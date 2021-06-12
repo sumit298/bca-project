@@ -1,7 +1,9 @@
 import React, { createRef, useState } from 'react'
 import './App.css'
 import firebase from '../firebase'
-import {Modal, Icon, Button} from 'semantic-ui-react';
+import {
+  // Modal, Icon, 
+  Button} from 'semantic-ui-react';
 
 const firestore = firebase.firestore()
 

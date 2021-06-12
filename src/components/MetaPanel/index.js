@@ -16,13 +16,13 @@ export default function MetaPanel({
   currentChannel,
   userPosts,
 }) {
-  const [activeIndex, setActiveIndex] = React.useState(0)
+  // const [activeIndex, setActiveIndex] = React.useState(0)
 
-  const handleAccordionChange = (event, titleProps) => {
-    const { index } = titleProps
-    const newIndex = activeIndex === index ? -1 : index
-    setActiveIndex(newIndex)
-  }
+  // const handleAccordionChange = (event, titleProps) => {
+  //   const { index } = titleProps
+  //   const newIndex = activeIndex === index ? -1 : index
+  //   setActiveIndex(newIndex)
+  // }
 
   const renderUserPosts = () => {
     return Object.entries(userPosts)
@@ -77,7 +77,7 @@ export default function MetaPanel({
             Created By
           </h4>
           <h4>
-            <img className="img" src={currentChannel && currentChannel.createdBy.avatar} />
+            <img className="img" src={currentChannel && currentChannel.createdBy.avatar} alt="currentChannel"/>
             <p>{currentChannel && currentChannel.createdBy.name}</p>
           </h4>
         </div>

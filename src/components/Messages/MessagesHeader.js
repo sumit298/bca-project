@@ -1,51 +1,54 @@
 import React from 'react'
-import { Header, Segment, Input, Icon } from 'semantic-ui-react'
-import { fade, makeStyles } from '@material-ui/core'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import {
+  //  Header, Segment, Input,
+  Icon,
+} from 'semantic-ui-react'
+// import { fade, makeStyles } from '@material-ui/core'
+// import { useSelector } from 'react-redux'
+// import { Link } from 'react-router-dom'
 import './MessageHeader.scss'
-import useDarkMode from 'use-dark-mode';
+import useDarkMode from 'use-dark-mode'
 
 import Brightness4Icon from '@material-ui/icons/Brightness4'
-import FlareIcon from '@material-ui/icons/Flare';
+// import FlareIcon from '@material-ui/icons/Flare';
 
+// const useStyles = makeStyles((theme) => {
+//   return {
+//     search: {
+//       position: 'relative',
+//       borderRadius: theme.shape.borderRadius,
+//       backgroundColor: '#212226',
+//       '&:hover': {
+//         backgroundColor: fade('#212226', 0.5),
+//       },
+//       marginLeft: 0,
+//       marginRight: theme.spacing(0.4),
+//       width: '100%',
+//       [theme.breakpoints.up('sm')]: {
+//         marginLeft: theme.spacing(1),
+//         width: 'auto',
+//       },
+//     },
+//     inputRoot: {
+//       color: 'inherit',
+//     },
+//     inputInput: {
+//       padding: theme.spacing(1, 1, 1, 0),
+//       fontSize: theme.spacing(1.5),
+//       // vertical padding + font size from searchIcon
+//       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+//       transition: theme.transitions.create('width'),
+//       width: '100%',
+//       [theme.breakpoints.up('sm')]: {
+//         width: '12ch',
+//         '&:focus': {
+//           width: '20ch',
+//         },
+//       },
+//     },
+//   }
+// })
 
-const useStyles = makeStyles((theme) => {
-  return {
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: '#212226',
-      '&:hover': {
-        backgroundColor: fade('#212226', 0.5),
-      },
-      marginLeft: 0,
-      marginRight: theme.spacing(0.4),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-      },
-    },
-    inputRoot: {
-      color: 'inherit',
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      fontSize: theme.spacing(1.5),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
-        },
-      },
-    },
-  }
-})
 export default function MessagesHeader({
   channelName,
   users,
@@ -56,7 +59,7 @@ export default function MessagesHeader({
   handleStarChannel,
   isStarred,
 }) {
-  const darkMode = useDarkMode(true);
+  const darkMode = useDarkMode(true)
   return (
     <div className="chat__main">
       <div className="chatheader">
@@ -66,20 +69,20 @@ export default function MessagesHeader({
               {channelName}
               {!isChannelPrivate && (
                 <Icon
-                  style={{marginLeft: '5px'}}
+                  style={{ marginLeft: '5px' }}
                   onClick={handleStarChannel}
                   name={isStarred ? 'star' : 'star outline'}
                   color={isStarred ? 'yellow' : 'black'}
                 />
               )}
             </span>
-            <span style={{marginLeft: "10px"}}>{users}</span>
+            <span style={{ marginLeft: '10px' }}>{users}</span>
           </h3>
         </div>
         <div className="chatheader__items">
           <div className="chatheader__items-left">
-              <Brightness4Icon onClick={darkMode.toggle}/>
-              {/* <FlareIcon onClick={darkMode.disable}/> */}
+            <Brightness4Icon onClick={darkMode.toggle} />
+            {/* <FlareIcon onClick={darkMode.disable}/> */}
           </div>
           <div className="chatheader__searchbar">
             <input

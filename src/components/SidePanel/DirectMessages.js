@@ -1,10 +1,13 @@
+// eslint-disable-next-line react-hooks/exhaustive-deps
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Menu, Icon } from 'semantic-ui-react'
+import {
+  //  Menu,
+   Icon } from 'semantic-ui-react'
 
 import { setChannel, setPrivateChannel } from '../../store/channels/actions'
 import firebase from '../../firebase'
-// import VideoChat from '../../components/VideoChat'
+import VideoChat from '../../components/VideoChat'
 import { Link } from 'react-router-dom'
 
 function DirectMessages({ currentUser }) {
@@ -105,9 +108,7 @@ function DirectMessages({ currentUser }) {
         </span>{' '}
         ({users.length})
       </p>
-      {/* <Menu.Item>
-        <Link to="/video">VideoChat </Link>
-      </Menu.Item> */}
+      <Link to="/video" target="_blank">VideoChat </Link>
       {users.map((user, index) => {
         return (
           <div

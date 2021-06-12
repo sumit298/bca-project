@@ -1,7 +1,4 @@
-:global(.ui.inverted.menu .active.item) {
-  background: rgba(255, 255, 255, 0.15);
-  color: #480202 !important;
-}
+
 
 #menu {
   // color: blue;
@@ -26,6 +23,7 @@
   &:hover {
     // background-color: rgb(163, 94, 94);
     padding: 10px 0;
+    padding-left: 20px;
     // width: 60%;
     cursor: pointer;
     // transition: all 0.3s linear;
@@ -47,6 +45,7 @@
   &:hover {
     // background-color: rgb(163, 94, 94);
     padding: 10px 0;
+    padding-left: 20px;
     // width: 60%;
     cursor: pointer;
     // transition: all 0.3s linear;

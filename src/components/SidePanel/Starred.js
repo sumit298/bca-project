@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Menu, Icon } from 'semantic-ui-react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch
+  //  useSelector 
+  } from 'react-redux'
 import { useIsMount } from '../../hooks/isMount'
 
 import {

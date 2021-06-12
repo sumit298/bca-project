@@ -3,7 +3,9 @@ import firebase from '../../firebase'
 import { connect } from 'react-redux'
 import { setChannel, setPrivateChannel } from '../../store/channels/actions'
 // prettier-ignore
-import { Menu, Icon, Modal, Form, Input, Button, Label } from "semantic-ui-react";
+import { 
+  // Menu,
+   Icon, Modal, Form, Input, Button, Label } from "semantic-ui-react";
 
 class Channels extends React.Component {
   state = {
@@ -187,7 +189,9 @@ class Channels extends React.Component {
         active={channel.id === this.state.activeChannel}
       >
         {this.getNotificationCount(channel) && (
-          <Label color="red">{this.getNotificationCount(channel)}</Label>
+          <Label 
+          className="active__icon"
+           color="red">{this.getNotificationCount(channel)}</Label>
         )}
         # {channel.name}
       </div>
@@ -206,6 +210,7 @@ class Channels extends React.Component {
     return (
       <React.Fragment>
         <div id="menu">
+        
           <p className="menu-label">
             <span >
               <Icon name="exchange" /> Channels

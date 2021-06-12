@@ -73,7 +73,7 @@ export const GlobalStyles = createGlobalStyle`
     .message{
         background-color: ${({ theme }) => theme.chatBackground};
         color: ${({ theme }) => theme.text};
-        transition: all 0.30s linear;
+        transition: all 0.5s linear;
 
         &:hover{
             background-color: ${({ theme }) => theme.chatHover};
