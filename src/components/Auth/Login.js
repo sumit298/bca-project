@@ -2,7 +2,7 @@ import React from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { Icon } from 'semantic-ui-react'
 import './Auth.styles.scss'
-import { Link } from 'react-router-dom'
+import { Link,useHistory } from 'react-router-dom'
 import firebase from '../../firebase'
 
 export default function Login() {
@@ -10,7 +10,7 @@ export default function Login() {
     email: '',
     password: '',
   }
-
+  const history = useHistory();
   const [loginUserState, setRegisterUserState] = React.useState(initialState)
   const [errors, setErrors] = React.useState([])
   const [status, setStatus] = React.useState('')
@@ -33,6 +33,7 @@ export default function Login() {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
         setStatus('RESOLVED')
+        history.push('/');
       } catch (err) {
         setStatus('RESOLVED')
         setErrors(errors.concat({ message: err.message }))
@@ -58,6 +59,7 @@ export default function Login() {
   }
 
   const { email, password } = loginUserState
+ 
 
   return (
     <TransitionGroup>

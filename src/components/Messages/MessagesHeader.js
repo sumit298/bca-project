@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 // import FlareIcon from '@material-ui/icons/Flare';
 import VideocamIcon from '@material-ui/icons/Videocam'
-import MicIcon from '@material-ui/icons/Mic';
+import MicIcon from '@material-ui/icons/Mic'
 
 // const useStyles = makeStyles((theme) => {
 //   return {
@@ -83,12 +83,15 @@ export default function MessagesHeader({
           </h3>
         </div>
         <div className="chatheader__items">
-          
           <div className="chatheader__items-left">
-          <Link to="/video" target="_blank" style={{marginTop: -10}}>
-            <VideocamIcon />
-          </Link>
-          {/* <Link to="/audio" target="_blank">
+            <Link
+              to="/video"
+              target="_blank"
+              style={{ marginTop: 7, color: 'silver' }}
+            >
+              <VideocamIcon />
+            </Link>
+            {/* <Link to="/audio" target="_blank">
             <MicIcon />
           </Link> */}
             <Brightness4Icon onClick={darkMode.toggle} />

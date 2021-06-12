@@ -32,7 +32,7 @@ const Root = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         dispatch(setUser(user))
-        history.push('/')
+        // history.push('/')
       } else {
         history.replace('/login')
         dispatch(clearUser())

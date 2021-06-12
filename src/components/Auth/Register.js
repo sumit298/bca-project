@@ -1,10 +1,9 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import './Auth.styles.scss'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import md5 from 'md5'
 import firebase from '../../firebase'
-import { auth } from 'firebase'
 
 export default function Register() {
   const initialState = {
@@ -19,7 +18,7 @@ export default function Register() {
   const [status, setStatus] = React.useState('')
   const [successMessage, setSuccessMessage] = React.useState("");
   const [userRef] = React.useState(firebase.database().ref('/users'))
-
+  const history = useHistory();
   const handleChange = (event) => {
     setRegisterUserState({
       ...registerUserState,
@@ -78,6 +77,7 @@ export default function Register() {
           })
           await saveUser(createdUser)
           setStatus('RESOLVED')
+          history.push('/login')
           // await auth().sendSignInLinkToEmail(email);
           // firebase.auth().sendSignInLinkToEmail(email);
           // setSuccessMessage("Please check your email");
