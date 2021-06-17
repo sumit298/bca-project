@@ -50,6 +50,8 @@ export default function Messages({ currentUser, currentChannel }) {
     return () => {
       return removeAllListeners()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [])
 
   const addListeners = (channel) => {
@@ -231,6 +233,8 @@ export default function Messages({ currentUser, currentChannel }) {
     setSearchResults(results)
     //setting the search indicator after one second
     setTimeout(() => setSearchingMessages(false), 800)
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [searchTerm])
 
   /**
@@ -277,6 +281,8 @@ export default function Messages({ currentUser, currentChannel }) {
     if (!!messagesEndRef) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [messages])
 
   const displayTypingUsers = (users) => {

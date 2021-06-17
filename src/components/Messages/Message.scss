@@ -5,11 +5,12 @@
   margin: 0 10px;
   // color: white;
   // background-color: #35383d;
-  width: 100%;
+  width: 60vw;
   &:hover{
-    background-color: aqua;
+    // background-color: aqua;
     position: sticky;
-    width: 62vw;
+    // width: 62vw;
+    color: #676c77;
   }
 }
 
@@ -48,4 +49,9 @@
   font-weight: 500;
 
  
+}
+
+.content__image{
+  text-align: center;
+  width: 100%;
 }

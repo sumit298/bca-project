@@ -25,15 +25,14 @@ export const darkTheme = {
   icons_hover: '#d3d6db',
   chatBackground: '#36393f',
   text: '#f2f2f2',
-  opacity: 0.8,
+  opacity: 1,
 }
 
 export const GlobalStyles = createGlobalStyle`
     body{
         background: ${({ theme }) => theme.chatBackground};
         color: ${({ theme }) => theme.text};
-        /* font-family: "Segoe UI"; */
-        height: 92vh;
+        height: 100vh;
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -73,12 +72,14 @@ export const GlobalStyles = createGlobalStyle`
     .message{
         background-color: ${({ theme }) => theme.chatBackground};
         color: ${({ theme }) => theme.text};
+
         transition: all 0.5s linear;
+        
 
         &:hover{
             background-color: ${({ theme }) => theme.chatHover};
             position: sticky;
-            width: 60vw;
+            /* width: 60vw; */
         }
     }
     .messages{

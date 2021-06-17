@@ -51,7 +51,7 @@ export default function UserPanel({ currentUser }) {
     },
   ]
 
-  const signOutUser = () => firebase.auth().signOut()
+  const signOutUser = async () => await firebase.auth().signOut()
 
   const handleInputChange = (event) => {
     const file = event.target.files[0]
@@ -91,8 +91,8 @@ export default function UserPanel({ currentUser }) {
     if (uploadedCroppedImage) {
       changeAvatar(uploadedCroppedImage)
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [uploadedCroppedImage])
-
   const changeAvatar = async (imageUrl) => {
     try {
       await authUser.updateProfile({
@@ -119,19 +119,23 @@ export default function UserPanel({ currentUser }) {
             />
             {/* User menu */}
             <Dropdown
-              trigger={<span style={{fontSize: '1.5rem'}} className="menu-label">{user.displayName}</span>}
+              trigger={
+                <span style={{ fontSize: '1.5rem' }} className="menu-label">
+                  {user.displayName}
+                </span>
+              }
               options={userActions()}
             />
           </Header>
           <input
-              size="mini"
-              icon="search"
-              placeholder="Search for user"
-              // value={searchTerm}
-              // onChange={handleSearchMessages}
-              // loading={searching}
-              className="chatheader__searchbar-input"
-            />
+            size="mini"
+            icon="search"
+            placeholder="Search for user"
+            // value={searchTerm}
+            // onChange={handleSearchMessages}
+            // loading={searching}
+            className="chatheader__searchbar-input"
+          />
         </Grid.Row>
       </Grid.Column>
       {/* Change avatar modal */}

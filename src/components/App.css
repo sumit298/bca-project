@@ -1,5 +1,3 @@
-
-
 /* messages */
 .messages {
   height: 82vh;
@@ -18,7 +16,7 @@
 /* messages form */
 
 .message__form {
-  position:fixed;
+  position: fixed;
   bottom: 0.9em;
   margin-left: 300px;
   left: 0;
@@ -27,7 +25,6 @@
   z-index: 200;
   /* height: 8vh; */
   /* background-color: #35383d; */
-  
 }
 
 /* message component */
@@ -78,7 +75,7 @@
   position: relative;
   padding: 10px;
   margin-left: 5px;
-  background-color: #e6e6e6;
+  background-color: #d32020;
   border-radius: 20px;
 }
 
@@ -190,8 +187,6 @@
   left: 40px;
 }
 
-
-
 .chat {
   /* flex: 0.75; */
   width: 63vw;
@@ -200,7 +195,7 @@
   position: relative;
   flex-direction: column;
 }
-.chatPrivate{
+.chatPrivate {
   flex: 0.75;
   width: 100%;
   display: flex;
@@ -220,19 +215,19 @@
   /* background-color: #0c0d0f; */
 }
 
-.chat__input  .MuiSvgIcon-root {
+.chat__input .MuiSvgIcon-root {
   cursor: pointer;
   color: black;
 }
 
-.chat__input  .MuiSvgIcon-root:hover {
+.chat__input .MuiSvgIcon-root:hover {
   color: white;
-  
 }
 
-.reactGiphySearchbox-componentWrapper, .emoji-picker-react {
+.reactGiphySearchbox-componentWrapper,
+.emoji-picker-react {
   position: absolute !important;
-  bottom:  5.5em;
+  bottom: 5.5em;
   right: 2em;
 }
 .emoji-picker-react {
@@ -240,12 +235,12 @@
 }
 
 .emoji-picker-react {
-  background: #161B22 !important;
-  border-color: #161B22 !important;
+  background: #161b22 !important;
+  border-color: #161b22 !important;
 }
 
 .emoji-picker-react .emoji-group:before {
-  background: #161B22 !important;
+  background: #161b22 !important;
 }
 
 .emoji-categories {
@@ -254,11 +249,11 @@
 
 .emoji-search {
   margin-top: 10px;
-  background: #0C0D0F;
+  background: #0c0d0f;
   border: none !important;
 }
 .skin-tones-list {
-  margin-top: 10px  !important;
+  margin-top: 10px !important;
 }
 
 .reactGiphySearchbox-poweredByGiphy {
@@ -310,7 +305,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background:#161B22;
+  background: #161b22;
   border-radius: 2px;
 }
 
@@ -318,9 +313,8 @@
   background: #0d1016;
   border-radius: 20px;
   /* border: 3px solid #161B22; */
-}  
+}
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(8, 8, 15);
 }
-

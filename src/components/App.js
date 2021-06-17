@@ -34,9 +34,7 @@ export default function App() {
             key={currentUser && currentUser.id}
             currentUser={currentUser}
           />
-          <Grid.Column 
-          style={{ marginLeft:268}}
-          >
+          <Grid.Column style={{ marginLeft: 268 }}>
             {currentUser && currentChannel && (
               <Messages
                 key={currentChannel && currentChannel.id}

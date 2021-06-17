@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { v4 as uuid } from 'uuid'
-// import { Segment, Input, Button } from 'semantic-ui-react'
 import { Picker, emojiIndex } from 'emoji-mart'
 import ReactGiphySearch from 'react-giphy-searchbox'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
-// import { makeStyles } from '@material-ui/core'
 import GifIcon from '@material-ui/icons/Gif'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import firebase from '../../firebase'
@@ -13,8 +11,6 @@ import ProgressBar from './ProgressBar'
 import './MessageForm.scss'
 import 'emoji-mart/css/emoji-mart.css'
 import { IconButton } from '@material-ui/core'
-// import { darkTheme, lightTheme } from '../../Themes/GlobalStyles'
-// import useDarkMode from 'use-dark-mode';
 
 export default function MessagesForm({
   currentChannel,
@@ -23,8 +19,12 @@ export default function MessagesForm({
   isChannelPrivate,
 }) {
   const [message, setMessage] = useState('')
-  const [status, setStatus] = useState('IDLE')
-  const [errors, setErrors] = useState([])
+  const [
+    // status
+    , setStatus] = useState('IDLE')
+  const [
+    // errors
+    , setErrors] = useState([])
   const [modal, setModal] = useState(false)
   const [storageRef] = useState(firebase.storage().ref())
   const [typingRef] = useState(firebase.database().ref('typing'))
@@ -34,6 +34,9 @@ export default function MessagesForm({
   const [pathToUpload, setPathToUpload] = useState('')
   const [emojiPicker, setEmojiPicker] = useState(false)
   const [showGifs, setShowGifs] = useState(false)
+  const [
+    // gifSrc
+    , setGifsrc] = useState('')
   const messageInputRef = useRef(null)
   // console.log(currentChannel)
   // const theme = useDarkMode(true)
@@ -73,6 +76,7 @@ export default function MessagesForm({
         setUploadTask(null)
       }
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [uploadTask])
 
   // Gif handler
@@ -140,6 +144,7 @@ export default function MessagesForm({
     setUploadState('UPLOADING')
     const fileReference = storageRef.child(filePath).put(file, metaData)
     setUploadTask(fileReference)
+    console.log(fileReference)
   }
 
   const handleKeyPress = (event) => {
@@ -156,14 +161,18 @@ export default function MessagesForm({
     }
   }
 
+  // const uploadgif = (gif) => {
+  //   const filePath = `${gif}`
+
+  //   // setUploadState('UPLOADING')
+  //   const fileReference = storageRef.child(filePath).put(gif)
+  //   setUploadTask(fileReference)
+  // }
   const handleEmojiPicker = () => {
     setEmojiPicker(!emojiPicker)
   }
 
   const handleAddEmoji = (emoji) => {
-    const emojiClass = {
-      fontSize: '20px',
-    }
     console.log(emoji)
     const oldMessage = message
     const newMessage = colonToUnicode(` ${oldMessage} ${emoji.colons} `)
@@ -194,23 +203,22 @@ export default function MessagesForm({
 
   const gifSelectHandler = (gif) => {
     console.log(gif)
-    // const oldMessage = message
     const newMessage = gif.images.downsized_medium.url
-    console.log(newMessage)
-    // const uploader = uploadFile(newMessage)
-    setMessage(newMessage)
+    setGifsrc(newMessage)
+    const filePath = `${newMessage}.jpg`
+    createMessage(filePath)
+    console.log(filePath)
+    console.log(gif.images.downsized_medium)
+
+    var blob = new Blob([filePath], { type: 'image/jpeg' })
+    const fileReference = storageRef.child(filePath).put(blob);
+    setUploadTask(fileReference)
+    setMessage(filePath)
     setShowGifs(false)
 
     setTimeout(() => {
       messageInputRef.current.focus()
     }, 0)
-    // notificationAudio.play();
-    // db.collection('textChannels').doc(channelId)
-    // .collection("messages").add({
-    //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    //     user: user,
-    //     gif: item.images.downsized_medium.url
-    // });
   }
 
   const openModal = () => setModal(true)
@@ -228,6 +236,7 @@ export default function MessagesForm({
           onSelect={gifSelectHandler}
         />
       )}
+      {/* <img src={gifSrc} alt="newgif" /> */}
       {emojiPicker && (
         <Picker
           set="apple"
@@ -255,11 +264,11 @@ export default function MessagesForm({
             onChange={(event) => setMessage(event.target.value)}
             ref={messageInputRef}
             onKeyPress={handleKeyPress}
-            className={
-              errors.some((err) => err.message.includes('message'))
-                ? 'error'
-                : ''
-            }
+            // className={
+            //   errors.some((err) => err.message.includes('message'))
+            //     ? 'error'
+            //     : ''
+            // }
           />
         </div>
         <div className="chatsearchbar__gifcon">

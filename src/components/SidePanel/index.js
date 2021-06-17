@@ -13,12 +13,10 @@ export default function SidePanel({ currentUser }) {
     <Menu
       inverted
       size="large"
-      // color="black"
       fixed="left"
       vertical
       id="menu"
     >
-      
       <UserPanel currentUser={currentUser} />
       <Starred currentUser={currentUser} />
       <Channels currentUser={currentUser} />

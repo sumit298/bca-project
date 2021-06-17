@@ -18,7 +18,7 @@ export default function Starred({ currentUser }) {
   const isMount = useIsMount()
 
   useEffect(() => {
-    userRef
+    isMount && userRef
       .child(currentUser.uid)
       .child('starred')
       .on('child_added', snap => {
@@ -31,6 +31,8 @@ export default function Starred({ currentUser }) {
     return () => {
       userRef.child(`${currentUser.uid}/starred`).off()
     }
+    
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [])
 
   useEffect(() => {
@@ -47,6 +49,8 @@ export default function Starred({ currentUser }) {
     return () => {
       userRef.child(`${currentUser.uid}/starred`).off()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [starredChannels])
 
   const renderStarredChannels = channels =>

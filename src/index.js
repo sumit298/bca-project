@@ -19,9 +19,9 @@ import { setUser, clearUser } from './store/auth/actions'
 
 import 'semantic-ui-css/semantic.min.css'
 import VideoChat from './components/VideoChat'
-import Auth from './components/Auth/Auth'
+// import Auth from './components/Auth/Auth'
 import ForgetPassword from './components/Auth/ForgetPassword'
-import { VoiceChat } from '@material-ui/icons'
+// import { VoiceChat } from '@material-ui/icons'
 
 const Root = () => {
   const history = useHistory()

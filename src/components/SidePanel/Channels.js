@@ -216,7 +216,7 @@ class Channels extends React.Component {
             ({channels.length}){' '}
             <Icon
               name="add"
-              style={{ marginLeft: 50 }}
+              style={{ marginLeft: '3.1rem', cursor: 'pointer' }}
               onClick={this.openModal}
             />
           </p>

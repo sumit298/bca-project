@@ -49,6 +49,8 @@ function DirectMessages({ currentUser }) {
       userRef.off()
       connectedRef.off()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [userRef, connectedRef])
 
   useEffect(() => {
@@ -76,6 +78,8 @@ function DirectMessages({ currentUser }) {
     return () => {
       presenceRef.off()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [])
 
   const isUserOnline = (user) => user.status === 'online'

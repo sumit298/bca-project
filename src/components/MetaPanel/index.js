@@ -39,11 +39,11 @@ export default function MetaPanel({
               <List.Header as="a" style={{ fontSize: '1.2rem' }}>
                 {key}
               </List.Header>
-              <p
+              <span
                 style={{ fontSize: '1rem' }}
               >
                 {getPostText(value.count)}
-              </p>
+              </span>
             </List.Content>
           </ListItem>
         )

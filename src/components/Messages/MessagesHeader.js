@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 // import FlareIcon from '@material-ui/icons/Flare';
 import VideocamIcon from '@material-ui/icons/Videocam'
-import MicIcon from '@material-ui/icons/Mic'
+// import MicIcon from '@material-ui/icons/Mic'
 
 // const useStyles = makeStyles((theme) => {
 //   return {
