@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { 
-  // Segment
-   Comment } from 'semantic-ui-react'
+import { Icon, Comment } from 'semantic-ui-react'
 import { useIsMount } from '../../hooks/isMount'
 import { setUserPosts } from '../../store/channels/actions'
 
@@ -51,7 +49,6 @@ export default function Messages({ currentUser, currentChannel }) {
       return removeAllListeners()
     }
     /* eslint-disable react-hooks/exhaustive-deps */
-
   }, [])
 
   const addListeners = (channel) => {
@@ -184,7 +181,18 @@ export default function Messages({ currentUser, currentChannel }) {
    * returns the channel name
    */
   const getChannelName = (channel) =>
-    channel && `${!isChannelPrivate ? '#' : '@'} ${channel.name}`
+    channel && !isChannelPrivate ? (
+      <span>
+        {' '}
+        <Icon name="hashtag" />
+        {channel.name}
+      </span>
+    ) : (
+      <span>
+        <Icon name="at" />
+        {channel.name}
+      </span>
+    )
 
   /**
    *
@@ -234,7 +242,6 @@ export default function Messages({ currentUser, currentChannel }) {
     //setting the search indicator after one second
     setTimeout(() => setSearchingMessages(false), 800)
     /* eslint-disable react-hooks/exhaustive-deps */
-
   }, [searchTerm])
 
   /**
@@ -282,7 +289,6 @@ export default function Messages({ currentUser, currentChannel }) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
     }
     /* eslint-disable react-hooks/exhaustive-deps */
-
   }, [messages])
 
   const displayTypingUsers = (users) => {
@@ -338,7 +344,6 @@ export default function Messages({ currentUser, currentChannel }) {
           isChannelPrivate={isChannelPrivate}
         />
       </div>
-      
     </div>
   )
 }

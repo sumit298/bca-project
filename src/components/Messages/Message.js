@@ -11,25 +11,17 @@ const isOwnUser = (message, user) =>
 const timeFromNow = (timestamp) => moment(timestamp).fromNow()
 
 export default function Message({ message, user }) {
-  function validURL(str) {
-    var pattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$',
-      'i'
-    ) // fragment locator
-    return !!pattern.test(str)
-  }
+  function checkURL(url) {
+    return(url?.match(/\.(jpeg|jpg|gif|png)$/) != null);
+}
+  
   const isImage = (message) =>
     message.hasOwnProperty('image') && !message.hasOwnProperty('content')
 
   const contentRendered = isImage(message) ? (
     <Image src={message.image} style={{ padding: ' 0.7em 0' }} />
-  ) : validURL(message.content) ? (
-    <img src={message.content} alt="content" />
+  ) : checkURL(message.content) ? (
+    <img src={message.content} alt={message.content} />
   ) : (
     <p className="content">{message.content}</p>
   )

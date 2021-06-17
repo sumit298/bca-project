@@ -121,7 +121,7 @@ function DirectMessages({ currentUser }) {
             className="menu-item-label"
             // style={{ color: "blue",opacity: 0.8, fontStyle: 'italic' }}
           >
-            @ {user.name}
+            <Icon name="at"/> {user.name}
             <Icon className="active__icon" name="circle" color={isUserOnline(user) ? 'green' : 'red'} />
           </div>
         )

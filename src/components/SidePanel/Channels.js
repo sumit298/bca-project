@@ -192,7 +192,7 @@ class Channels extends React.Component {
             {this.getNotificationCount(channel)}
           </Label>
         )}
-        # {channel.name}
+        <Icon name="hashtag"/> {channel.name}
       </div>
     ))
 

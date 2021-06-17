@@ -25,7 +25,7 @@ div.videos {
     width: 100vw;
 }
 
-div.videos > video {
+.videos > video {
     background: black;
    
     height: 100%;
@@ -35,9 +35,7 @@ div.videos > video {
 
 .remote-stream{
     margin-left: 20px;
-    // display: flex;
-    // align-items: center;
-    // justify-content: space-between;
+   
 }
 
 .local-stream{

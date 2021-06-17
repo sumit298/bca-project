@@ -60,7 +60,7 @@ export default function MetaPanel({
   return (
     <div className="metapanel" loading={!currentChannel}>
       <div className="metapanel__content">
-      <h3>About # {currentChannel && currentChannel.name}</h3>
+      <h3>About <Icon name="hashtag"/>{currentChannel && currentChannel.name}</h3>
 
       <div>
         <p>{currentChannel && currentChannel.description}</p>

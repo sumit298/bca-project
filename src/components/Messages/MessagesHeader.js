@@ -11,46 +11,9 @@ import useDarkMode from 'use-dark-mode'
 import { Link } from 'react-router-dom'
 
 import Brightness4Icon from '@material-ui/icons/Brightness4'
-// import FlareIcon from '@material-ui/icons/Flare';
+import FlareIcon from '@material-ui/icons/Flare'
 import VideocamIcon from '@material-ui/icons/Videocam'
 // import MicIcon from '@material-ui/icons/Mic'
-
-// const useStyles = makeStyles((theme) => {
-//   return {
-//     search: {
-//       position: 'relative',
-//       borderRadius: theme.shape.borderRadius,
-//       backgroundColor: '#212226',
-//       '&:hover': {
-//         backgroundColor: fade('#212226', 0.5),
-//       },
-//       marginLeft: 0,
-//       marginRight: theme.spacing(0.4),
-//       width: '100%',
-//       [theme.breakpoints.up('sm')]: {
-//         marginLeft: theme.spacing(1),
-//         width: 'auto',
-//       },
-//     },
-//     inputRoot: {
-//       color: 'inherit',
-//     },
-//     inputInput: {
-//       padding: theme.spacing(1, 1, 1, 0),
-//       fontSize: theme.spacing(1.5),
-//       // vertical padding + font size from searchIcon
-//       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-//       transition: theme.transitions.create('width'),
-//       width: '100%',
-//       [theme.breakpoints.up('sm')]: {
-//         width: '12ch',
-//         '&:focus': {
-//           width: '20ch',
-//         },
-//       },
-//     },
-//   }
-// })
 
 export default function MessagesHeader({
   channelName,
@@ -69,7 +32,7 @@ export default function MessagesHeader({
         <div className="chatheader__topic">
           <h3>
             <span>
-              {channelName}
+             {channelName}
               {!isChannelPrivate && (
                 <Icon
                   style={{ marginLeft: '5px' }}
@@ -91,10 +54,12 @@ export default function MessagesHeader({
             >
               <VideocamIcon />
             </Link>
-            {/* <Link to="/audio" target="_blank">
-            <MicIcon />
-          </Link> */}
-            <Brightness4Icon onClick={darkMode.toggle} />
+            {darkMode.value === true ? (
+              <FlareIcon onClick={darkMode.disable} />
+            ) : (
+              <Brightness4Icon onClick={darkMode.enable} />
+            )}
+
             {/* <FlareIcon onClick={darkMode.disable}/> */}
           </div>
           <div className="chatheader__searchbar">
