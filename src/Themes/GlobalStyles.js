@@ -36,51 +36,52 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
         overflow: hidden;
         display: grid;
         /* grid-template-columns: (2fr, 3fr, 2fr); */
     }
     .app{
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
     }
     .chatheader{
         background-color: ${({ theme }) => theme.chatBackground};
         color: ${({ theme }) => theme.text};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
        
     }
     .chatheader__searchbar-input{
             color:${({ theme }) => theme.text};
             background-color: ${({ theme }) => theme.topSearchBar};
-            transition: all 0.50s linear;
+            transition: all 0.2s linear;
 
 
     }
     .chatheader__items{
         color:${({ theme }) => theme.icons};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
     }
 
     .metapanel{
         background-color: ${({ theme }) => theme.sidebar};
         color:  ${({ theme }) => theme.text};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
     }
 
     .message{
         background-color: ${({ theme }) => theme.chatBackground};
         color: ${({ theme }) => theme.text};
-        transition: all 0.5s linear;
+        transition: all 0.2s linear;
         
         
 
         &:hover{
             background-color: ${({ theme }) => theme.chatHover};
+            color: ${({ theme }) => theme.text};
             position: sticky;
             /* width: 60vw; */
             transition: all 0.2s linear;
@@ -89,36 +90,36 @@ export const GlobalStyles = createGlobalStyle`
     .messages{
         background-color: ${({ theme }) => theme.chatBackground};
         color: ${({ theme }) => theme.text};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
     }
 
     .content{
         opacity: ${({ theme }) => theme.opacity};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
     }
     
     .message__timestamp{
         color: ${({ theme }) => theme.text};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
     }
 
     .chatsearchbar{
         background-color: ${({ theme }) => theme.messageSearchbar};
         color: ${({ theme }) => theme.text};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
         input{
             background-color: ${({ theme }) => theme.messageSearchbar};
             color: ${({ theme }) => theme.text};
-            transition: all 0.50s linear;
+            transition: all 0.2s linear;
         }
     }
 
     .icon__button{
         color: ${({ theme }) => theme.icons};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
         /* font-size: 30px; */
     }
@@ -130,18 +131,18 @@ export const GlobalStyles = createGlobalStyle`
     #menu{
         color: ${({ theme }) => theme.text};
         background-color: ${({ theme }) => theme.sidebar};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
     }
     .menu-label{
         color: ${({ theme }) => theme.text};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
     }
 
     .menu-item{
         color: ${({ theme }) => theme.text};
         opacity: ${({ theme }) => theme.opacity};
-        transition: all 0.50s linear;
+        transition: all 0.2s linear;
 
 
         &:hover{
@@ -152,7 +153,7 @@ export const GlobalStyles = createGlobalStyle`
     .menu-item-label{
         &:hover{
             background-color: ${({ theme }) => theme.chatHover};
-            /* transition: all 0.50s linear; */
+            /* transition: all 0.2s linear; */
 
         }
     }
