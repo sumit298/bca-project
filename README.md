@@ -37,7 +37,7 @@
 
 ## Issues
 - [ ] Add className for Emojis
-- [ ] VideoCall feature integration
+- [x] VideoCall feature integration
 - [x] Gifs not working
 - [ ] Sidebar issues (need a button to hide and show sidebar)
 - [ ] Favourite Channel (Starring Channel) not working
