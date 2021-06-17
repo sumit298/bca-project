@@ -11,7 +11,6 @@ const isOwnUser = (message, user) =>
 const timeFromNow = (timestamp) => moment(timestamp).fromNow()
 
 export default function Message({ message, user }) {
-  console.log(typeof message.content)
   function validURL(str) {
     var pattern = new RegExp(
       '^(https?:\\/\\/)?' + // protocol

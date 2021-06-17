@@ -138,13 +138,13 @@ export default function MessagesForm({
   }
 
   const uploadFile = (file, metaData) => {
-    console.log(file)
+    // console.log(file)
     setPathToUpload(currentChannel.id)
     const filePath = `${getFilePath(currentChannel.id)}/${uuid()}.jpg`
     setUploadState('UPLOADING')
     const fileReference = storageRef.child(filePath).put(file, metaData)
     setUploadTask(fileReference)
-    console.log(fileReference)
+    // console.log(fileReference)
   }
 
   const handleKeyPress = (event) => {
@@ -202,13 +202,13 @@ export default function MessagesForm({
   }
 
   const gifSelectHandler = (gif) => {
-    console.log(gif)
+    // console.log(gif)
     const newMessage = gif.images.downsized_medium.url
     setGifsrc(newMessage)
     const filePath = `${newMessage}.jpg`
     createMessage(filePath)
-    console.log(filePath)
-    console.log(gif.images.downsized_medium)
+    // console.log(filePath)
+    // console.log(gif.images.downsized_medium)
 
     var blob = new Blob([filePath], { type: 'image/jpeg' })
     const fileReference = storageRef.child(filePath).put(blob);
