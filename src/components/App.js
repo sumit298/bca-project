@@ -5,7 +5,7 @@ import SidePanel from './SidePanel'
 import Messages from './Messages'
 import MetaPanel from './MetaPanel'
 import useDarkMode from 'use-dark-mode'
-import './App.css'
+import './App.scss'
 import { darkTheme, GlobalStyles, lightTheme } from '../Themes/GlobalStyles'
 import { ThemeProvider } from 'styled-components'
 
