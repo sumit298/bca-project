@@ -5,24 +5,17 @@
     width: 100%;
     overflow-y: scroll;
     font-size: 1.1rem;
-    /* color: #e6e6e6; */
-    /* background-color: #35383d; */
-    /* background-color: #0C0D0F !important; */
-    /* transition: all 0.50s linear; */
+    
   }
-  /* .messages:hover{
-    background-color: aqua;
-  } */
-  
-  /* messages form */
+ 
   
   .message__form {
     position: fixed;
     bottom: 0.9em;
-    margin-left: 300px;
-    left: 0;
+    margin-left: 1rem;
+    // left: 0;
     /* width: 80%; */
-    /* right: 1em; */
+    // right: 24rem;
     z-index: 200;
     /* height: 8vh; */
     /* background-color: #35383d; */

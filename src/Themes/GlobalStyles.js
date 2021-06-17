@@ -38,9 +38,12 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         transition: all 0.50s linear;
         overflow: hidden;
+        display: grid;
+        /* grid-template-columns: (2fr, 3fr, 2fr); */
     }
     .app{
         transition: all 0.50s linear;
+
     }
     .chatheader{
         background-color: ${({ theme }) => theme.chatBackground};
@@ -72,14 +75,15 @@ export const GlobalStyles = createGlobalStyle`
     .message{
         background-color: ${({ theme }) => theme.chatBackground};
         color: ${({ theme }) => theme.text};
-
         transition: all 0.5s linear;
+        
         
 
         &:hover{
             background-color: ${({ theme }) => theme.chatHover};
             position: sticky;
             /* width: 60vw; */
+            transition: all 0.2s linear;
         }
     }
     .messages{

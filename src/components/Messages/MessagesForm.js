@@ -11,6 +11,7 @@ import ProgressBar from './ProgressBar'
 import './MessageForm.scss'
 import 'emoji-mart/css/emoji-mart.css'
 import { IconButton } from '@material-ui/core'
+import notificationSound from '../Assets/sounds/micSound.mp3'
 
 export default function MessagesForm({
   currentChannel,
@@ -34,12 +35,15 @@ export default function MessagesForm({
   const [pathToUpload, setPathToUpload] = useState('')
   const [emojiPicker, setEmojiPicker] = useState(false)
   const [showGifs, setShowGifs] = useState(false)
+  
   const [
     // gifSrc
     , setGifsrc] = useState('')
   const messageInputRef = useRef(null)
   // console.log(currentChannel)
   // const theme = useDarkMode(true)
+
+  const notificationAudio = new Audio(notificationSound);
 
   useEffect(() => {
     // listener for upload task, when it's done; this will be called.
@@ -119,6 +123,7 @@ export default function MessagesForm({
     if (message) {
       setStatus('PENDING')
       try {
+        notificationAudio.play();
         await messagesRef().child(currentChannel.id).push().set(createMessage())
         await typingRef.child(currentChannel.id).child(currentUser.uid).remove()
         resetState()
@@ -264,11 +269,7 @@ export default function MessagesForm({
             onChange={(event) => setMessage(event.target.value)}
             ref={messageInputRef}
             onKeyPress={handleKeyPress}
-            // className={
-            //   errors.some((err) => err.message.includes('message'))
-            //     ? 'error'
-            //     : ''
-            // }
+            
           />
         </div>
         <div className="chatsearchbar__gifcon">

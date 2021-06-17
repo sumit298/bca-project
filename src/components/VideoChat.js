@@ -1,4 +1,6 @@
 import React, { createRef, useState } from 'react'
+import connectSound from './Assets/sounds/connectSound.mp3';
+import disconnectSound from './Assets/sounds/disconnectSound.mp3';
 // import './App.css'
 import './VideoChat.scss'
 import firebase from '../firebase'
@@ -30,6 +32,8 @@ function VideoChat() {
   const [answerButtonDisabled, setAnswerButonDisabled] = useState(true)
   const [hangUpButtonDisabled, setHangUpButtonDisabled] = useState(true)
   const [callID, setCallID] = useState('')
+  const connectAudio = new Audio(connectSound);
+  const disconnectAudio = new Audio(disconnectSound);
 
   // Setup media sources
   const webcamSetup = async () => {
@@ -146,7 +150,7 @@ function VideoChat() {
     }
 
     await callDoc.update({ answer })
-
+    connectAudio.play();
     // add caller to the peer connection (remote stream)
     offerCandidates.onSnapshot((snapshot) => {
       snapshot.docChanges().forEach((change) => {
@@ -178,7 +182,7 @@ function VideoChat() {
 
     // deleteCallDoc(callID);
     setCallID('')
-
+    disconnectAudio.play();
     console.log('call ended')
 
     setHangUpButtonDisabled(true)
