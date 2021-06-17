@@ -232,7 +232,7 @@ export default function MessagesForm({
     <div className="message__form">
       {showGifs && (
         <ReactGiphySearch
-          apiKey="m8zn7XPBBGgyFC0QlJdTZCrG9y9ofAj1"
+          apiKey={process.env.REACT_APP_GIF_KEY}
           onSelect={gifSelectHandler}
         />
       )}
