@@ -11,8 +11,29 @@ const isOwnUser = (message, user) =>
 const timeFromNow = (timestamp) => moment(timestamp).fromNow()
 
 export default function Message({ message, user }) {
+  console.log(typeof message.content)
+  function validURL(str) {
+    var pattern = new RegExp(
+      '^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$',
+      'i'
+    ) // fragment locator
+    return !!pattern.test(str)
+  }
   const isImage = (message) =>
     message.hasOwnProperty('image') && !message.hasOwnProperty('content')
+
+  const contentRendered = isImage(message) ? (
+    <Image src={message.image} style={{ padding: ' 0.7em 0' }} />
+  ) : validURL(message.content) ? (
+    <img src={message.content} alt="content" />
+  ) : (
+    <p className="content">{message.content}</p>
+  )
 
   return (
     <div className="message">
@@ -27,12 +48,7 @@ export default function Message({ message, user }) {
               </span>
             </h4>
 
-            {isImage(message) ? (
-              <Image src={message.image} style={{ padding: ' 0.7em 0' }} />
-            ) : (
-              <p className="content">{message.content}</p>
-            )}
-            {/* {message ? <p>{message}</p> : <img src={"gifUrl"} alt="gif" />} */}
+            {contentRendered}
           </div>
         </div>
       </ReactLinkify>
