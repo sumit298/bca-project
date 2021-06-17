@@ -10,9 +10,9 @@ import './MessageHeader.scss'
 import useDarkMode from 'use-dark-mode'
 import { Link } from 'react-router-dom'
 
-import Brightness4Icon from '@material-ui/icons/Brightness4'
-import FlareIcon from '@material-ui/icons/Flare'
 import VideocamIcon from '@material-ui/icons/Videocam'
+import Brightness7Icon from '@material-ui/icons/Brightness7'
+import Brightness4Icon from '@material-ui/icons/Brightness4'
 // import MicIcon from '@material-ui/icons/Mic'
 
 export default function MessagesHeader({
@@ -32,7 +32,7 @@ export default function MessagesHeader({
         <div className="chatheader__topic">
           <h3>
             <span>
-             {channelName}
+              {channelName}
               {!isChannelPrivate && (
                 <Icon
                   style={{ marginLeft: '5px' }}
@@ -47,26 +47,12 @@ export default function MessagesHeader({
         </div>
         <div className="chatheader__items">
           <div className="chatheader__items-left">
-            <Link
-              to="/video"
-              target="_blank"
-              style={{ marginTop: 7, color: 'silver' }}
-            >
-              <VideocamIcon />
-            </Link>
-            {darkMode.value === true ? (
-              <FlareIcon onClick={darkMode.disable} />
-            ) : (
-              <Brightness4Icon onClick={darkMode.enable} />
-            )}
-
-            {/* <FlareIcon onClick={darkMode.disable}/> */}
+            
           </div>
           <div className="chatheader__searchbar">
             <input
-              size="mini"
               icon="search"
-              placeholder="Search"
+              placeholder="Search for Messages"
               value={searchTerm}
               onChange={handleSearchMessages}
               loading={searching}
@@ -87,6 +73,24 @@ export default function MessagesHeader({
             </div>
           </div>
           <div className="chatheader__items-right">
+          <Link
+              to="/video"
+              target="_blank"
+              style={{ marginTop: 7, marginLeft: '10px', color: 'silver' }}
+            >
+              <VideocamIcon style={{ fontSize: 26 }} />
+            </Link>
+            {darkMode.value === true ? (
+              <Brightness7Icon
+                style={{ fontSize: 24 }}
+                onClick={darkMode.disable}
+              />
+            ) : (
+              <Brightness4Icon
+                style={{ fontSize: 24 }}
+                onClick={darkMode.enable}
+              />
+            )}
             <svg
               x="0"
               y="0"

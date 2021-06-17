@@ -12,14 +12,12 @@
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-avatar-editor": "^12.0.0-beta.0",
-    "react-color": "^2.18.0",
     "react-dom": "^16.13.1",
     "react-giphy-searchbox": "^1.5.4",
     "react-linkify": "^1.0.0-alpha",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
-    "react-transition-group": "^4.4.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "semantic-ui-css": "^2.4.1",
@@ -53,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "node-sass": "4.14.1"
   }
 }
