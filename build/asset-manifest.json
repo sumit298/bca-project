@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c8ff20d9.chunk.css",
+    "main.js": "/static/js/main.c43971f5.chunk.js",
+    "main.js.map": "/static/js/main.c43971f5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f54c5474.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f54c5474.js.map",
+    "static/css/2.b220a92a.chunk.css": "/static/css/2.b220a92a.chunk.css",
+    "static/js/2.386add81.chunk.js": "/static/js/2.386add81.chunk.js",
+    "static/js/2.386add81.chunk.js.map": "/static/js/2.386add81.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.659354ef5f29d9ad51f322c0d1270ceb.js": "/precache-manifest.659354ef5f29d9ad51f322c0d1270ceb.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.b220a92a.chunk.css.map": "/static/css/2.b220a92a.chunk.css.map",
+    "static/css/main.c8ff20d9.chunk.css.map": "/static/css/main.c8ff20d9.chunk.css.map",
+    "static/js/2.386add81.chunk.js.LICENSE.txt": "/static/js/2.386add81.chunk.js.LICENSE.txt",
+    "static/media/Auth.styles.scss": "/static/media/auth-bg.fd91131e.jpg",
+    "static/media/semantic.min.css": "/static/media/outline-icons.ef60a4f6.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f54c5474.js",
+    "static/css/2.b220a92a.chunk.css",
+    "static/js/2.386add81.chunk.js",
+    "static/css/main.c8ff20d9.chunk.css",
+    "static/js/main.c43971f5.chunk.js"
+  ]
+}
