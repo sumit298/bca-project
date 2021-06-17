@@ -1,21 +1,28 @@
 import React from 'react'
 import {
-  Segment,
-  Accordion,
-  Header,
+  // Segment,
+  // Accordion,
+  // Header,
   Icon,
   Image,
   List,
   ListItem,
-  Sidebar,
+  // Sidebar,
 } from 'semantic-ui-react'
-import styled from 'styled-components'
+import './metaPanel.scss'
+
 export default function MetaPanel({
   isPrivateChannel,
   currentChannel,
   userPosts,
 }) {
-  const [activeIndex, setActiveIndex] = React.useState(0)
+  // const [activeIndex, setActiveIndex] = React.useState(0)
+
+  // const handleAccordionChange = (event, titleProps) => {
+  //   const { index } = titleProps
+  //   const newIndex = activeIndex === index ? -1 : index
+  //   setActiveIndex(newIndex)
+  // }
 
   const renderUserPosts = () => {
     return Object.entries(userPosts)
@@ -32,12 +39,11 @@ export default function MetaPanel({
               <List.Header as="a" style={{ fontSize: '1.2rem' }}>
                 {key}
               </List.Header>
-              <List.Description
-                style={{ fontSize: '1rem', color: '#fff' }}
-                as="p"
+              <span
+                style={{ fontSize: '1rem' }}
               >
                 {getPostText(value.count)}
-              </List.Description>
+              </span>
             </List.Content>
           </ListItem>
         )
@@ -51,10 +57,9 @@ export default function MetaPanel({
     return null
   }
 
-  // const newClassName = isPrivateChannel ? "": ""
-
   return (
     <div className="metapanel" loading={!currentChannel}>
+      <div className="metapanel__content">
       <h3>About # {currentChannel && currentChannel.name}</h3>
 
       <div>
@@ -71,19 +76,13 @@ export default function MetaPanel({
             <Icon name="pencil alternate" />
             Created By
           </h4>
-          <p>
-            <img src={currentChannel && currentChannel.createdBy.avatar} />
-            <h3>{currentChannel && currentChannel.createdBy.name}</h3>
-          </p>
+          <h4>
+            <img className="img" src={currentChannel && currentChannel.createdBy.avatar} alt="currentChannel"/>
+            <p>{currentChannel && currentChannel.createdBy.name}</p>
+          </h4>
         </div>
+      </div>
       </div>
     </div>
   )
 }
-
-// const MetaPanelWrapper = styled.div`
-//   width: 100%;
-//   /* background-color: ${props=>props.lightTheme.primary}; */
-
-//   margin-top: 100px;
-// `

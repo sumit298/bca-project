@@ -1,32 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { v4 as uuid } from 'uuid'
-import { Segment, Input, Button } from 'semantic-ui-react'
 import { Picker, emojiIndex } from 'emoji-mart'
 import ReactGiphySearch from 'react-giphy-searchbox'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
-import { makeStyles } from '@material-ui/core'
 import GifIcon from '@material-ui/icons/Gif'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import firebase from '../../firebase'
 import UploadFileModal from './UploadFileModal'
 import ProgressBar from './ProgressBar'
+import './MessageForm.scss'
 import 'emoji-mart/css/emoji-mart.css'
 import { IconButton } from '@material-ui/core'
-
-const useStyles = makeStyles(() => {
-  return {
-    button: {
-      color: '#b8bbc0',
-      padding: '0 .75rem',
-      '&:hover': {
-        color: '#fff',
-      },
-    },
-    addbutton: {
-      color: '#b8bbc0',
-    },
-  }
-})
 
 export default function MessagesForm({
   currentChannel,
@@ -35,8 +19,12 @@ export default function MessagesForm({
   isChannelPrivate,
 }) {
   const [message, setMessage] = useState('')
-  const [status, setStatus] = useState('IDLE')
-  const [errors, setErrors] = useState([])
+  const [
+    // status
+    , setStatus] = useState('IDLE')
+  const [
+    // errors
+    , setErrors] = useState([])
   const [modal, setModal] = useState(false)
   const [storageRef] = useState(firebase.storage().ref())
   const [typingRef] = useState(firebase.database().ref('typing'))
@@ -46,9 +34,13 @@ export default function MessagesForm({
   const [pathToUpload, setPathToUpload] = useState('')
   const [emojiPicker, setEmojiPicker] = useState(false)
   const [showGifs, setShowGifs] = useState(false)
-  const [gifs, setGifs] = useState("")
+  const [
+    // gifSrc
+    , setGifsrc] = useState('')
   const messageInputRef = useRef(null)
   // console.log(currentChannel)
+  // const theme = useDarkMode(true)
+
   useEffect(() => {
     // listener for upload task, when it's done; this will be called.
     if (uploadTask !== null) {
@@ -84,10 +76,10 @@ export default function MessagesForm({
         setUploadTask(null)
       }
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [uploadTask])
 
   // Gif handler
-  const classes = useStyles()
   const sendFileMessage = (downloadedFileUrl, filePath) => {
     messagesRef()
       .child(filePath)
@@ -111,7 +103,7 @@ export default function MessagesForm({
       },
     }
     if (file !== null) {
-      messageBody['image', 'gif'] = file
+      messageBody['image'] = file
     } else {
       messageBody['content'] = message
     }
@@ -149,10 +141,10 @@ export default function MessagesForm({
     console.log(file)
     setPathToUpload(currentChannel.id)
     const filePath = `${getFilePath(currentChannel.id)}/${uuid()}.jpg`
-    console.log(filePath);
     setUploadState('UPLOADING')
     const fileReference = storageRef.child(filePath).put(file, metaData)
     setUploadTask(fileReference)
+    console.log(fileReference)
   }
 
   const handleKeyPress = (event) => {
@@ -169,6 +161,13 @@ export default function MessagesForm({
     }
   }
 
+  // const uploadgif = (gif) => {
+  //   const filePath = `${gif}`
+
+  //   // setUploadState('UPLOADING')
+  //   const fileReference = storageRef.child(filePath).put(gif)
+  //   setUploadTask(fileReference)
+  // }
   const handleEmojiPicker = () => {
     setEmojiPicker(!emojiPicker)
   }
@@ -177,11 +176,11 @@ export default function MessagesForm({
     console.log(emoji)
     const oldMessage = message
     const newMessage = colonToUnicode(` ${oldMessage} ${emoji.colons} `)
+    // newMessage
     setMessage(newMessage)
     setShowGifs(false)
     setEmojiPicker(false)
-    // const fileReference = storageRef.child(filePath).put(newMessage)
-    setUploadTask(newMessage);
+
     setTimeout(() => {
       messageInputRef.current.focus()
     }, 0)
@@ -202,43 +201,42 @@ export default function MessagesForm({
     })
   }
 
-  const gifSelectHandler = async(gif) => {
+  const gifSelectHandler = (gif) => {
     console.log(gif)
-    const oldMessage = message
-    const newMessage = gif.images.downsized_medium.url;
-    // const uploader = uploadFile(newMessage)
-    setGifs(newMessage);
-    setMessage(newMessage)
+    const newMessage = gif.images.downsized_medium.url
+    setGifsrc(newMessage)
+    const filePath = `${newMessage}.jpg`
+    createMessage(filePath)
+    console.log(filePath)
+    console.log(gif.images.downsized_medium)
+
+    var blob = new Blob([filePath], { type: 'image/jpeg' })
+    const fileReference = storageRef.child(filePath).put(blob);
+    setUploadTask(fileReference)
+    setMessage(filePath)
     setShowGifs(false)
 
     setTimeout(() => {
       messageInputRef.current.focus()
     }, 0)
-    setPathToUpload(newMessage);
-    // notificationAudio.play();
-    // db.collection('textChannels').doc(channelId)
-    // .collection("messages").add({
-    //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    //     user: user,
-    //     gif: item.images.downsized_medium.url
-    // });
   }
 
   const openModal = () => setModal(true)
 
   const closeModal = () => setModal(false)
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  // }
   const channelName = currentChannel.name.toLowerCase()
   return (
     <div className="message__form">
       {showGifs && (
         <ReactGiphySearch
-          apiKey={`${process.env.REACT_APP_GIF_API_KEY}`}
+          apiKey={process.env.REACT_APP_GIF_KEY}
           onSelect={gifSelectHandler}
         />
       )}
+      {/* <img src={gifSrc} alt="newgif" /> */}
       {emojiPicker && (
         <Picker
           set="apple"
@@ -252,10 +250,10 @@ export default function MessagesForm({
         <div className="chatsearchbar__addicon">
           <IconButton
             onClick={openModal}
-            className={classes.button}
+            className="icon__button"
             aria-label="settings"
           >
-            <AddCircleIcon style={{ fontSize: 25 }} />
+            <AddCircleIcon className="icon__button" style={{ fontSize: 25 }} />
           </IconButton>
         </div>
         <div className="chatsearchbar__input">
@@ -266,11 +264,11 @@ export default function MessagesForm({
             onChange={(event) => setMessage(event.target.value)}
             ref={messageInputRef}
             onKeyPress={handleKeyPress}
-            className={
-              errors.some((err) => err.message.includes('message'))
-                ? 'error'
-                : ''
-            }
+            // className={
+            //   errors.some((err) => err.message.includes('message'))
+            //     ? 'error'
+            //     : ''
+            // }
           />
         </div>
         <div className="chatsearchbar__gifcon">
@@ -279,23 +277,27 @@ export default function MessagesForm({
               // setEmojiPicker(false)
               setShowGifs(!showGifs)
             }}
-            className={classes.button}
+            className="icon__button"
             aria-label="settings"
           >
-            <GifIcon style={{ fontSize: 30 }} />
+            <GifIcon className="icon__button" style={{ fontSize: 30 }} />
           </IconButton>
         </div>
         <div className="chatsearchbar__emojiicon">
           <IconButton
-            className={classes.addbutton}
+            // className="icon__button"
             icon={emojiPicker ? 'close' : 'smile outline'}
             content={emojiPicker ? 'close' : null}
             onClick={handleEmojiPicker}
           >
-            <InsertEmoticonIcon style={{ fontSize: 25 }} />
+            <InsertEmoticonIcon
+              className="icon__button"
+              style={{ fontSize: 30 }}
+            />
           </IconButton>
         </div>
       </div>
+
       <UploadFileModal
         open={modal}
         closeModal={closeModal}

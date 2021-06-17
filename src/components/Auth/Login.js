@@ -1,14 +1,8 @@
 import React from 'react'
-import {
-  Grid,
-  Form,
-  Segment,
-  Button,
-  Header,
-  Message,
-  Icon,
-} from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { Icon } from 'semantic-ui-react'
+import './Auth.styles.scss'
+import { Link,useHistory } from 'react-router-dom'
 import firebase from '../../firebase'
 
 export default function Login() {
@@ -16,19 +10,19 @@ export default function Login() {
     email: '',
     password: '',
   }
-
+  const history = useHistory();
   const [loginUserState, setRegisterUserState] = React.useState(initialState)
   const [errors, setErrors] = React.useState([])
   const [status, setStatus] = React.useState('')
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setRegisterUserState({
       ...loginUserState,
       [event.target.name]: event.target.value,
     })
   }
 
-  const onSubmit = async event => {
+  const onSubmit = async (event) => {
     event.preventDefault()
     const errors = []
     if (formIsValid(loginUserState)) {
@@ -39,6 +33,7 @@ export default function Login() {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
         setStatus('RESOLVED')
+        history.push('/');
       } catch (err) {
         setStatus('RESOLVED')
         setErrors(errors.concat({ message: err.message }))
@@ -47,6 +42,8 @@ export default function Login() {
       let error = { message: 'Please fill the form' }
       setErrors(errors.concat(error))
     }
+    setRegisterUserState(initialState)
+
   }
 
   const formIsValid = ({ email, password }) => {
@@ -54,7 +51,7 @@ export default function Login() {
   }
 
   const handleInputError = (errors, inputName) => {
-    return errors.some(err =>
+    return errors.some((err) =>
       err.message.toLowerCase().includes(inputName.toLowerCase())
     )
       ? 'error'
@@ -62,60 +59,79 @@ export default function Login() {
   }
 
   const { email, password } = loginUserState
+ 
 
   return (
-    <Grid textAlign="center" verticalAlign="middle" className="app">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="purple" textAlign="center">
-          <Icon name="puzzle piece" color="purple" />
-          Login for slack clone!!
-        </Header>
-        <Form size="large" onSubmit={onSubmit}>
-          <Segment stacked>
-            <Form.Input
-              fluid
-              type="email"
-              name="email"
-              icon="mail"
-              iconPosition="left"
-              placeholder="Email"
-              value={email}
-              onChange={handleChange}
-              className={handleInputError(errors, 'email')}
-            />
-            <Form.Input
-              fluid
-              type="password"
-              name="password"
-              icon="lock"
-              iconPosition="left"
-              placeholder="Password"
-              value={password}
-              onChange={handleChange}
-              className={handleInputError(errors, 'password')}
-            />
-            <Button
-              disabled={status === 'PENDING'}
-              className={status === 'PENDING' ? 'loading' : ''}
-              type="submit"
-              fluid
-              color="purple"
-              size="large"
-            >
-              Submit
-            </Button>
-          </Segment>
-        </Form>
-        {errors.length > 0 &&
-          errors.map((err, i) => (
-            <Message error key={i}>
-              <p>{err.message}</p>
-            </Message>
-          ))}
-        <Message>
-          Don't have an account? <Link to="/register">Register</Link>{' '}
-        </Message>
-      </Grid.Column>
-    </Grid>
+    <TransitionGroup>
+      <CSSTransition timeout={500} classNames="alert">
+        <div className="auth">
+          <div className="wrapper">
+            <div className="login" style={{ marginTop: -70 }}>
+              <h2>
+                <Icon name="fork" />
+                Welcome back!
+              </h2>
+              <h3>We're so excited to see you again!</h3>
+
+              <form size="large" onSubmit={onSubmit}>
+                <label
+                  style={{
+                    color: errors.includes('email') ? '#d72323' : 'white',
+                  }}
+                >
+                  EMAIL
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={handleChange}
+                  className={handleInputError(errors, 'email')}
+                />
+                <label
+                  style={{
+                    color: errors.includes('password') ? '#d72323' : 'white',
+                  }}
+                >
+                  PASSWORD
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={handleChange}
+                  className={handleInputError(errors, 'password')}
+                />
+                <button
+                  disabled={status === 'PENDING'}
+                  className={status === 'PENDING' ? 'loading' : ''}
+                  type="submit"
+                  color="purple"
+                  size="large"
+                >
+                  Login
+                </button>
+              </form>
+              <h4>
+                <Link to="/forget-password">Forget Password? </Link>
+              </h4>
+              {errors.length > 0 &&
+                errors.map((err, i) => (
+                  <div className="error" key={i}>
+                    <p>{err.message}</p>
+                  </div>
+                ))}
+              <h4>
+                <Link to="/register" style={{ fontSize: '1.2rem' }}>
+                  Register
+                </Link>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </CSSTransition>
+    </TransitionGroup>
   )
 }

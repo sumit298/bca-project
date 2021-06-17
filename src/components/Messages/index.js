@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Segment, Comment } from 'semantic-ui-react'
+import { 
+  // Segment
+   Comment } from 'semantic-ui-react'
 import { useIsMount } from '../../hooks/isMount'
 import { setUserPosts } from '../../store/channels/actions'
 
@@ -8,10 +10,11 @@ import MessagesHeader from './MessagesHeader'
 import MessagesForm from './MessagesForm'
 import Message from './Message'
 import Typing from './Typing'
+import './Message.scss'
 
 import firebase from '../../firebase'
 import Skeleton from './Skeleton'
-import VideoChat from '../VideoChat'
+// import VideoChat from '../VideoChat'
 
 export default function Messages({ currentUser, currentChannel }) {
   const isMount = useIsMount()
@@ -24,7 +27,7 @@ export default function Messages({ currentUser, currentChannel }) {
   const [searchResults, setSearchResults] = useState([])
   const [typingUsers, setTypingUsers] = useState([])
   const [isStarred, setIsStarred] = useState(true)
-  const [video, setVideo] = useState(true)
+  // const [video, setVideo] = useState(true)
 
   const [messagesRef] = useState(firebase.database().ref('messages'))
   const [privateMessagesRef] = useState(
@@ -47,6 +50,8 @@ export default function Messages({ currentUser, currentChannel }) {
     return () => {
       return removeAllListeners()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [])
 
   const addListeners = (channel) => {
@@ -228,6 +233,8 @@ export default function Messages({ currentUser, currentChannel }) {
     setSearchResults(results)
     //setting the search indicator after one second
     setTimeout(() => setSearchingMessages(false), 800)
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [searchTerm])
 
   /**
@@ -274,6 +281,8 @@ export default function Messages({ currentUser, currentChannel }) {
     if (!!messagesEndRef) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [messages])
 
   const displayTypingUsers = (users) => {
@@ -298,7 +307,7 @@ export default function Messages({ currentUser, currentChannel }) {
   }
 
   return (
-    <div className="chat">
+    <div className={isChannelPrivate ? 'chatPrivate' : 'chat'}>
       <div>
         <MessagesHeader
           channelName={getChannelName(channel)}

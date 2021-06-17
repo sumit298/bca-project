@@ -1,36 +1,54 @@
-.metapanel{
-    width: 100%;
-    background-color: "#2c2f33";
-    color: #fff;
-    // position: absolute;
-    
-    margin-top: 100px;
-   
+.metapanel {
+  width: 18vw;
+  // background-color: blue;
+  // #2c2f33;
+  // color: #fff;
+  // position: absolute;
+  margin-left: -92px;
+  margin-top: 54px;
+  height: 90vh;
+  overflow: hidden;
 }
 
+.metalist {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // text-align: center;
+}
 
+.metapanel__content {
+  margin-left: 40px;
+  padding-top: 50px;
+  // text-align: center;
+}
 
-.metalist{
-    display: flex;
-    align-items: center;
-    justify-content: center; 
+.metalist__content {
+  margin-top: auto;
 
 }
 
-.metalist__content{
-    margin-top:auto;
+.meta__createdBy {
+  // display: flex;
+  // align-items: flex-start;
+  // text-align: center;
+  // justify-content: space-evenly;
+  // flex-direction: column;
+  margin-top: 10px;
+  margin-left: auto;
+  img {
+    border-radius: 50%;
+    // width: 2rem;
+    margin-top: -1rem;
+    margin-left: 1rem;
+  }
+  p {
+    // text-align: center;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
-.meta__createdBy{
-    display: flex;
-    align-items: flex-start;
-    text-align: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 10px;
-    img{
-        border-radius: 50%;
-        margin-bottom: -1.5rem;
-    }
+.img {
+  width: 4rem;
 }
-

@@ -4,7 +4,7 @@ import { Menu, Icon } from 'semantic-ui-react'
 
 import { setChannel, setPrivateChannel } from '../../store/channels/actions'
 import firebase from '../../firebase'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 function VideoChannels({ currentUser }) {
   const [users, setUsers] = useState([])
@@ -98,7 +98,7 @@ function VideoChannels({ currentUser }) {
   return (
     <Menu.Menu>
       <Menu.Item>
-        <span>
+        <span >
           <Icon name="mail" /> VideoChannels
         </span>{' '}
         ({users.length})

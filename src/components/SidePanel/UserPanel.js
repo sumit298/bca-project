@@ -51,9 +51,9 @@ export default function UserPanel({ currentUser }) {
     },
   ]
 
-  const signOutUser = () => firebase.auth().signOut()
+  const signOutUser = async () => await firebase.auth().signOut()
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const file = event.target.files[0]
 
     const reader = new FileReader()
@@ -67,7 +67,7 @@ export default function UserPanel({ currentUser }) {
 
   const handleCropImage = () => {
     if (avatarEditor) {
-      avatarEditor.getImageScaledToCanvas().toBlob(blob => {
+      avatarEditor.getImageScaledToCanvas().toBlob((blob) => {
         let imageUrl = URL.createObjectURL(blob)
         setCroppedImage(imageUrl)
         setBlob(blob)
@@ -80,8 +80,8 @@ export default function UserPanel({ currentUser }) {
     storageRef
       .child(`avatars/users/${user.uid}`)
       .put(blob, metaData)
-      .then(snap => {
-        snap.ref.getDownloadURL().then(async downloadedUrl => {
+      .then((snap) => {
+        snap.ref.getDownloadURL().then(async (downloadedUrl) => {
           setUploadedCroppedImage(downloadedUrl)
         })
       })
@@ -91,9 +91,9 @@ export default function UserPanel({ currentUser }) {
     if (uploadedCroppedImage) {
       changeAvatar(uploadedCroppedImage)
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [uploadedCroppedImage])
-
-  const changeAvatar = async imageUrl => {
+  const changeAvatar = async (imageUrl) => {
     try {
       await authUser.updateProfile({
         photoURL: uploadedCroppedImage,
@@ -111,16 +111,31 @@ export default function UserPanel({ currentUser }) {
     <Grid>
       <Grid.Column>
         <Grid.Row style={{ padding: '1.2em', margin: 0 }}>
-          
           <Header inverted as="h4" style={{ padding: '1.2em' }}>
-            <Image avatar src={user.photoURL} />
+            <Image
+              style={{ width: '3rem', height: '3rem' }}
+              avatar
+              src={user.photoURL}
+            />
             {/* User menu */}
             <Dropdown
-              trigger={<span>{user.displayName}</span>}
+              trigger={
+                <span style={{ fontSize: '1.5rem' }} className="menu-label">
+                  {user.displayName}
+                </span>
+              }
               options={userActions()}
             />
           </Header>
-          <Input type="text" name="search" placeholder="Search for User"/>
+          <input
+            size="mini"
+            icon="search"
+            placeholder="Search for user"
+            // value={searchTerm}
+            // onChange={handleSearchMessages}
+            // loading={searching}
+            className="chatheader__searchbar-input"
+          />
         </Grid.Row>
       </Grid.Column>
       {/* Change avatar modal */}
@@ -138,7 +153,7 @@ export default function UserPanel({ currentUser }) {
               <Grid.Column className="ui centered align grid">
                 {preview && (
                   <AvatarEditor
-                    ref={node => (avatarEditor = node)}
+                    ref={(node) => (avatarEditor = node)}
                     image={preview}
                     height={220}
                     width={300}

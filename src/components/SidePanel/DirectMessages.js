@@ -1,11 +1,14 @@
+// eslint-disable-next-line react-hooks/exhaustive-deps
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Menu, Icon } from 'semantic-ui-react'
+import {
+  //  Menu,
+   Icon } from 'semantic-ui-react'
 
 import { setChannel, setPrivateChannel } from '../../store/channels/actions'
 import firebase from '../../firebase'
-import VideoChat from '../../components/VideoChat'
-import { Link } from 'react-router-dom'
+// import VideoChat from '../../components/VideoChat'
+// import { Link } from 'react-router-dom'
 
 function DirectMessages({ currentUser }) {
   const [users, setUsers] = useState([])
@@ -46,6 +49,8 @@ function DirectMessages({ currentUser }) {
       userRef.off()
       connectedRef.off()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [userRef, connectedRef])
 
   useEffect(() => {
@@ -73,6 +78,8 @@ function DirectMessages({ currentUser }) {
     return () => {
       presenceRef.off()
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+
   }, [])
 
   const isUserOnline = (user) => user.status === 'online'
@@ -97,31 +104,29 @@ function DirectMessages({ currentUser }) {
   }
 
   return (
-    <Menu.Menu>
+    <div>
       
-      <Menu.Item>
+      <p className="menu-label">
         <span>
           <Icon name="mail" /> Direct Messages
         </span>{' '}
         ({users.length})
-      </Menu.Item>
-      <Menu.Item>
-        <Link to="/video">VideoChat </Link>
-      </Menu.Item>
+      </p>
       {users.map((user, index) => {
         return (
-          <Menu.Item
+          <div
             key={user.uid}
             active={activeChannel === user.uid}
             onClick={() => changeChannel(user)}
-            style={{ opacity: 0.7, fontStyle: 'italic' }}
+            className="menu-item-label"
+            // style={{ color: "blue",opacity: 0.8, fontStyle: 'italic' }}
           >
-            <Icon name="circle" color={isUserOnline(user) ? 'green' : 'red'} />@{' '}
-            {user.name}
-          </Menu.Item>
+            @ {user.name}
+            <Icon className="active__icon" name="circle" color={isUserOnline(user) ? 'green' : 'red'} />
+          </div>
         )
       })}
-    </Menu.Menu>
+    </div>
   )
 }
 

@@ -1,23 +1,18 @@
 import React from 'react'
 import { Grid } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
-// Theme import
-import { ThemeProvider } from 'styled-components'
-import { GlobalStyles } from './Themes/GlobalStyles'
-import { lightTheme, darkTheme } from './Themes/theme'
-
 import SidePanel from './SidePanel'
 import Messages from './Messages'
 import MetaPanel from './MetaPanel'
-
-// import '../App.scss'
 import useDarkMode from 'use-dark-mode'
+import './App.css'
+import { darkTheme, GlobalStyles, lightTheme } from '../Themes/GlobalStyles'
+import { ThemeProvider } from 'styled-components'
 
 export default function App() {
-  const [isMounted, setIsMounted] = React.useState(false)
   const darkMode = useDarkMode(true)
+  const [isMounted, setIsMounted] = React.useState(false)
   const theme = darkMode.value ? darkTheme : lightTheme
-  
   const { currentUser, currentChannel, isPrivateChannel, userPosts } =
     useSelector(({ user, channel }) => ({
       currentUser: user.currentUser,
@@ -29,6 +24,7 @@ export default function App() {
   React.useEffect(() => {
     setIsMounted(true)
   }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -38,7 +34,7 @@ export default function App() {
             key={currentUser && currentUser.id}
             currentUser={currentUser}
           />
-          <Grid.Column style={{ marginLeft: 260 }}>
+          <Grid.Column style={{ marginLeft: 268 }}>
             {currentUser && currentChannel && (
               <Messages
                 key={currentChannel && currentChannel.id}
@@ -47,7 +43,7 @@ export default function App() {
               />
             )}
           </Grid.Column>
-          {!isPrivateChannel ? (
+          {!isPrivateChannel && (
             <Grid.Column width={2}>
               <MetaPanel
                 isPrivateChannel={isPrivateChannel}
@@ -55,7 +51,7 @@ export default function App() {
                 userPosts={userPosts}
               />
             </Grid.Column>
-          ) : null}
+          )}
         </Grid>
       )}
     </ThemeProvider>

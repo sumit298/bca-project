@@ -1,14 +1,7 @@
 import React from 'react'
-import {
-  Grid,
-  Form,
-  Segment,
-  Button,
-  Header,
-  Message,
-  Icon,
-} from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Icon } from 'semantic-ui-react'
+import './Auth.styles.scss'
+import { Link, useHistory } from 'react-router-dom'
 import md5 from 'md5'
 import firebase from '../../firebase'
 
@@ -23,9 +16,12 @@ export default function Register() {
   const [registerUserState, setRegisterUserState] = React.useState(initialState)
   const [errors, setErrors] = React.useState([])
   const [status, setStatus] = React.useState('')
+  const [successMessage,
+    //  setSuccessMessage
+    ] = React.useState("");
   const [userRef] = React.useState(firebase.database().ref('/users'))
-
-  const handleChange = event => {
+  const history = useHistory();
+  const handleChange = (event) => {
     setRegisterUserState({
       ...registerUserState,
       [event.target.name]: event.target.value,
@@ -62,7 +58,7 @@ export default function Register() {
     }
   }
 
-  const onSubmit = async event => {
+  const onSubmit = async (event) => {
     event.preventDefault()
     if (formIsValid()) {
       const { email, password } = registerUserState
@@ -73,7 +69,7 @@ export default function Register() {
         const createdUser = await firebase
           .auth()
           .createUserWithEmailAndPassword(email, password)
-
+          
         try {
           await createdUser.user.updateProfile({
             displayName: userName,
@@ -83,6 +79,10 @@ export default function Register() {
           })
           await saveUser(createdUser)
           setStatus('RESOLVED')
+          history.push('/login')
+          // await auth().sendSignInLinkToEmail(email);
+          // firebase.auth().sendSignInLinkToEmail(email);
+          // setSuccessMessage("Please check your email");
         } catch (err) {
           setStatus('RESOLVED')
           setErrors(errors.concat({ message: err.message }))
@@ -92,16 +92,18 @@ export default function Register() {
         setErrors(errors.concat({ message: err.message }))
       }
     }
+    setRegisterUserState(initialState);
+
   }
 
-  const saveUser = createdUser =>
+  const saveUser = (createdUser) =>
     userRef.child(createdUser.user.uid).set({
       name: createdUser.user.displayName,
       photoUrl: createdUser.user.photoURL,
     })
 
   const handleInputError = (errors, inputName) => {
-    return errors.some(err =>
+    return errors.some((err) =>
       err.message.toLowerCase().includes(inputName.toLowerCase())
     )
       ? 'error'
@@ -111,80 +113,99 @@ export default function Register() {
   const { userName, email, password, confirmPassword } = registerUserState
 
   return (
-    <Grid textAlign="center" verticalAlign="middle" className="app">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="purple" textAlign="center">
-          <Icon name="puzzle piece" color="purple" />
-          Register for slack clone!!
-        </Header>
-        <Form size="large" onSubmit={onSubmit}>
-          <Segment stacked>
-            <Form.Input
-              fluid
+    <div className="auth">
+      <div className="wrapper">
+        <div className="register" style={{ marginTop: '-140px' }}>
+          <h2>
+            <Icon name="puzzle piece" />
+            Register for new account
+          </h2>
+          <form onSubmit={onSubmit}>
+            <label
+              style={{
+                color: errors.includes('username') ? '#d72323' : 'white',
+              }}
+            >
+              USERNAME
+            </label>
+            <input
               type="text"
               name="userName"
               icon="user"
-              iconPosition="left"
               placeholder="User Name"
               value={userName}
               onChange={handleChange}
               className={handleInputError(errors, 'userName')}
             />
-            <Form.Input
-              fluid
+            
+            <label
+              style={{ color: errors.includes('email') ? '#d72323' : 'white' }}
+            >
+              EMAIL
+            </label>
+            <input
               type="email"
               name="email"
-              icon="mail"
-              iconPosition="left"
               placeholder="Email"
               value={email}
               onChange={handleChange}
               className={handleInputError(errors, 'email')}
             />
-            <Form.Input
-              fluid
+           
+
+            <label
+              style={{
+                color: errors.includes('password') ? '#d72323' : 'white',
+              }}
+            >
+              PASSWORD
+            </label>
+            <input
               type="password"
               name="password"
-              icon="lock"
-              iconPosition="left"
               placeholder="Password"
               value={password}
               onChange={handleChange}
               className={handleInputError(errors, 'password')}
             />
-            <Form.Input
-              fluid
+            <label
+              style={{
+                color: errors.includes('password') ? '#d72323' : 'white',
+              }}
+            >
+              CONFIRM PASSWORD
+            </label>
+            <input
               type="password"
               name="confirmPassword"
-              icon="redo"
-              iconPosition="left"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={handleChange}
               className={handleInputError(errors, 'password')}
             />
-            <Button
+            <button
               disabled={status === 'PENDING'}
               className={status === 'PENDING' ? 'loading' : ''}
               type="submit"
-              fluid
-              color="purple"
-              size="large"
             >
-              Submit
-            </Button>
-          </Segment>
-        </Form>
-        {errors.length > 0 &&
-          errors.map((err, i) => (
-            <Message error key={i}>
-              <p>{err.message}</p>
-            </Message>
-          ))}
-        <Message>
-          Already have an account? <Link to="/login">Login</Link>{' '}
-        </Message>
-      </Grid.Column>
-    </Grid>
+              Register
+            </button>
+            {/* </Segment> */}
+          </form>
+          {successMessage && <p className="error">{successMessage}</p>}
+          {errors.length > 0 &&
+            errors.map((err, i) => (
+              <div className="error" key={i}>
+                <p>{err.message}</p>
+              </div>
+            ))}
+          <div>
+            <Link to="/login" style={{ fontSize: '1.2rem' }}>
+              Already have an account? Login!
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
