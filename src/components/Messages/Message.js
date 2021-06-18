@@ -36,7 +36,7 @@ export default function Message({ message, user }) {
 
   return (
     <div className="message">
-      <ReactLinkify>
+      <ReactLinkify target="_blank">
         <Avatar src={message.user.avatar} />
         <div className={isOwnUser(message, user)}>
           <div className="message__info">
