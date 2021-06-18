@@ -8,13 +8,21 @@ import ReactLinkify from 'react-linkify'
 const isOwnUser = (message, user) =>
   message.user.id === user.uid ? 'message__self' : ''
 
-const timeFromNow = (timestamp) => moment(timestamp).fromNow()
+const timeFromNow = (timestamp) => moment(timestamp).calendar()
 
 export default function Message({ message, user }) {
   function checkURL(url) {
-    return(url?.match(/\.(jpeg|jpg|gif|png)$/) != null);
-}
-  
+    return url?.match(/\.(jpeg|jpg|gif|png)$/) != null
+  }
+  // function matchYoutubeUrl(url) {
+  //   var p =
+  //     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
+  //   if (url.match(p)) {
+  //     return url.match(p)[1]
+  //   }
+  //   return false
+  // }
+
   const isImage = (message) =>
     message.hasOwnProperty('image') && !message.hasOwnProperty('content')
 

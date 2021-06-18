@@ -45,7 +45,7 @@
 - [ ] VoiceCall integration
 - [ ] Conversion from firebase realtime to firebase firestore
 - [ ] Animations
-- [ ] time format i.e add exact time
+- [x] time format i.e add exact time
 - [x] Dark Mode
 - [ ] Search User Integration
 - [ ] Push Notifications
