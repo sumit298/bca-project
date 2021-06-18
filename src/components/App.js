@@ -44,8 +44,6 @@ export default function App() {
           <Grid
             container
             direction="row"
-            // justify="space-around"
-            // alignItems="baseline"
             spacing={3}
             className={classes.root}
           >

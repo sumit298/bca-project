@@ -1,97 +1,110 @@
-.chat__main{
-    width: 100%;
-    height: 100%;
+.chat__main {
+  width: 100%;
+  height: 100%;
 }
-.chatheader{
-    height: 8vh;
-    // min-width: 80vw;
-    // cursor: pointer;
-    width: 81vw;
-    // margin-left: -268px;
-    // clear: both;
-    overflow: visible;
-    pointer-events: stroke;
-    z-index: 400;
+.chatheader {
+  height: 8vh;
+  // min-width: 80vw;
+  // cursor: pointer;
+  width: 81vw;
+  // margin-left: -268px;
+  // clear: both;
+  overflow: visible;
+  pointer-events: stroke;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  // margin-left: 200px;
+  // color: #fff;
+  // background-color: blue !important;
+  border-bottom: 1px solid #23272a;
+  padding-right: 1rem;
+  &__topic {
+    display: flex;
+    margin-right: auto;
+    margin-left: 20px;
+    font-size: 1.6rem;
+    align-items: center;
+
+    &-content {
+      margin-left: 1.2rem;
+    }
+    &-hash {
+      color: gray;
+      margin-left: 1.5rem;
+      font-size: 2.85rem;
+    }
+  }
+  &__items {
     display: flex;
     align-items: center;
-    // margin-left: 200px;
-    // color: #fff;
-    // background-color: blue !important;
-    border-bottom: 1px solid #23272a;
-    padding-right: 1rem;
-    &__topic{
-        display: flex;
-        margin-right: auto;
-        margin-left: 20px;
-        font-size: 1.6rem;
-        align-items: center;
+    justify-content: center;
+    // color:#babbbd;
+    &-left,
+    &-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        margin: 0 0.7rem;
+      }
+    }
+  }
+  &__searchbar {
+    margin: 1.2rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    width: 20rem;
 
-        &-content{
-            margin-left: 1.2rem;
-        }
-        &-hash{
-            color:gray;
-            margin-left: 1.5rem;
-            font-size: 2.85rem;
-        }
+    &-searchicon {
+      position: absolute;
+      top: 18%;
+      right: 3%;
+
+      svg {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
     }
-    &__items{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        // color:#babbbd;
-        &-left, &-right{
-            display: flex;
-            align-items: center;
-            justify-content: center;    
-            svg{
-                margin:0 .7rem;
-            }
-        }
+    &-input {
+      // color:#fff;
+      padding: 0.6rem;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      // background-color: #202225;
+      border: 0;
+      outline: none;
+      font-family: 'Quicksand', 'Segoe UI';
+      width: 80%;
+      transition: width 0.3s;
+      &::placeholder {
+        padding-left: 0.25rem;
+      }
+      &:focus {
+        width: 100%;
+      }
     }
-    &__searchbar{
-        margin: 1.2rem;
-        display: flex;
-        align-items: center;
-        position: relative;
-        justify-content:flex-end;
-        width: 20rem;
-        
-        &-searchicon{
-            position: absolute;
-            top: 18%;
-            right:3%;
-            
-            svg{
-                width: 1.6rem;
-                height:1.6rem;
-            }
-        }
-        &-input{
-            // color:#fff;
-            padding: 0.6rem;
-            border-radius: 4px;
-            font-size: 1.2rem;
-            // background-color: #202225;
-            border: 0;
-            outline: none;
-            font-family: "Quicksand", "Segoe UI";
-            width: 80%;
-            transition: width .3s;
-            &::placeholder{
-                padding-left: .25rem;
-            }
-            &:focus{
-                width: 100%;
-            }
-        }
-    }
+  }
 }
 
-svg{
-    cursor: pointer;
+svg {
+  cursor: pointer;
 }
 
-.emojipicker{
-    font-size: 20px;
+.emojipicker {
+  font-size: 20px;
+}
+
+.link__icon {
+  margin-top: 5px;
+//   margin-left: 10px;
+  //   color: 'silver'
+}
+
+chatheader__items-right{
+    display: flex;
+    align-items: center;
+
 }

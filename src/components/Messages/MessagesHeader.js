@@ -3,6 +3,7 @@ import {
   //  Header, Segment, Input,
   Icon,
 } from 'semantic-ui-react'
+import Tooltip from '@material-ui/core/Tooltip'
 // import { fade, makeStyles } from '@material-ui/core'
 // import { useSelector } from 'react-redux'
 // import { Link } from 'react-router-dom'
@@ -13,7 +14,9 @@ import { Link } from 'react-router-dom'
 import VideocamIcon from '@material-ui/icons/Videocam'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
+import GitHubIcon from '@material-ui/icons/GitHub'
 // import MicIcon from '@material-ui/icons/Mic'
+// import MetaPanel from '../MetaPanel/index'
 
 export default function MessagesHeader({
   channelName,
@@ -26,6 +29,7 @@ export default function MessagesHeader({
   isStarred,
 }) {
   const darkMode = useDarkMode(true)
+  // const [showMeta, setShowMeta] = React.useState(false)
   return (
     <div className="chat__main">
       <div className="chatheader">
@@ -46,9 +50,7 @@ export default function MessagesHeader({
           </h3>
         </div>
         <div className="chatheader__items">
-          <div className="chatheader__items-left">
-            
-          </div>
+          <div className="chatheader__items-left"></div>
           <div className="chatheader__searchbar">
             <input
               icon="search"
@@ -73,51 +75,52 @@ export default function MessagesHeader({
             </div>
           </div>
           <div className="chatheader__items-right">
-          <Link
-              to="/video"
-              target="_blank"
-              style={{ marginTop: 7, marginLeft: '10px', color: 'silver' }}
-            >
-              <VideocamIcon style={{ fontSize: 26 }} />
-            </Link>
+            <Tooltip title="Videocall" arrow>
+              <Link to="/video" target="_blank" className="link__icon">
+                <VideocamIcon style={{ fontSize: 26 }} />
+              </Link>
+            </Tooltip>
             {darkMode.value === true ? (
-              <Brightness7Icon
-                style={{ fontSize: 24 }}
-                onClick={darkMode.disable}
-              />
+              <Tooltip title="Light Mode" arrow>
+                <Brightness7Icon
+                  style={{ fontSize: 24 }}
+                  onClick={darkMode.disable}
+                />
+              </Tooltip>
             ) : (
-              <Brightness4Icon
-                style={{ fontSize: 24 }}
-                onClick={darkMode.enable}
-              />
+              <Tooltip title="Dark Mode" arrow>
+                <Brightness4Icon
+                  style={{ fontSize: 24 }}
+                  onClick={darkMode.enable}
+                />
+              </Tooltip>
             )}
-            <svg
-              x="0"
-              y="0"
-              aria-hidden="false"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M19 3H4.99C3.88 3 3.01 3.89 3.01 5L3 19C3 20.1 3.88 21 4.99 21H19C20.1 21 21 20.1 21 19V5C21 3.89 20.1 3 19 3ZM19 15H15C15 16.66 13.65 18 12 18C10.35 18 9 16.66 9 15H4.99V5H19V15Z"
-                fill="currentColor"
-              ></path>
-            </svg>
-            <svg
-              x="0"
-              y="0"
-              aria-hidden="false"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M12 2C6.486 2 2 6.487 2 12C2 17.515 6.486 22 12 22C17.514 22 22 17.515 22 12C22 6.487 17.514 2 12 2ZM12 18.25C11.31 18.25 10.75 17.691 10.75 17C10.75 16.31 11.31 15.75 12 15.75C12.69 15.75 13.25 16.31 13.25 17C13.25 17.691 12.69 18.25 12 18.25ZM13 13.875V15H11V12H12C13.104 12 14 11.103 14 10C14 8.896 13.104 8 12 8C10.896 8 10 8.896 10 10H8C8 7.795 9.795 6 12 6C14.205 6 16 7.795 16 10C16 11.861 14.723 13.429 13 13.875Z"
-              ></path>
-            </svg>
+            <Tooltip title="Toggle MetaPanel">
+              <svg
+                x="0"
+                y="0"
+                aria-hidden="false"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M19 3H4.99C3.88 3 3.01 3.89 3.01 5L3 19C3 20.1 3.88 21 4.99 21H19C20.1 21 21 20.1 21 19V5C21 3.89 20.1 3 19 3ZM19 15H15C15 16.66 13.65 18 12 18C10.35 18 9 16.66 9 15H4.99V5H19V15Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </Tooltip>
+            <Tooltip title="Github Repo" arrow>
+              <a
+                href="https://github.com/sumit298/bca-project"
+                target="_blank"
+                className="link__icon"
+                rel="noopener noreferrer"
+              >
+                <GitHubIcon style={{ fontSize: 26 }} />
+              </a>
+            </Tooltip>
           </div>
         </div>
       </div>

@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { setChannel, setPrivateChannel } from '../../store/channels/actions'
 // prettier-ignore
 import { 
-  // Menu,
    Icon, Modal, Form, Input, Button, Label } from "semantic-ui-react";
+import Tooltip from '@material-ui/core/Tooltip'
 
 class Channels extends React.Component {
   state = {
@@ -192,7 +192,7 @@ class Channels extends React.Component {
             {this.getNotificationCount(channel)}
           </Label>
         )}
-        <Icon name="hashtag"/> {channel.name}
+        <Icon name="hashtag" /> {channel.name}
       </div>
     ))
 
@@ -214,11 +214,13 @@ class Channels extends React.Component {
               <Icon name="exchange" /> Channels
             </span>{' '}
             ({channels.length}){' '}
+            <Tooltip title="Add New Channel" arrow>
             <Icon
               name="add"
               style={{ marginLeft: '3.1rem', cursor: 'pointer' }}
               onClick={this.openModal}
             />
+            </Tooltip>
           </p>
           {this.displayChannels(channels)}
         </div>

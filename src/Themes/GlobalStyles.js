@@ -158,6 +158,15 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
+    .link__icon{
+        color: ${({ theme }) => theme.icons};
+        transition: all 0.2s linear;
+
+        &:hover{
+            color: ${({ theme }) => theme.icons_hover};
+        }
+    }
+
     
 
     
