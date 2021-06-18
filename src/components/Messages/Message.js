@@ -12,7 +12,7 @@ const timeFromNow = (timestamp) => moment(timestamp).calendar()
 
 export default function Message({ message, user }) {
   const componentDecorator = (href, text, key) => (
-    <a href={href} rel="noopener noreferrer" key={key} target="_blank">
+    <a style={{fontWeight: 'bold'}} href={href} rel="noopener noreferrer" key={key} target="_blank">
       {text}
     </a>
   );
