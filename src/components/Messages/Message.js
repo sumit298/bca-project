@@ -11,6 +11,11 @@ const isOwnUser = (message, user) =>
 const timeFromNow = (timestamp) => moment(timestamp).calendar()
 
 export default function Message({ message, user }) {
+  const componentDecorator = (href, text, key) => (
+    <a href={href} rel="noopener noreferrer" key={key} target="_blank">
+      {text}
+    </a>
+  );
   function checkURL(url) {
     return url?.match(/\.(jpeg|jpg|gif|png)$/) != null
   }
@@ -36,7 +41,9 @@ export default function Message({ message, user }) {
 
   return (
     <div className="message">
-      <ReactLinkify target="_blank">
+      <ReactLinkify
+        componentDecorator={componentDecorator}
+      >
         <Avatar src={message.user.avatar} />
         <div className={isOwnUser(message, user)}>
           <div className="message__info">
