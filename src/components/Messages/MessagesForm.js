@@ -36,12 +36,9 @@ export default function MessagesForm({
   const [emojiPicker, setEmojiPicker] = useState(false)
   const [showGifs, setShowGifs] = useState(false)
   
-  const [
-    // gifSrc
-    , setGifsrc] = useState('')
+ 
   const messageInputRef = useRef(null)
-  // console.log(currentChannel)
-  // const theme = useDarkMode(true)
+    
 
   const notificationAudio = new Audio(notificationSound);
 
@@ -166,13 +163,7 @@ export default function MessagesForm({
     }
   }
 
-  // const uploadgif = (gif) => {
-  //   const filePath = `${gif}`
-
-  //   // setUploadState('UPLOADING')
-  //   const fileReference = storageRef.child(filePath).put(gif)
-  //   setUploadTask(fileReference)
-  // }
+ 
   const handleEmojiPicker = () => {
     setEmojiPicker(!emojiPicker)
   }
@@ -207,17 +198,11 @@ export default function MessagesForm({
   }
 
   const gifSelectHandler = (gif) => {
-    // console.log(gif)
-    const newMessage = gif.images.downsized_medium.url
-    setGifsrc(newMessage)
+    console.log(gif);
+    const newMessage = gif.images.downsized.url
     const filePath = `${newMessage}.jpg`
     createMessage(filePath)
-    // console.log(filePath)
-    // console.log(gif.images.downsized_medium)
-
-    var blob = new Blob([filePath], { type: 'image/jpeg' })
-    const fileReference = storageRef.child(filePath).put(blob);
-    setUploadTask(fileReference)
+   
     setMessage(filePath)
     setShowGifs(false)
 
@@ -239,6 +224,10 @@ export default function MessagesForm({
         <ReactGiphySearch
           apiKey={process.env.REACT_APP_GIF_KEY}
           onSelect={gifSelectHandler}
+          masonryConfig={[
+            { columns: 2, imageWidth: 110, gutter: 5 },
+            { mq: '700px', columns: 3, imageWidth: 110, gutter: 5 },
+          ]}
         />
       )}
       {/* <img src={gifSrc} alt="newgif" /> */}
