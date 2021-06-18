@@ -1,8 +1,8 @@
 import React from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Button } from 'semantic-ui-react'
 import './Auth.styles.scss'
 import { Link, useHistory } from 'react-router-dom'
-import firebase from '../../firebase'
+import firebase, { signInWithGoogle } from '../../firebase'
 
 export default function Login() {
   const initialState = {
@@ -13,6 +13,11 @@ export default function Login() {
   const [loginUserState, setRegisterUserState] = React.useState(initialState)
   const [errors, setErrors] = React.useState([])
   const [status, setStatus] = React.useState('')
+
+  const handleGoogleSignIn = async () => {
+    await signInWithGoogle()
+    history.push('/')
+  }
 
   const handleChange = (event) => {
     setRegisterUserState({
@@ -61,7 +66,7 @@ export default function Login() {
   return (
     <div className="auth">
       <div className="wrapper">
-        <div className="login" style={{ marginTop: -70 }}>
+        <div className="login" style={{ marginTop: -90 }}>
           <h2>
             <Icon name="fork" />
             Welcome back!
@@ -108,6 +113,16 @@ export default function Login() {
             >
               Login
             </button>
+            <Button
+              onClick={handleGoogleSignIn}
+              fluid
+              style={{ marginTop: 10, marginLeft: '1px', width: '100%' }}
+              size="large"
+              color="google plus"
+            >
+              <Icon name="google"></Icon>
+              Sign In With Google
+            </Button>
           </form>
           <h4>
             <Link to="/forget-password">Forget Password? </Link>
@@ -120,7 +135,7 @@ export default function Login() {
             ))}
           <h4>
             <Link to="/register" style={{ fontSize: '1.2rem' }}>
-              Register
+              New Here? Register
             </Link>
           </h4>
         </div>
