@@ -39,6 +39,19 @@ export default function Messages({ currentUser, currentChannel }) {
   const isChannelPrivate = useSelector((state) => state.channel.private)
 
   const messagesEndRef = useRef(null)
+  const addUserStarListener = (channelId, userId) => {
+    userRef
+      .child(userId)
+      .child(`starred`)
+      .once('value')
+      .then((data) => {
+        if (data.val() !== null) {
+          const channelIds = Object.keys(data.val())
+          const prevStarred = channelIds.includes(channelId)
+          setIsStarred(prevStarred)
+        }
+      })
+  }
 
   useEffect(() => {
     if (user && channel) {
@@ -86,19 +99,7 @@ export default function Messages({ currentUser, currentChannel }) {
    * Star channel listener
    */
 
-  const addUserStarListener = (channelId, userId) => {
-    userRef
-      .child(userId)
-      .child(`starred`)
-      .once('value')
-      .then((data) => {
-        if (data.val() !== null) {
-          const channelIds = Object.keys(data.val())
-          const prevStarred = channelIds.includes(channelId)
-          setIsStarred(prevStarred)
-        }
-      })
-  }
+  
 
   const handleStarChannel = () => {
     setIsStarred(!isStarred)
@@ -107,8 +108,8 @@ export default function Messages({ currentUser, currentChannel }) {
   useEffect(() => {
     // If is starred! then add this channel to favorites
     if (!isMount) {
-      if (isStarred) {
-        userRef.child(`${user.uid}/starred`).update({
+      if (!!isStarred) {
+        userRef.child(`${user.uid}/starred`).update(JSON.parse(JSON.stringify({
           [channel.id]: {
             name: channel.name,
             description: channel.description,
@@ -117,10 +118,10 @@ export default function Messages({ currentUser, currentChannel }) {
               avatar: channel.createdBy.avatar,
             },
           },
-        })
+        })))
       } else {
         // if unstarred, then remove this channel from favorites
-        userRef.child(`${user.uid}/starred/${channel.id}`).remove((err) => {
+        userRef.child(`${user.uid}/starred`).child(channel.id).remove((err) => {
           if (err !== null) {
             console.error('ERROR: ', err)
           }

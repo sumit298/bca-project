@@ -127,15 +127,7 @@ export default function UserPanel({ currentUser }) {
               options={userActions()}
             />
           </Header>
-          <input
-            size="mini"
-            icon="search"
-            placeholder="Search for user"
-            // value={searchTerm}
-            // onChange={handleSearchMessages}
-            // loading={searching}
-            className="chatheader__searchbar-input"
-          />
+          
         </Grid.Row>
       </Grid.Column>
       {/* Change avatar modal */}

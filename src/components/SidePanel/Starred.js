@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Menu, Icon } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 import { useDispatch
   //  useSelector 
   } from 'react-redux'
 import { useIsMount } from '../../hooks/isMount'
+import './sidePanel.scss';
 
 import {
   setChannel as setChannelAction,
@@ -33,7 +34,7 @@ export default function Starred({ currentUser }) {
     }
     
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [])
+  }, [starredChannels, userRef])
 
   useEffect(() => {
     userRef
@@ -56,14 +57,15 @@ export default function Starred({ currentUser }) {
   const renderStarredChannels = channels =>
     channels.length > 0 &&
     channels.map(channel => (
-      <Menu.Item
+      <p
+        className="menu-item-label"
         key={channel.id}
         onClick={() => channelClickHandler(channel)}
         name={channel.name}
-        style={{ opacity: 0.7 }}
+        // style={{ opacity: 0.7 }}
       >
-        # {channel.name}
-      </Menu.Item>
+        <Icon name="hashtag"/> {channel.name}
+      </p>
     ))
 
   const channelClickHandler = channel => {
