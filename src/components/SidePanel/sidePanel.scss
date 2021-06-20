@@ -1,5 +1,3 @@
-
-
 #menu {
   // color: blue;
   font-size: 1.2rem;
@@ -7,7 +5,7 @@
   overflow-x: hidden;
   // marginTop: '52px',
   //   background-color: rgb(163, 94, 94);
-  width: 20vw !important;
+  // width: 20vw !important;
   // color: blue !important;
 }
 
@@ -58,3 +56,42 @@
   left: 180px;
 }
 
+.side-toggle {
+  visibility: hidden !important;
+}
+.main-sidepanel {
+  visibility: visible;
+}
+
+@media only screen and (max-width: 675px) {
+  .side-toggle {
+    visibility: visible !important;
+    color: rgb(184, 184, 184) !important;
+    font-size: 30px !important;
+    border-radius: 20px;
+    position: fixed !important;
+    z-index: 1 !important;
+    width: auto;
+    height: auto;
+  }
+
+  .side-toggle :hover {
+    visibility: visible !important;
+    color: white !important;
+    background-color: rgb(146, 146, 146) !important;
+    border-radius: 30px;
+    transition: 0.3s;
+    font-size: 30px !important;
+  }
+  .main-sidepanel {
+    visibility: hidden !important;
+  }
+  #menu {
+    width: 50vw !important;
+  }
+}
+@media only screen and (max-width: 575px) {
+  #menu {
+    width: 50vw !important;
+  }
+}
