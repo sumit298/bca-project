@@ -19,7 +19,8 @@ export default function Starred({ currentUser }) {
   const isMount = useIsMount()
 
   useEffect(() => {
-    isMount && userRef
+    const addStartoChannel = async ()=>{
+    isMount && await userRef
       .child(currentUser.uid)
       .child('starred')
       .on('child_added', snap => {
@@ -29,6 +30,8 @@ export default function Starred({ currentUser }) {
           starredChannel,
         ])
       })
+    }
+    addStartoChannel();
     return () => {
       userRef.child(`${currentUser.uid}/starred`).off()
     }

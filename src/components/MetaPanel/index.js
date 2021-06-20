@@ -68,9 +68,9 @@ export default function MetaPanel({
           <Icon name="user circle" />
           Top posters
         </h4>
-        <p>
+        
           <List>{userPosts && renderUserPosts(userPosts)}</List>
-        </p>
+        
         <div className="meta__createdBy">
           <h4>
             <Icon name="pencil alternate" />

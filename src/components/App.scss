@@ -61,6 +61,7 @@
     font-style: italic;
     font-weight: bold;
     margin-right: 3px;
+    font-size: 40px;
   }
   
   .typing {
@@ -78,9 +79,10 @@
     width: 8px;
     height: 8px;
     margin: 0 4px;
-    background-color: #8d8c91;
+    // background-color: #8d8c91;
     border-radius: 50px;
     opacity: 0;
+    font-size: 50px;
     animation: loadingFade 1s infinite;
   }
   

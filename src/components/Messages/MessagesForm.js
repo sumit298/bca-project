@@ -163,6 +163,23 @@ export default function MessagesForm({
     }
   }
 
+  const handleKeyDown = event => {
+    if (event.ctrlKey && event.keyCode === 13) {
+      sendMessage()
+    }
+    if (message) {
+      typingRef
+        .child(currentChannel.id)
+        .child(currentUser.uid)
+        .set(currentUser.displayName)
+    } else {
+      typingRef
+        .child(currentChannel.id)
+        .child(currentUser.uid)
+        .remove()
+    }
+  }
+
  
   const handleEmojiPicker = () => {
     setEmojiPicker(!emojiPicker)
@@ -198,7 +215,7 @@ export default function MessagesForm({
   }
 
   const gifSelectHandler = (gif) => {
-    console.log(gif);
+    // console.log(gif);
     const newMessage = gif.images.downsized.url
     const filePath = `${newMessage}.jpg`
     createMessage(filePath)
@@ -258,6 +275,7 @@ export default function MessagesForm({
             onChange={(event) => setMessage(event.target.value)}
             ref={messageInputRef}
             onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
             
           />
         </div>
