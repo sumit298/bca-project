@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button'
 // import VideoChannel from './VideoChannel'
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 200,
   },
   fullList: {
     width: 'auto',
