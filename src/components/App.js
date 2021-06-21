@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  
 }))
 
 export default function App() {
@@ -41,37 +40,32 @@ export default function App() {
       <GlobalStyles />
       <CssBaseline />
       {isMounted && (
-          <Grid
-            container
-            direction="row"
-            spacing={3}
-            className={classes.root}
-          >
-            <Grid item xs>
-              <SidePanel
-                key={currentUser && currentUser.id}
+        <Grid container direction="row" spacing={3} className={classes.root}>
+          <Grid item xs>
+            <SidePanel
+              key={currentUser && currentUser.id}
+              currentUser={currentUser}
+            />
+          </Grid>
+          <Grid item xl className="main-messagepanel">
+            {currentUser && currentChannel && (
+              <Messages
+                key={currentChannel && currentChannel.id}
+                currentChannel={currentChannel}
                 currentUser={currentUser}
               />
-            </Grid>
-            <Grid item xl>
-              {currentUser && currentChannel && (
-                <Messages
-                  key={currentChannel && currentChannel.id}
-                  currentChannel={currentChannel}
-                  currentUser={currentUser}
-                />
-              )}
-            </Grid>
-            {!isPrivateChannel && (
-              <Grid item xs={2}>
-                <MetaPanel
-                  isPrivateChannel={isPrivateChannel}
-                  currentChannel={currentChannel}
-                  userPosts={userPosts}
-                />
-              </Grid>
             )}
           </Grid>
+          {!isPrivateChannel && (
+            <Grid item xs={2} className="main-metapanel">
+              <MetaPanel
+                isPrivateChannel={isPrivateChannel}
+                currentChannel={currentChannel}
+                userPosts={userPosts}
+              />
+            </Grid>
+          )}
+        </Grid>
       )}
     </ThemeProvider>
   )
