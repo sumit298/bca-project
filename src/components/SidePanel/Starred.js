@@ -81,7 +81,7 @@ export default function Starred({ currentUser }) {
     <div style={{ paddingBottom: '2rem' }}>
       <p className="menu-label">
         <span>
-          <Icon name="star" /> Channels
+          <Icon name="star" /> Starred Channels
         </span>{' '}
         ({starredChannels.length})
       </p>
