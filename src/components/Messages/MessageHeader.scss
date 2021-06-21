@@ -20,7 +20,7 @@
   border-bottom: 1px solid #23272a;
   padding-right: 1rem;
   &__topic {
-    display: flex;
+    display: flex !important;
     margin-right: auto;
     margin-left: 20px;
     font-size: 1.6rem;
@@ -68,6 +68,7 @@
         height: 1.6rem;
       }
     }
+
     &-input {
       // color:#fff;
       padding: 0.6rem;
@@ -88,7 +89,81 @@
     }
   }
 }
+@media only screen and (max-width: 675px) {
+  .chatheader {
+    height: 8vh;
+    // min-width: 80vw;
+    // cursor: pointer;
+    width: 95vw !important;
+    // margin-left: -268px;
+    // clear: both;
+    overflow: visible;
+    pointer-events: stroke;
+    z-index: 400;
+    display: flex;
+    margin-left: 50px;
+    // margin-left: 200px;
+    // color: #fff;
+    // background-color: blue !important;
+    border-bottom: 1px solid #23272a;
+    padding-right: 1rem;
+    &__topic {
+      display: flex;
+      margin-top: auto;
+      margin-right: auto;
+      margin-left: 20px;
+      font-size: 10px;
+      align-items: center;
 
+      &-content {
+        margin-left: 1.2rem;
+      }
+      &-hash {
+        color: gray;
+        margin-left: 1.5rem;
+        font-size: 2.85rem;
+      }
+    }
+
+    &__searchbar {
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: flex-end;
+      width: 10rem;
+
+      &-searchicon {
+        position: absolute;
+        top: 18%;
+        right: 3%;
+
+        svg {
+          width: 1.6rem;
+          height: 1.6rem;
+        }
+      }
+
+      &-input {
+        // color:#fff;
+        padding: 0.6rem;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        // background-color: #202225;
+        border: 0;
+        outline: none;
+        font-family: 'Quicksand', 'Segoe UI';
+        width: 40%;
+        transition: width 0.3s;
+        &::placeholder {
+          visibility: hidden;
+        }
+        &:focus {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
 svg {
   cursor: pointer;
 }
@@ -99,12 +174,11 @@ svg {
 
 .link__icon {
   margin-top: 5px;
-//   margin-left: 10px;
+  //   margin-left: 10px;
   //   color: 'silver'
 }
 
-chatheader__items-right{
-    display: flex;
-    align-items: center;
-
+chatheader__items-right {
+  display: flex;
+  align-items: center;
 }
