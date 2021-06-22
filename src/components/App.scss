@@ -5,14 +5,14 @@
   overflow-y: scroll;
   font-size: 1.1rem;
 }
-@media only screen and (max-width: 675px) {
+@media only screen and (max-width: 700px) {
   .main-messagepanel {
     position: absolute;
     z-index: 0;
   }
   .messages {
     height: 82vh;
-    width: 130% !important;
+    width: 126% !important;
 
     overflow-y: scroll;
     font-size: 1.1rem;

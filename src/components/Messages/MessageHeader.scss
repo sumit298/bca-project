@@ -89,7 +89,7 @@
     }
   }
 }
-@media only screen and (max-width: 675px) {
+@media only screen and (max-width: 700px) {
   .chatheader {
     height: 8vh;
     // min-width: 80vw;
@@ -109,7 +109,7 @@
     padding-right: 1rem;
     &__topic {
       display: flex;
-      margin-top: auto;
+      // margin-top: auto;
       margin-right: auto;
       margin-left: 20px;
       font-size: 10px;

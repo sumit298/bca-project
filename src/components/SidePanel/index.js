@@ -64,8 +64,8 @@ export default function SidePanel({ currentUser }) {
 
   return (
     <div>
-      {['='].map((anchor) => (
-        <React.Fragment className="side-toggle">
+      {['='].map((anchor, index) => (
+        <div className="side-toggle" key={index}>
           <Button onClick={toggleDrawer(anchor, true)} className="side-toggle">
             {anchor}
           </Button>
@@ -76,7 +76,7 @@ export default function SidePanel({ currentUser }) {
           >
             {list(anchor)}
           </Drawer>
-        </React.Fragment>
+        </div>
       ))}
 
       <Menu

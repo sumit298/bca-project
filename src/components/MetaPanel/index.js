@@ -1,13 +1,9 @@
 import React from 'react'
 import {
-  // Segment,
-  // Accordion,
-  // Header,
   Icon,
   Image,
   List,
   ListItem,
-  // Sidebar,
 } from 'semantic-ui-react'
 import './metaPanel.scss'
 
