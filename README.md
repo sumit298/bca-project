@@ -32,8 +32,8 @@
 - Join and Leave Channel
 - Add Formik and Yup for Validation in Login and Register.
 - Threads of chats displayed in Sidebar
-- Linkify html - like clickable urls
-- Optional - voice command feature  
+- Optional - voice command feature 
+- Shared Links of Youtube will play on player.
 
 ## Issues
 - [ ] Add className for Emojis
@@ -49,7 +49,8 @@
 - [x] Dark Mode
 - [ ] Search User Integration
 - [ ] Push Notifications
-- [ ] Responsive - Much bigger issue
+- [x] Responsive - Much bigger issue
+- [ ] Security of Users and Links
 
 ## How to setup ?
 
