@@ -283,6 +283,7 @@ function VideoChat() {
             id="callInput"
             placeholder="Enter Unique ID"
             value={callID}
+            onChange={(e) => setCallID(e.target.value)}
             // onChange={({ target: { value } }) =>
             //   setCopyValue({ value: value, copied: false })
             // }
