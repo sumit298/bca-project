@@ -83,7 +83,6 @@ export const GlobalStyles = createGlobalStyle`
             background-color: ${({ theme }) => theme.chatHover};
             color: ${({ theme }) => theme.text};
             position: sticky;
-            /* width: 60vw; */
             transition: all 0.2s linear;
         }
     }
