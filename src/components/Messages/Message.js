@@ -1,5 +1,4 @@
 import React from 'react'
-import { Image } from 'semantic-ui-react'
 import moment from 'moment'
 import './Message.scss'
 import { Avatar } from '@material-ui/core'
@@ -40,9 +39,14 @@ export default function Message({ message, user }) {
     message.hasOwnProperty('image') && !message.hasOwnProperty('content')
 
   const contentRendered = isImage(message) ? (
-    <Image src={message.image} style={{ padding: ' 0.7em 0' }} />
+    <img
+      src={message.image}
+      className="content__image"
+      style={{ padding: ' 0.5em 0' }}
+      alt={message.content}
+    />
   ) : checkURL(message.content) ? (
-    <img src={message.content} alt={message.content} />
+    <img className="content__image" src={message.content} alt={message.content} />
   ) : videoId ? (
     <iframe
       width="700"
