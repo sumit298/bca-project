@@ -1,7 +1,6 @@
 import React, { createRef, useState } from 'react'
-import connectSound from './Assets/sounds/connectSound.mp3'
-import disconnectSound from './Assets/sounds/disconnectSound.mp3'
-// import { CopyToClipboard } from 'react-copy-to-clipboard'
+import connectSound from './Assets/sounds/connectSound.mp3';
+import disconnectSound from './Assets/sounds/disconnectSound.mp3';
 // import './App.css'
 import './VideoChat.scss'
 import firebase from '../firebase'
@@ -32,13 +31,9 @@ function VideoChat() {
   const [callButtonDisabled, setCallButtonDisabled] = useState(true)
   const [answerButtonDisabled, setAnswerButonDisabled] = useState(true)
   const [hangUpButtonDisabled, setHangUpButtonDisabled] = useState(true)
-  // const [copyValue, setCopyValue] = useState({
-  //   value: '',
-  //   copied: false,
-  // })
   const [callID, setCallID] = useState('')
-  const connectAudio = new Audio(connectSound)
-  const disconnectAudio = new Audio(disconnectSound)
+  const connectAudio = new Audio(connectSound);
+  const disconnectAudio = new Audio(disconnectSound);
 
   // Setup media sources
   const webcamSetup = async () => {
@@ -155,7 +150,7 @@ function VideoChat() {
     }
 
     await callDoc.update({ answer })
-    connectAudio.play()
+    connectAudio.play();
     // add caller to the peer connection (remote stream)
     offerCandidates.onSnapshot((snapshot) => {
       snapshot.docChanges().forEach((change) => {
@@ -187,7 +182,7 @@ function VideoChat() {
 
     // deleteCallDoc(callID);
     setCallID('')
-    disconnectAudio.play()
+    disconnectAudio.play();
     console.log('call ended')
 
     setHangUpButtonDisabled(true)
@@ -217,7 +212,6 @@ function VideoChat() {
       mic_switch = !mic_switch
 
       localStream.getAudioTracks()[0].enabled = mic_switch
-      connectAudio.play()
     }
     localStream.getTracks().forEach((t) => {
       if (t.kind === 'audio') t.enabled = !t.enabled
@@ -283,20 +277,14 @@ function VideoChat() {
             id="callInput"
             placeholder="Enter Unique ID"
             value={callID}
+            // onClick={() => {
+            //   alert(`Your clipboard contains: ${clipboard}`);
+            // }}
+            // onClick={() => {
+            //   navigator.clipboard.writeText(callID.textToCopy)
+            // }}
             onChange={(e) => setCallID(e.target.value)}
-            // onChange={({ target: { value } }) =>
-            //   setCopyValue({ value: value, copied: false })
-            // }
           />
-          {/* <CopyToClipboard
-            text={copyValue.value}
-            onCopy={() => setCopyValue({ copied: true })}
-          >
-            <Button>Copy ID</Button>
-          </CopyToClipboard>
-          {copyValue.copied ? (
-            <span style={{ color: 'red' }}>Copied.</span>
-          ) : null} */}
           <Button
             id="answerButton"
             disabled={answerButtonDisabled}
@@ -311,7 +299,6 @@ function VideoChat() {
               id="hangupButton"
               disabled={hangUpButtonDisabled}
               onClick={hangUp}
-              icon={'phone'}
             >
               Hangup
             </Button>

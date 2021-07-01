@@ -21,11 +21,15 @@ export default function MessagesForm({
 }) {
   const [message, setMessage] = useState('')
   const [
+    ,
     // status
-    , setStatus] = useState('IDLE')
+    setStatus,
+  ] = useState('IDLE')
   const [
+    ,
     // errors
-    , setErrors] = useState([])
+    setErrors,
+  ] = useState([])
   const [modal, setModal] = useState(false)
   const [storageRef] = useState(firebase.storage().ref())
   const [typingRef] = useState(firebase.database().ref('typing'))
@@ -35,12 +39,10 @@ export default function MessagesForm({
   const [pathToUpload, setPathToUpload] = useState('')
   const [emojiPicker, setEmojiPicker] = useState(false)
   const [showGifs, setShowGifs] = useState(false)
-  
- 
-  const messageInputRef = useRef(null)
-    
 
-  const notificationAudio = new Audio(notificationSound);
+  const messageInputRef = useRef(null)
+
+  const notificationAudio = new Audio(notificationSound)
 
   useEffect(() => {
     // listener for upload task, when it's done; this will be called.
@@ -120,7 +122,7 @@ export default function MessagesForm({
     if (message) {
       setStatus('PENDING')
       try {
-        notificationAudio.play();
+        notificationAudio.play()
         await messagesRef().child(currentChannel.id).push().set(createMessage())
         await typingRef.child(currentChannel.id).child(currentUser.uid).remove()
         resetState()
@@ -163,7 +165,7 @@ export default function MessagesForm({
     }
   }
 
-  const handleKeyDown = event => {
+  const handleKeyDown = (event) => {
     if (event.ctrlKey && event.keyCode === 13) {
       sendMessage()
     }
@@ -173,14 +175,10 @@ export default function MessagesForm({
         .child(currentUser.uid)
         .set(currentUser.displayName)
     } else {
-      typingRef
-        .child(currentChannel.id)
-        .child(currentUser.uid)
-        .remove()
+      typingRef.child(currentChannel.id).child(currentUser.uid).remove()
     }
   }
 
- 
   const handleEmojiPicker = () => {
     setEmojiPicker(!emojiPicker)
   }
@@ -219,7 +217,7 @@ export default function MessagesForm({
     const newMessage = gif.images.downsized.url
     const filePath = `${newMessage}.jpg`
     createMessage(filePath)
-   
+
     setMessage(filePath)
     setShowGifs(false)
 
@@ -276,7 +274,6 @@ export default function MessagesForm({
             ref={messageInputRef}
             onKeyPress={handleKeyPress}
             onKeyDown={handleKeyDown}
-            
           />
         </div>
         <div className="chatsearchbar__gifcon">

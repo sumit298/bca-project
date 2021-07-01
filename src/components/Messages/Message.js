@@ -25,14 +25,16 @@ export default function Message({ message, user }) {
   function checkURL(url) {
     return url?.match(/\.(jpeg|jpg|gif|png)$/) != null
   }
-  // function matchYoutubeUrl(url) {
-  //   var p =
-  //     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
-  //   if (url.match(p)) {
-  //     return url.match(p)[1]
-  //   }
-  //   return false
-  // }
+
+  function getId(url) {
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+    const match = url?.match(regExp)
+
+    return match && match[2].length === 11 ? match[2] : null
+  }
+
+  const videoId = getId(message.content)
 
   const isImage = (message) =>
     message.hasOwnProperty('image') && !message.hasOwnProperty('content')
@@ -41,9 +43,20 @@ export default function Message({ message, user }) {
     <Image src={message.image} style={{ padding: ' 0.7em 0' }} />
   ) : checkURL(message.content) ? (
     <img src={message.content} alt={message.content} />
+  ) : videoId ? (
+    <iframe
+      width="700"
+      height="400"
+      frameBorder="0"
+      allowFullScreen={true}
+      src={`//www.youtube.com/embed/${videoId}`}
+      title="youtube video"
+    ></iframe>
   ) : (
     <p className="content">{message.content}</p>
   )
+
+  // const contentFunc = () => {}
 
   return (
     <div className="message">
