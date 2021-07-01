@@ -15,6 +15,7 @@
 - 💡 Notifications for unseen messages
 - 💡 Top posters of one group
 - 💡 Favorite channels
+- 💡 Embedded Youtube Videos
 - 💡 Search in the chat
 - 💡 Indicators when the other peron is typing.
 - 💡 VideoCall Feature
