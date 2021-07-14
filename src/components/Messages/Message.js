@@ -46,7 +46,11 @@ export default function Message({ message, user }) {
       alt={message.content}
     />
   ) : checkURL(message.content) ? (
-    <img className="content__image" src={message.content} alt={message.content} />
+    <img
+      className={"content__image"}
+      src={message.content}
+      alt={message.content}
+    />
   ) : videoId ? (
     <iframe
       width="700"
@@ -59,8 +63,6 @@ export default function Message({ message, user }) {
   ) : (
     <p className="content">{message.content}</p>
   )
-
-  // const contentFunc = () => {}
 
   return (
     <div className="message">
