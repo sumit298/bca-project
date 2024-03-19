@@ -79,7 +79,6 @@ export default function MessagesForm({
         setUploadTask(null)
       }
     }
-    /* eslint-disable react-hooks/exhaustive-deps */
   }, [uploadTask])
 
   // Gif handler

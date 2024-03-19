@@ -91,7 +91,7 @@ export default function UserPanel({ currentUser }) {
     if (uploadedCroppedImage) {
       changeAvatar(uploadedCroppedImage)
     }
-    /* eslint-disable react-hooks/exhaustive-deps */
+    /* eslint-disable */
   }, [uploadedCroppedImage])
   const changeAvatar = async (imageUrl) => {
     try {

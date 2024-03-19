@@ -1,4 +1,3 @@
-// eslint-disable-next-line react-hooks/exhaustive-deps
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {
@@ -49,7 +48,6 @@ function DirectMessages({ currentUser }) {
       userRef.off()
       connectedRef.off()
     }
-    /* eslint-disable react-hooks/exhaustive-deps */
 
   }, [userRef, connectedRef])
 
@@ -78,7 +76,6 @@ function DirectMessages({ currentUser }) {
     return () => {
       presenceRef.off()
     }
-    /* eslint-disable react-hooks/exhaustive-deps */
 
   }, [])
 

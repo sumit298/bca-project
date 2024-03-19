@@ -36,7 +36,6 @@ export default function Starred({ currentUser }) {
       userRef.child(`${currentUser.uid}/starred`).off()
     }
     
-    /* eslint-disable react-hooks/exhaustive-deps */
   }, [starredChannels, userRef])
 
   useEffect(() => {
@@ -53,7 +52,6 @@ export default function Starred({ currentUser }) {
     return () => {
       userRef.child(`${currentUser.uid}/starred`).off()
     }
-    /* eslint-disable react-hooks/exhaustive-deps */
 
   }, [starredChannels])
 
